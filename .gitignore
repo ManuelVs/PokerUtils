@@ -1,3 +1,8 @@
+.idea
+HJAPractica1.iml
+
+
+# Github's default .gitignore below
 # Compiled class file
 *.class
 
