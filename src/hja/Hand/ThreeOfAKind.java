@@ -4,10 +4,10 @@ import hja.Card.Card;
 
 import java.util.ArrayList;
 
-public class Pair extends Hand {
+public class ThreeOfAKind extends Hand {
 	
-	public Pair(ArrayList<Card> hand) {
-		super(HandType.PAIR, hand);
+	public ThreeOfAKind(ArrayList<Card> hand) {
+		super(HandType.THREE_OF_A_KIND, hand);
 		//Ordenar...
 	}
 	

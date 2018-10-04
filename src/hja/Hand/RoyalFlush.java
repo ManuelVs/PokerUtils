@@ -4,16 +4,14 @@ import hja.Card.Card;
 
 import java.util.ArrayList;
 
-public class Pair extends Hand {
+public class RoyalFlush extends Hand {
 	
-	public Pair(ArrayList<Card> hand) {
-		super(HandType.PAIR, hand);
-		//Ordenar...
+	public RoyalFlush(ArrayList<Card> hand) {
+		super(HandType.ROYAL_FLUSH, hand);
 	}
 	
 	@Override
 	public int compareKernel(Hand o) {
 		return 0;
-		//comparar
 	}
 }

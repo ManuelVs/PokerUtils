@@ -1,26 +1,53 @@
 package hja.Hand;
 
-import hja.Card;
+import hja.Card.Card;
 
 import java.util.ArrayList;
 
 public abstract class Hand implements Comparable<Hand> {
-	protected static final int HIGH_CARD       = 1;
-	protected static final int PAIR            = 2;
-	protected static final int DOUBLE_PAIR     = 3;
-	protected static final int THREE_OF_A_KIND = 4;
-	protected static final int STRAIGHT        = 5;
-	protected static final int FLUSH           = 6;
-	protected static final int FULL_HOUSE      = 7;
-	protected static final int FOUR_OF_A_KIND  = 8;
-	protected static final int STRAIGHT_FLUSH  = 9;
-	protected static final int ROYAL_FLUSH     = 10;
+	protected final HandType type;
+	protected final ArrayList<Card> hand;
 	
-	protected int type;
-	protected ArrayList<Card> hand;
-	
-	Hand(int type, ArrayList<Card> hand) {
+	Hand(HandType type, ArrayList<Card> hand) {
 		this.type = type;
 		this.hand = hand;
 	}
+	
+	@Override
+	public int compareTo(Hand o) {
+		int compare = this.type.compareTo(o.type);
+		
+		if (compare == 0) {
+			compare = this.compareKernel(o);
+			
+			if (compare == 0) {
+				compare = this.compareKickers(o);
+			}
+		}
+		
+		return compare;
+	}
+	
+	protected final int compareKickers(Hand o) {
+		int initialPos = this.type.firstKicker;
+		if (initialPos == 5) return 0;
+		
+		ArrayList<Card> leftHand = this.hand;
+		ArrayList<Card> rightHand = o.hand;
+		
+		Card leftCard = leftHand.get(initialPos);
+		Card rightCard = rightHand.get(initialPos);
+		
+		int compare = leftCard.compareTo(rightCard);
+		while (compare == 0 && initialPos < 5) {
+			initialPos += 1;
+			leftCard = leftHand.get(initialPos);
+			rightCard = rightHand.get(initialPos);
+			compare = leftCard.compareTo(rightCard);
+		}
+		
+		return compare;
+	}
+	
+	protected abstract int compareKernel(Hand o);
 }
