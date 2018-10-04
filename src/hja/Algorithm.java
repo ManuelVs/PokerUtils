@@ -1,16 +1,17 @@
 package hja;
 
+import hja.Card.Card;
 import hja.Hand.Hand;
 
 import java.util.ArrayList;
 
 public final class Algorithm {
 	
-	public static Hand calculateBestHand(ArrayList<Card> cards){
+	public static Hand calculateBestHand(ArrayList<Card> cards) {
 		return null;
 	}
 	
-	public static ArrayList<Hand> calculateBestPossibleHands(ArrayList<Card> cards){
+	public static ArrayList<Hand> calculateBestPossibleHands(ArrayList<Card> cards) {
 		return null;
 	}
 }
