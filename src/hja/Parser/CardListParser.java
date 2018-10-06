@@ -12,7 +12,7 @@ public final class CardListParser {
 	public static ArrayList<Card> parseListCard(InputStreamReader stream, int numCards) throws IOException {
 		ArrayList<Card> arr = new ArrayList<>(numCards);
 		
-		for(int i = 0; i < numCards; ++i){
+		for (int i = 0; i < numCards; ++i) {
 			Card card = parseCard(stream);
 			arr.set(i, card);
 		}
