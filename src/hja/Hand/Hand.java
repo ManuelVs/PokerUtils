@@ -35,16 +35,13 @@ public abstract class Hand implements Comparable<Hand> {
 		ArrayList<Card> leftHand = this.hand;
 		ArrayList<Card> rightHand = o.hand;
 		
-		Card leftCard = leftHand.get(initialPos);
-		Card rightCard = rightHand.get(initialPos);
-		
-		int compare = leftCard.compareTo(rightCard);
-		while (compare == 0 && initialPos < 5) {
-			initialPos += 1;
-			leftCard = leftHand.get(initialPos);
-			rightCard = rightHand.get(initialPos);
+		int compare;
+		do{
+			Card leftCard = leftHand.get(initialPos);
+			Card rightCard = rightHand.get(initialPos);
 			compare = leftCard.compareTo(rightCard);
-		}
+			initialPos += 1;
+		} while (compare == 0 && initialPos < 5);
 		
 		return compare;
 	}

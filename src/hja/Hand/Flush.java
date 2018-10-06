@@ -17,16 +17,13 @@ public class Flush extends Hand {
 		ArrayList<Card> leftHand = this.hand;
 		ArrayList<Card> rightHand = o.hand;
 		
-		Card leftCard = leftHand.get(initialPos);
-		Card rightCard = rightHand.get(initialPos);
-		
-		int compare = leftCard.compareTo(rightCard);
-		while (initialPos < 5 && compare == 0) {
-			initialPos += 1;
-			leftCard = leftHand.get(initialPos);
-			rightCard = rightHand.get(initialPos);
+		int compare;
+		do{
+			Card leftCard = leftHand.get(initialPos);
+			Card rightCard = rightHand.get(initialPos);
 			compare = leftCard.compareTo(rightCard);
-		}
+			initialPos += 1;
+		} while (initialPos < 5 && compare == 0);
 		
 		return compare;
 	}
