@@ -1,6 +1,7 @@
 # HJAPracticas
 
 This repository contains the source code for all the exercises in HJA.
+All files must be encoded in UTF-8.
 
 ## Build instructions
 
