@@ -12,7 +12,7 @@ public final class Algorithm {
 	/**
 	 * Calculates the best hand given 5 cards or more.
 	 *
-	 * @param cards The array of cards. CAn be unordered
+	 * @param cards The array of cards. Can be unordered
 	 * @return The best hand
 	 */
 	public static Hand calculateHand(ArrayList<Card> cards) {
