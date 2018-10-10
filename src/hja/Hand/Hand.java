@@ -47,4 +47,6 @@ public abstract class Hand implements Comparable<Hand> {
 	}
 	
 	protected abstract int compareKernel(Hand o);
+	
+	public abstract String toString();
 }

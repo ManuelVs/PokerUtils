@@ -16,4 +16,9 @@ public class TwoPair extends Hand {
 		return 0;
 		//comparar
 	}
+	
+	@Override
+	public String toString() {
+		return "Two pairs of " + hand.get(0).rank.name() + " and " + hand.get(2).rank.name();
+	}
 }

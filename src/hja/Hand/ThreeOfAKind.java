@@ -16,4 +16,9 @@ public class ThreeOfAKind extends Hand {
 		return 0;
 		//comparar
 	}
+	
+	@Override
+	public String toString() {
+		return "Three of " + hand.get(0).rank.name();
+	}
 }
