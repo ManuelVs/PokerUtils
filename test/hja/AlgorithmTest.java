@@ -101,7 +101,7 @@ class AlgorithmTest {
 	@ParameterizedTest(name = "{index} => {1}")
 	@MethodSource("handProvider")
 	void compareToTest(ArrayList<Card> cards, Class<Hand> handClass){
-		Hand hand = Algorithm.calculateBestHand(cards);
+		Hand hand = Algorithm.calculateHand(cards);
 		
 		assertEquals(handClass, hand.getClass());
 	}
