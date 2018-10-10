@@ -23,4 +23,9 @@ public class Card implements Comparable<Card> {
 		Card other = (Card) obj;
 		return other.rank == this.rank && other.suit == this.suit;
 	}
+	
+	@Override
+	public String toString() {
+		return rank.rank + "" + suit.suit;
+	}
 }
