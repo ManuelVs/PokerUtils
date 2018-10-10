@@ -25,8 +25,8 @@ public final class CardFactory {
 	}
 	
 	public static Card createCard(Rank rank, Suit suit) {
-		int suit_pos = indexOf(suit, suits);
-		int rank_pos = indexOf(rank, ranks);
+		int suit_pos = suit.ordinal();
+		int rank_pos = rank.ordinal();
 		
 		return CardFactory.cards[suit_pos][rank_pos];
 	}
@@ -44,7 +44,6 @@ public final class CardFactory {
 			default:
 				return null;
 		}
-		
 	}
 	
 	private static Rank getRank(char rank) {
@@ -78,14 +77,5 @@ public final class CardFactory {
 			default:
 				return null;
 		}
-	}
-	
-	private static <T> int indexOf(T elem, T[] arr) {
-		int i = 0;
-		while (i < arr.length && elem != arr[i]) {
-			++i;
-		}
-		
-		return i;
 	}
 }
