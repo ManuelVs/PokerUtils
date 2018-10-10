@@ -15,7 +15,7 @@ public class StraightFlush extends Hand {
 	private void sort() {
 		Card firstCard = hand.get(0);
 		
-		if(firstCard.rank == Rank.ACE){
+		if (firstCard.rank == Rank.ACE) {
 			// Straight flush of 5,4,3,2,A
 			hand.remove(0);
 			hand.add(firstCard);

@@ -18,7 +18,7 @@ public class Flush extends Hand {
 		ArrayList<Card> rightHand = o.hand;
 		
 		int compare;
-		do{
+		do {
 			Card leftCard = leftHand.get(initialPos);
 			Card rightCard = rightHand.get(initialPos);
 			compare = leftCard.compareTo(rightCard);

@@ -37,7 +37,7 @@ class CardTest {
 	
 	@ParameterizedTest(name = "{index} => left={0}, right={1}")
 	@MethodSource("compareProvider")
-	void compareToTest(Card left, Card right){
+	void compareToTest(Card left, Card right) {
 		int compareGreater = left.compareTo(right);
 		assertTrue(compareGreater > 0);
 		
@@ -47,7 +47,7 @@ class CardTest {
 	
 	@ParameterizedTest(name = "{index} => left={0}, right={1}")
 	@MethodSource("compareEqualProvider")
-	void compareToEqualTest(Card left, Card right){
+	void compareToEqualTest(Card left, Card right) {
 		int compare = left.compareTo(right);
 		
 		assertTrue(compare == 0);

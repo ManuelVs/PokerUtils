@@ -16,7 +16,7 @@ public final class Algorithm {
 	 * @return The best hand
 	 */
 	public static Hand calculateHand(ArrayList<Card> cards) {
-		if(cards.size() == 5){
+		if (cards.size() == 5) {
 			return classifyHand(cards);
 		}
 		else {
@@ -24,13 +24,13 @@ public final class Algorithm {
 			cards_copy.remove(0);
 			Hand best_hand = classifyHand(cards);
 			
-			for(int i = 1; i < cards.size(); ++i){
+			for (int i = 1; i < cards.size(); ++i) {
 				cards_copy = new ArrayList<>(cards);
 				cards_copy.remove(i);
 				
 				Hand actual_hand = calculateHand(cards_copy);
 				
-				if(actual_hand.compareTo(best_hand) > 0){
+				if (actual_hand.compareTo(best_hand) > 0) {
 					best_hand = actual_hand;
 				}
 			}
@@ -43,44 +43,44 @@ public final class Algorithm {
 		return new ArrayList<>();
 	}
 	
-	private static Hand classifyHand(ArrayList<Card> cards){
+	private static Hand classifyHand(ArrayList<Card> cards) {
 		cards.sort(Collections.reverseOrder());
 		
-		if(isRoyalFlush(cards)){
+		if (isRoyalFlush(cards)) {
 			return new RoyalFlush(cards);
 		}
-		else if(isStraightFlush(cards)){
+		else if (isStraightFlush(cards)) {
 			return new StraightFlush(cards);
 		}
 		else {
 			int[] rank_count = new int[Rank.values().length];
-			for(int i = 0; i < 5; ++i){
+			for (int i = 0; i < 5; ++i) {
 				Rank card_rank = cards.get(i).rank;
 				rank_count[card_rank.ordinal()]++;
 			}
 			
-			if(isFourOfAKind(rank_count)){
+			if (isFourOfAKind(rank_count)) {
 				return new FourOfAKind(cards);
 			}
-			else if(isFullHouse(rank_count)){
+			else if (isFullHouse(rank_count)) {
 				return new FullHouse(cards);
 			}
-			else if(isFlush(cards)){
+			else if (isFlush(cards)) {
 				return new Flush(cards);
 			}
-			else if(isStraight(cards)){
+			else if (isStraight(cards)) {
 				return new Straight(cards);
 			}
-			else if(isThreeOfAKind(rank_count)){
+			else if (isThreeOfAKind(rank_count)) {
 				return new ThreeOfAKind(cards);
 			}
-			else if(isTwoPair(rank_count)){
+			else if (isTwoPair(rank_count)) {
 				return new TwoPair(cards);
 			}
-			else if(isPair(rank_count)){
+			else if (isPair(rank_count)) {
 				return new Pair(cards);
 			}
-			else{
+			else {
 				return new HighCard(cards);
 			}
 		}
@@ -126,24 +126,24 @@ public final class Algorithm {
 				&& cards.get(4).rank == Rank.TWO;
 	}
 	
-	private static boolean isThreeOfAKind(int[] rank_count){
+	private static boolean isThreeOfAKind(int[] rank_count) {
 		return find(rank_count, 0, rank_count.length, 3) < rank_count.length;
 	}
 	
-	private static boolean isTwoPair(int[] rank_count){
+	private static boolean isTwoPair(int[] rank_count) {
 		int pos_first_pair = find(rank_count, 0, rank_count.length, 2);
 		int pos_second_pair = find(rank_count, pos_first_pair + 1, rank_count.length, 2);
 		return pos_second_pair < rank_count.length;
 	}
 	
-	private static boolean isPair(int[] rank_count){
+	private static boolean isPair(int[] rank_count) {
 		return find(rank_count, 0, rank_count.length, 2) < rank_count.length;
 	}
 	
-	private static int find(int[] arr, int start, int end, int elem){
+	private static int find(int[] arr, int start, int end, int elem) {
 		int i = start;
 		
-		while(i < end && arr[i] != elem){
+		while (i < end && arr[i] != elem) {
 			++i;
 		}
 		

@@ -90,7 +90,7 @@ class HandTest {
 	
 	@ParameterizedTest(name = "{index} => left={0}, right={1}")
 	@MethodSource("compareProvider")
-	void compareToTest(Hand left, Hand right){
+	void compareToTest(Hand left, Hand right) {
 		int compareGreater = left.compareTo(right);
 		assertTrue(compareGreater > 0);
 		

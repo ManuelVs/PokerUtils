@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AlgorithmTest {
 	private static final Card ace = new Card(Rank.ACE, Suit.HEARTS);
@@ -100,7 +100,7 @@ class AlgorithmTest {
 	
 	@ParameterizedTest(name = "{index} => {1}")
 	@MethodSource("handProvider")
-	void compareToTest(ArrayList<Card> cards, Class<Hand> handClass){
+	void compareToTest(ArrayList<Card> cards, Class<Hand> handClass) {
 		Hand hand = Algorithm.calculateHand(cards);
 		
 		assertEquals(handClass, hand.getClass());

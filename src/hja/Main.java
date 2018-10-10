@@ -14,27 +14,35 @@ public class Main {
 		String inputFile = args[1];
 		String outputFile = args[2];
 		
-		try{
+		try {
 			FileReader reader = new FileReader(inputFile);
 			FileWriter writer = new FileWriter(outputFile);
 			
-			switch (option){
-				case 1: classifyHand(reader, writer); break;
-				case 2: calculateBestHand(reader, writer); break;
-				case 3: sortPlayerHands(reader, writer); break;
-				case 4: calculateBestHandOmaha(reader, writer); break;
+			switch (option) {
+				case 1:
+					classifyHand(reader, writer);
+					break;
+				case 2:
+					calculateBestHand(reader, writer);
+					break;
+				case 3:
+					sortPlayerHands(reader, writer);
+					break;
+				case 4:
+					calculateBestHandOmaha(reader, writer);
+					break;
 			}
 			
 			reader.close();
 			writer.close();
 		}
-		catch (Exception e){
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	private static void classifyHand(Reader input, Writer output) throws IOException {
-		while (input.ready()){
+		while (input.ready()) {
 			ArrayList<Card> cards = CardListParser.parseListCard(input, 5);
 			consumeLine(input);
 			
@@ -68,10 +76,10 @@ public class Main {
 	
 	}
 	
-	private static String cardsToString(ArrayList<Card> cards){
+	private static String cardsToString(ArrayList<Card> cards) {
 		StringBuilder sb = new StringBuilder();
 		
-		for(Card card : cards){
+		for (Card card : cards) {
 			sb.append(card);
 		}
 		
@@ -81,7 +89,7 @@ public class Main {
 	private static void consumeLine(Reader reader) throws IOException {
 		char c = (char) reader.read();
 		
-		while (reader.ready() && c != '\n'){
+		while (reader.ready() && c != '\n') {
 			c = (char) reader.read();
 		}
 	}
