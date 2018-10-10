@@ -15,7 +15,7 @@ public final class Algorithm {
 	 * @param cards The array of cards. CAn be unordered
 	 * @return The best hand
 	 */
-	public static Hand calculateBestHand(ArrayList<Card> cards) {
+	public static Hand calculateHand(ArrayList<Card> cards) {
 		if(cards.size() == 5){
 			return classifyHand(cards);
 		}
@@ -28,7 +28,7 @@ public final class Algorithm {
 				cards_copy = new ArrayList<>(cards);
 				cards_copy.remove(i);
 				
-				Hand actual_hand = calculateBestHand(cards_copy);
+				Hand actual_hand = calculateHand(cards_copy);
 				
 				if(actual_hand.compareTo(best_hand) > 0){
 					best_hand = actual_hand;
@@ -39,8 +39,8 @@ public final class Algorithm {
 		}
 	}
 	
-	public static ArrayList<Hand> calculateBestPossibleHands(ArrayList<Card> cards) {
-		return null;
+	public static ArrayList<Hand> calculateDraws(ArrayList<Card> cards) {
+		return new ArrayList<>();
 	}
 	
 	private static Hand classifyHand(ArrayList<Card> cards){
