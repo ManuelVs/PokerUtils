@@ -33,7 +33,7 @@ class HandTest {
 	private static final Card jackh = new Card(Rank.JACK, Suit.HEARTS);
 	private static final Card tenh = new Card(Rank.TEN, Suit.HEARTS);
 	private static final Card nineh = new Card(Rank.NINE, Suit.HEARTS);
-	private static final Card eighth = new Card(Rank.EIGHT, Suit.DIAMONDS);
+	private static final Card eighth = new Card(Rank.EIGHT, Suit.HEARTS);
 	
 	private static final Hand hihgcard1 = new HighCard(new ArrayList<>(Arrays.asList(ace, king, seven, three, two)));
 	private static final Hand hihgcard2 = new HighCard(new ArrayList<>(Arrays.asList(king, queen, seven, three, two)));
