@@ -3,6 +3,8 @@ AhQcTs7h2c
 
 AhAcQhJhTh
  - Best hand: Pair of ACE
+ - Draw: Straight Gutshot
+ - Draw: Flush
 
 AhKc7d3s2h
  - Best hand: High card: ACE
@@ -10,29 +12,31 @@ AhKc7d3s2h
 KhQh7s3s2d
  - Best hand: High card: KING
 
-KsKsAs7h3d
+AsKsKs7h3d
  - Best hand: Pair of KING
 
 AdAd7s7s2h
  - Best hand: Two pairs of ACE and SEVEN
 
-KhKh3s3sAh
+AhKhKh3s3s
  - Best hand: Two pairs of KING and THREE
 
-KdKs3s3hAs
+AsKsKd3h3s
  - Best hand: Two pairs of KING and THREE
 
 AsAdAh3s2h
- - Best hand: Three of ACE
+ - Best hand: Three ACE
 
-KsKhKdAs3c
- - Best hand: Three of KING
+AsKhKdKs3c
+ - Best hand: Three KING
 
 AcKcQcJcTh
  - Best hand: Straight ended in ACE
+ - Draw: Flush
 
 KhQhJhTh9c
  - Best hand: Straight ended in KING
+ - Draw: Flush
 
 AhTh9h4h2h
  - Best hand: Flush ended in ACE
@@ -43,14 +47,14 @@ Jc8c7c5c3c
 AhAsAd5c5h
  - Best hand: Full of ACE and FIVE
 
-TdTcTsQhQd
+QhQdTsTdTc
  - Best hand: Full of TEN and QUEEN
 
 AhAsAdAc5c
- - Best hand: Four of ACE
+ - Best hand: Four ACE
 
-6d6c6s6hTd
- - Best hand: Four of SIX
+Td6c6s6h6d
+ - Best hand: Four SIX
 
 KhQhJhTh9h
  - Best hand: Straight flush ended in KING
@@ -60,4 +64,7 @@ QhJhTh9h8h
 
 AdKdQdJdTd
  - Best hand: Royal flush
+
+Ah5h4d3c2d
+ - Best hand: Straight ended in FIVE
 
