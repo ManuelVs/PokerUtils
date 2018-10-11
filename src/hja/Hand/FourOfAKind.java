@@ -37,6 +37,6 @@ public class FourOfAKind extends Hand {
 	
 	@Override
 	public String toString() {
-		return "Four of " + hand.get(0).rank.name();
+		return "Four " + hand.get(0).rank.name();
 	}
 }

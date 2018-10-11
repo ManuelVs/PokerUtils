@@ -46,6 +46,6 @@ public class ThreeOfAKind extends Hand {
 	
 	@Override
 	public String toString() {
-		return "Three of " + hand.get(0).rank.name();
+		return "Three " + hand.get(0).rank.name();
 	}
 }
