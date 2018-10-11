@@ -2,6 +2,7 @@ package hja;
 
 import hja.Card.Card;
 import hja.Card.Rank;
+import hja.Card.Suit;
 import hja.Hand.*;
 
 import java.util.ArrayList;
@@ -39,8 +40,74 @@ public final class Algorithm {
 		}
 	}
 	
-	public static ArrayList<Hand> calculateDraws(ArrayList<Card> cards) {
-		return new ArrayList<>();
+	/**
+	 * Calculates draws given 5 or 6 cards.
+	 *
+	 * @param cards The array of cards. Can be unordered
+	 * @return An array of three positions. The first position indicates
+	 * if the card form s 'open ended straight', the second one indicates
+	 * 'straight gutshot' and the third one indicates a 'flush'
+	 */
+	public static boolean[] calculateDraws(ArrayList<Card> cards) {
+		boolean[] draws = new boolean[3];
+		
+		int typeStraightDraw = calculateStraightDraw(cards);
+		
+		draws[0] = typeStraightDraw == 1;
+		draws[1] = typeStraightDraw == 2;
+		draws[2] = isFlushDraw(cards);
+		
+		return draws;
+	}
+	
+	/**
+	 * Returns 0 if there is no straight draw, 1 if there is open ended straight and 2
+	 * if there is gutshot straight
+	 *
+	 * @param cards The array of cards
+	 * @return 0 no draw, 1 open ended, 2 gutshot
+	 */
+	private static int calculateStraightDraw(ArrayList<Card> cards) {
+		int[] rank_count = countRank(cards);
+		
+		int count = 0, pos = -1;
+		for (int i = 0; i < 5; ++i) {
+			if (rank_count[i] >= 1) {
+				count++;
+			}
+		}
+		if (count >= 4) pos = 0;
+		
+		for (int i = 5; i < rank_count.length; ++i) {
+			if (rank_count[i] >= 1) {
+				count++;
+			}
+			if (rank_count[i - 5] >= 1) {
+				count--;
+			}
+			
+			if (count >= 4) {
+				pos = i - 4;
+			}
+		}
+		
+		if (pos != -1) {
+			boolean isGutshot = rank_count[pos + 1] == 0 || rank_count[pos + 2] == 0
+					|| rank_count[pos + 3] == 0;
+			
+			boolean isOpenEnded = rank_count[pos] == 0 || rank_count[pos + 4] == 0;
+			
+			if (isStraight(cards)) return 0;
+			if (isOpenEnded) return 1;
+			if (isGutshot) return 2;
+		}
+		return 0;
+	}
+	
+	private static boolean isFlushDraw(ArrayList<Card> cards) {
+		int[] suit_count = countSuit(cards);
+		
+		return find(suit_count, 0, suit_count.length, 4) < suit_count.length;
 	}
 	
 	private static Hand classifyHand(ArrayList<Card> cards) {
@@ -53,11 +120,7 @@ public final class Algorithm {
 			return new StraightFlush(cards);
 		}
 		else {
-			int[] rank_count = new int[Rank.values().length];
-			for (int i = 0; i < 5; ++i) {
-				Rank card_rank = cards.get(i).rank;
-				rank_count[card_rank.ordinal()]++;
-			}
+			int[] rank_count = countRank(cards);
 			
 			if (isFourOfAKind(rank_count)) {
 				return new FourOfAKind(cards);
@@ -148,5 +211,25 @@ public final class Algorithm {
 		}
 		
 		return i;
+	}
+	
+	private static int[] countRank(ArrayList<Card> cards) {
+		int[] rank_count = new int[Rank.values().length];
+		for (int i = 0; i < 5; ++i) {
+			Rank card_rank = cards.get(i).rank;
+			rank_count[card_rank.ordinal()]++;
+		}
+		
+		return rank_count;
+	}
+	
+	private static int[] countSuit(ArrayList<Card> cards) {
+		int[] suit_count = new int[Suit.values().length];
+		for (int i = 0; i < 5; ++i) {
+			Suit card_suit = cards.get(i).suit;
+			suit_count[card_suit.ordinal()]++;
+		}
+		
+		return suit_count;
 	}
 }
