@@ -14,8 +14,9 @@ public class Straight extends Hand {
 	
 	private void sort() {
 		Card firstCard = hand.get(0);
+		Card secondCard = hand.get(1);
 		
-		if (firstCard.rank == Rank.ACE && firstCard.rank == Rank.FIVE) {
+		if (firstCard.rank == Rank.ACE && secondCard.rank == Rank.FIVE) {
 			hand.remove(0);
 			hand.add(firstCard);
 		}
