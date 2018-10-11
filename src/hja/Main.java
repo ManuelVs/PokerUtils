@@ -47,7 +47,7 @@ public class Main {
 			consumeLine(input);
 			
 			Hand bestHand = Algorithm.calculateHand(cards);
-			ArrayList<Hand> draws = Algorithm.calculateDraws(cards);
+			boolean[] draws = Algorithm.calculateDraws(cards);
 			
 			output.write(cardsToString(cards));
 			output.write(System.lineSeparator());
@@ -55,11 +55,19 @@ public class Main {
 			output.write(bestHand.toString());
 			output.write(System.lineSeparator());
 			
-			for (Hand draw : draws) {
-				output.write(" - Draw: ");
-				output.write(draw.toString());
+			if (draws[0]) {
+				output.write(" - Draw: Straight open ended");
 				output.write(System.lineSeparator());
 			}
+			else if (draws[1]) {
+				output.write(" - Draw: Straight Gutshot");
+				output.write(System.lineSeparator());
+			}
+			if (draws[2]) {
+				output.write(" - Draw: Flush");
+				output.write(System.lineSeparator());
+			}
+			
 			output.write(System.lineSeparator());
 		}
 	}
