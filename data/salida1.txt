@@ -1,3 +1,6 @@
+AhQcTs7h2c
+ - Best hand: High card: ACE
+
 AhAcQhJhTh
  - Best hand: Pair of ACE
 
@@ -7,23 +10,23 @@ AhKc7d3s2h
 KhQh7s3s2d
  - Best hand: High card: KING
 
-AsKsKs7h3d
- - Best hand: Pair of ACE
+KsKsAs7h3d
+ - Best hand: Pair of KING
 
 AdAd7s7s2h
  - Best hand: Two pairs of ACE and SEVEN
 
-AhKhKh3s3s
- - Best hand: Two pairs of ACE and KING
+KhKh3s3sAh
+ - Best hand: Two pairs of KING and THREE
 
-AsKsKd3h3s
- - Best hand: Two pairs of ACE and KING
+KdKs3s3hAs
+ - Best hand: Two pairs of KING and THREE
 
 AsAdAh3s2h
  - Best hand: Three of ACE
 
-AsKhKdKs3c
- - Best hand: Three of ACE
+KsKhKdAs3c
+ - Best hand: Three of KING
 
 AcKcQcJcTh
  - Best hand: Straight ended in ACE
