@@ -68,26 +68,33 @@ public final class Algorithm {
 	 * @return 0 no draw, 1 open ended, 2 gutshot
 	 */
 	private static int calculateStraightDraw(ArrayList<Card> cards) {
-		int[] rank_count = countRank(cards);
+		cards.sort(Collections.reverseOrder());
+		if (isStraight(cards)) return 0;
 		
+		// Values for readability
+		final int STRAIGHT_SIZE = 5;
+		final int STRAIGHT_CRITICAL_SIZE = 4;
+		
+		int[] rank_count = countRank(cards);
 		int count = 0, pos = -1;
-		for (int i = 0; i < 5; ++i) {
+		
+		for (int i = 0; i < STRAIGHT_SIZE; ++i) {
 			if (rank_count[i] >= 1) {
 				count++;
 			}
 		}
-		if (count >= 4) pos = 0;
+		if (count == STRAIGHT_CRITICAL_SIZE) pos = 0;
 		
-		for (int i = 5; i < rank_count.length; ++i) {
+		for (int i = STRAIGHT_SIZE; i < rank_count.length; ++i) {
 			if (rank_count[i] >= 1) {
 				count++;
 			}
-			if (rank_count[i - 5] >= 1) {
+			if (rank_count[i - STRAIGHT_SIZE] >= 1) {
 				count--;
 			}
 			
-			if (count >= 4) {
-				pos = i - 4;
+			if (count == STRAIGHT_CRITICAL_SIZE) {
+				pos = i - STRAIGHT_SIZE + 1;
 			}
 		}
 		
@@ -97,7 +104,6 @@ public final class Algorithm {
 			
 			boolean isOpenEnded = rank_count[pos] == 0 || rank_count[pos + 4] == 0;
 			
-			if (isStraight(cards)) return 0;
 			if (isOpenEnded) return 1;
 			if (isGutshot) return 2;
 		}
