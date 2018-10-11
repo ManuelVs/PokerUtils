@@ -11,16 +11,16 @@ public class Straight extends Hand {
 		super(HandType.STRAIGHT, hand);
 		sort();
 	}
-
+	
 	private void sort() {
 		Card firstCard = hand.get(0);
-
+		
 		if (firstCard.rank == Rank.ACE && firstCard.rank == Rank.FIVE) {
 			hand.remove(0);
 			hand.add(firstCard);
 		}
 	}
-
+	
 	@Override
 	public int compareKernel(Hand o) {
 		Card leftCard = this.hand.get(0);
