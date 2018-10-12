@@ -1,5 +1,6 @@
 package hja.pokerutils.Card;
 
+import hja.pokerutils.Utils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -9,29 +10,23 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CardTest {
-	private static final Card ace = new Card(Rank.ACE, Suit.HEARTS);
-	private static final Card king = new Card(Rank.KING, Suit.CLUBS);
-	private static final Card queen = new Card(Rank.QUEEN, Suit.SPADES);
-	private static final Card jack = new Card(Rank.JACK, Suit.DIAMONDS);
-	private static final Card ten = new Card(Rank.TEN, Suit.HEARTS);
-	
 	private static Stream<Arguments> compareProvider() {
 		return Stream.of(
-				Arguments.of(ace, king),
-				Arguments.of(ace, jack),
-				Arguments.of(queen, jack),
-				Arguments.of(queen, ten),
-				Arguments.of(jack, ten)
+				Arguments.of(Utils.ACEc, Utils.KINGd),
+				Arguments.of(Utils.KINGh, Utils.QUEENc),
+				Arguments.of(Utils.QUEENd, Utils.JACKd),
+				Arguments.of(Utils.JACKh, Utils.TENh),
+				Arguments.of(Utils.TENc, Utils.NINEd)
 		);
 	}
 	
 	private static Stream<Arguments> compareEqualProvider() {
 		return Stream.of(
-				Arguments.of(ace, ace),
-				Arguments.of(jack, jack),
-				Arguments.of(queen, queen),
-				Arguments.of(ten, ten),
-				Arguments.of(king, king)
+				Arguments.of(Utils.ACEd, Utils.ACEc),
+				Arguments.of(Utils.KINGd, Utils.KINGh),
+				Arguments.of(Utils.QUEENd, Utils.QUEENc),
+				Arguments.of(Utils.JACKd, Utils.JACKh),
+				Arguments.of(Utils.TENh, Utils.TENc)
 		);
 	}
 	

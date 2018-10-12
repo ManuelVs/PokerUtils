@@ -1,8 +1,7 @@
 package hja.pokerutils.Parser;
 
 import hja.pokerutils.Card.Card;
-import hja.pokerutils.Card.Rank;
-import hja.pokerutils.Card.Suit;
+import hja.pokerutils.Utils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -19,42 +18,42 @@ class CardListParserTest {
 	private static Stream<Arguments> cardListsProvider() {
 		return Stream.of(
 				Arguments.of("AhAcQhJhTh", 5, new ArrayList<>(Arrays.asList(
-						new Card(Rank.ACE, Suit.HEARTS),
-						new Card(Rank.ACE, Suit.CLUBS),
-						new Card(Rank.QUEEN, Suit.HEARTS),
-						new Card(Rank.JACK, Suit.HEARTS),
-						new Card(Rank.TEN, Suit.HEARTS)
+						Utils.ACEh,
+						Utils.ACEc,
+						Utils.QUEENh,
+						Utils.JACKh,
+						Utils.TENh
 				))),
 				
 				Arguments.of("As2s3h4dJd", 5, new ArrayList<>(Arrays.asList(
-						new Card(Rank.ACE, Suit.SPADES),
-						new Card(Rank.TWO, Suit.SPADES),
-						new Card(Rank.THREE, Suit.HEARTS),
-						new Card(Rank.FOUR, Suit.DIAMONDS),
-						new Card(Rank.JACK, Suit.DIAMONDS)
+						Utils.ACEs,
+						Utils.TWOs,
+						Utils.THREEh,
+						Utils.FOURd,
+						Utils.JACKd
 				))),
 				
 				Arguments.of("AhAcAs4dJd", 5, new ArrayList<>(Arrays.asList(
-						new Card(Rank.ACE, Suit.HEARTS),
-						new Card(Rank.ACE, Suit.CLUBS),
-						new Card(Rank.ACE, Suit.SPADES),
-						new Card(Rank.FOUR, Suit.DIAMONDS),
-						new Card(Rank.JACK, Suit.DIAMONDS)
+						Utils.ACEh,
+						Utils.ACEc,
+						Utils.ACEs,
+						Utils.FOURd,
+						Utils.JACKd
 				))),
 				
 				Arguments.of("5dKs6cTh9h", 5, new ArrayList<>(Arrays.asList(
-						new Card(Rank.FIVE, Suit.DIAMONDS),
-						new Card(Rank.KING, Suit.SPADES),
-						new Card(Rank.SIX, Suit.CLUBS),
-						new Card(Rank.TEN, Suit.HEARTS),
-						new Card(Rank.NINE, Suit.HEARTS)
+						Utils.FIVEd,
+						Utils.KINGs,
+						Utils.SIXc,
+						Utils.TENh,
+						Utils.NINEh
 				))),
 				
 				Arguments.of("2h2d2c2s", 4, new ArrayList<>(Arrays.asList(
-						new Card(Rank.TWO, Suit.HEARTS),
-						new Card(Rank.TWO, Suit.DIAMONDS),
-						new Card(Rank.TWO, Suit.CLUBS),
-						new Card(Rank.TWO, Suit.SPADES)
+						Utils.TWOh,
+						Utils.TWOd,
+						Utils.TWOc,
+						Utils.TWOs
 				)))
 		);
 	}
