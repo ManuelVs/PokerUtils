@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OmahaAlgorithmTest {
 	private static final ArrayList<Card> pair1 = new ArrayList<>(Arrays.asList(Utils.ACEh, Utils.ACEc, Utils.EIGHTs, Utils.FIVEh));
