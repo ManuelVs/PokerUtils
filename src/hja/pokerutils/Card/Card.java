@@ -1,4 +1,4 @@
-package hja.Card;
+package hja.pokerutils.Card;
 
 public class Card implements Comparable<Card> {
 	public final Rank rank;

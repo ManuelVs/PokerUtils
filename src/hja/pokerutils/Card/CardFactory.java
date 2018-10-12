@@ -1,4 +1,4 @@
-package hja.Card;
+package hja.pokerutils.Card;
 
 public final class CardFactory {
 	private static Card[][] cards;

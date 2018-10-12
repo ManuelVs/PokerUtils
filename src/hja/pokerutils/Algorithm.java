@@ -1,9 +1,9 @@
-package hja;
+package hja.pokerutils;
 
-import hja.Card.Card;
-import hja.Card.Rank;
-import hja.Card.Suit;
-import hja.Hand.*;
+import hja.pokerutils.Card.Card;
+import hja.pokerutils.Card.Rank;
+import hja.pokerutils.Card.Suit;
+import hja.pokerutils.Hand.*;
 
 import java.util.ArrayList;
 import java.util.Collections;

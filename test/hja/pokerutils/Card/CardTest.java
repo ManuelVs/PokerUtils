@@ -1,4 +1,4 @@
-package hja.Card;
+package hja.pokerutils.Card;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

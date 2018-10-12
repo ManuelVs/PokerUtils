@@ -1,9 +1,10 @@
 package hja;
 
-import hja.Card.Card;
-import hja.Card.Rank;
-import hja.Card.Suit;
-import hja.Hand.*;
+import hja.pokerutils.Algorithm;
+import hja.pokerutils.Card.Card;
+import hja.pokerutils.Card.Rank;
+import hja.pokerutils.Card.Suit;
+import hja.pokerutils.Hand.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

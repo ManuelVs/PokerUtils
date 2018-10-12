@@ -1,7 +1,7 @@
-package hja.Parser;
+package hja.pokerutils.Parser;
 
-import hja.Card.Card;
-import hja.Card.CardFactory;
+import hja.pokerutils.Card.Card;
+import hja.pokerutils.Card.CardFactory;
 
 import java.io.IOException;
 import java.io.Reader;

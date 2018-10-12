@@ -1,8 +1,8 @@
-package hja.Parser;
+package hja.pokerutils.Parser;
 
-import hja.Card.Card;
-import hja.Card.Rank;
-import hja.Card.Suit;
+import hja.pokerutils.Card.Card;
+import hja.pokerutils.Card.Rank;
+import hja.pokerutils.Card.Suit;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

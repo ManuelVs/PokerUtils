@@ -1,8 +1,9 @@
 package hja;
 
-import hja.Card.Card;
-import hja.Hand.Hand;
-import hja.Parser.CardListParser;
+import hja.pokerutils.Algorithm;
+import hja.pokerutils.Card.Card;
+import hja.pokerutils.Hand.Hand;
+import hja.pokerutils.Parser.CardListParser;
 
 import java.io.*;
 import java.util.ArrayList;

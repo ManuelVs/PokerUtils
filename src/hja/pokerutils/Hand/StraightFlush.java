@@ -1,7 +1,7 @@
-package hja.Hand;
+package hja.pokerutils.Hand;
 
-import hja.Card.Card;
-import hja.Card.Rank;
+import hja.pokerutils.Card.Card;
+import hja.pokerutils.Card.Rank;
 
 import java.util.ArrayList;
 
