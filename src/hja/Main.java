@@ -1,12 +1,14 @@
 package hja;
 
-import hja.pokerutils.Algorithm;
+import hja.pokerutils.HoldEmAlgorithm;
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.Hand;
+import hja.pokerutils.OmahaAlgorithm;
 import hja.pokerutils.Parser.CardListParser;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 	
@@ -43,12 +45,15 @@ public class Main {
 	}
 	
 	private static void classifyHand(Reader input, Writer output) throws IOException {
-		while (input.ready()) {
-			ArrayList<Card> cards = CardListParser.parseListCard(input, 5);
-			consumeLine(input);
+		Scanner scanner = new Scanner(input);
+		while (scanner.hasNext()) {
+			String line = scanner.next();
+			StringReader stringReader = new StringReader(line);
 			
-			Hand bestHand = Algorithm.calculateHand(cards);
-			boolean[] draws = Algorithm.calculateDraws(cards);
+			ArrayList<Card> cards = CardListParser.parseListCard(stringReader, 5);
+			
+			Hand bestHand = HoldEmAlgorithm.calculateHand(cards);
+			boolean[] draws = HoldEmAlgorithm.calculateDraws(cards);
 			
 			output.write(cardsToString(cards));
 			output.write(System.lineSeparator());
@@ -81,8 +86,30 @@ public class Main {
 	
 	}
 	
-	private static void calculateBestHandOmaha(Reader input, Writer output) {
-	
+	private static void calculateBestHandOmaha(Reader input, Writer output) throws IOException {
+		Scanner scanner = new Scanner(input);
+		while (scanner.hasNext()) {
+			String line = scanner.next();
+			StringReader stringReader = new StringReader(line);
+			
+			ArrayList<Card> playerCards = CardListParser.parseListCard(stringReader, 4);
+			
+			stringReader.read(); // ';' char
+			int cNumCards = stringReader.read(); // numCards
+			stringReader.read(); // ';' char
+			
+			int numCards = Integer.parseInt((char) cNumCards + "");
+			ArrayList<Card> boardCards = CardListParser.parseListCard(stringReader, numCards);
+			
+			Hand bestHand = OmahaAlgorithm.calculateHand(playerCards, boardCards);
+			
+			output.write(line);
+			output.write(System.lineSeparator());
+			output.write(" - Best hand: ");
+			output.write(bestHand.toString());
+			output.write(System.lineSeparator());
+			output.write(System.lineSeparator());
+		}
 	}
 	
 	private static String cardsToString(ArrayList<Card> cards) {
@@ -93,13 +120,5 @@ public class Main {
 		}
 		
 		return sb.toString();
-	}
-	
-	private static void consumeLine(Reader reader) throws IOException {
-		char c = (char) reader.read();
-		
-		while (reader.ready() && c != '\n') {
-			c = (char) reader.read();
-		}
 	}
 }
