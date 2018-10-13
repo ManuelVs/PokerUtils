@@ -10,6 +10,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HandValueOption implements OptionMode {
+	
+	@Override
+	public void start(String... args) throws IOException {
+		String inputFile = args[1];
+		String outputFile = args[2];
+		
+		FileReader reader = new FileReader(inputFile);
+		FileWriter writer = new FileWriter(outputFile);
+		
+		classifyHand(reader, writer);
+		
+		reader.close();
+		writer.close();
+	}
+	
 	private static void classifyHand(Reader input, Writer output) throws IOException {
 		Scanner scanner = new Scanner(input);
 		while (scanner.hasNext()) {
@@ -21,7 +36,7 @@ public class HandValueOption implements OptionMode {
 			Hand bestHand = HoldEmAlgorithm.calculateHand(cards);
 			boolean[] draws = HoldEmAlgorithm.calculateDraws(cards);
 			
-			output.write(cardsToString(cards));
+			output.write(Utils.cardsToString(cards));
 			output.write(System.lineSeparator());
 			output.write(" - Best hand: ");
 			output.write(bestHand.toString());
@@ -42,29 +57,5 @@ public class HandValueOption implements OptionMode {
 			
 			output.write(System.lineSeparator());
 		}
-	}
-	
-	private static String cardsToString(ArrayList<Card> cards) {
-		StringBuilder sb = new StringBuilder();
-		
-		for (Card card : cards) {
-			sb.append(card);
-		}
-		
-		return sb.toString();
-	}
-	
-	@Override
-	public void start(String... args) throws IOException {
-		String inputFile = args[1];
-		String outputFile = args[2];
-		
-		FileReader reader = new FileReader(inputFile);
-		FileWriter writer = new FileWriter(outputFile);
-		
-		classifyHand(reader, writer);
-		
-		reader.close();
-		writer.close();
 	}
 }
