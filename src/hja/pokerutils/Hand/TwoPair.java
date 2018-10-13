@@ -40,9 +40,16 @@ public class TwoPair extends Hand {
 	
 	@Override
 	public int compareKernel(Hand o) {
-		Card leftTwoCard = hand.get(0);
-		Card rightTwoCard = o.hand.get(0);
-		int compare = leftTwoCard.compareTo(rightTwoCard);
+		Card leftCard = hand.get(0);
+		Card rightCard = o.hand.get(0);
+		int compare = leftCard.compareTo(rightCard);
+		
+		if(compare == 0){
+			leftCard = hand.get(2);
+			rightCard = o.hand.get(2);
+			
+			compare = leftCard.compareTo(rightCard);
+		}
 		
 		return compare;
 	}
