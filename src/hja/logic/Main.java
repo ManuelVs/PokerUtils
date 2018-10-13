@@ -6,7 +6,10 @@ import java.io.IOException;
 public class Main {
 	
 	public static void main(String... args) {
-		int option = Integer.parseInt(args[0]);
+		int option = 5;
+		if(args.length > 0){
+			option = Integer.parseInt(args[0]);
+		}
 		OptionMode mode = createMode(option);
 		
 		try {
