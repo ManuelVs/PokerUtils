@@ -5,7 +5,7 @@ import hja.pokerutils.Hand.Hand;
 
 import java.util.ArrayList;
 
-public class OmahaAlgorithm {
+public final class OmahaAlgorithm {
 	
 	public static Hand calculateHand(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
 		if (playerCards.size() == 2) {
