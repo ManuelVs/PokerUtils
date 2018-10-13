@@ -24,6 +24,11 @@ public final class CardListParser {
 		char rank = (char) reader.read();
 		char suit = (char) reader.read();
 		
-		return CardFactory.createCard(rank, suit);
+		try{
+			return CardFactory.createCard(rank, suit);
+		}
+		catch (Exception e){
+			throw new IOException("Bad card: " + rank + suit);
+		}
 	}
 }
