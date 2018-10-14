@@ -14,7 +14,7 @@ public class RoyalFlush extends Hand {
 	public int compareKernel(Hand o) {
 		return 0;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Royal flush";

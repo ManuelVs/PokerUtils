@@ -20,8 +20,7 @@ public class TwoPair extends Hand {
 		if (firstCard.compareTo(secondCard) != 0) {
 			swap(hand, 0, 2);
 			swap(hand, 4, 2);
-		}
-		else {
+		} else {
 			firstCard = hand.get(2);
 			secondCard = hand.get(3);
 			if (firstCard.compareTo(secondCard) != 0) {
@@ -44,7 +43,7 @@ public class TwoPair extends Hand {
 		Card rightCard = o.hand.get(0);
 		int compare = leftCard.compareTo(rightCard);
 		
-		if(compare == 0){
+		if (compare == 0) {
 			leftCard = hand.get(2);
 			rightCard = o.hand.get(2);
 			
@@ -53,7 +52,7 @@ public class TwoPair extends Hand {
 		
 		return compare;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Two pairs of " + hand.get(0).rank.name() + " and " + hand.get(2).rank.name();

@@ -40,7 +40,7 @@ public class FullHouse extends Hand {
 		
 		return compare;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Full of " + hand.get(0).rank.name() + " and " + hand.get(3).rank.name();

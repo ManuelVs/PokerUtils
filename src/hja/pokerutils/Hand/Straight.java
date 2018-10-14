@@ -28,7 +28,7 @@ public class Straight extends Hand {
 		Card rightCard = o.hand.get(0);
 		return leftCard.compareTo(rightCard);
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Straight ended in " + hand.get(0).rank.name();

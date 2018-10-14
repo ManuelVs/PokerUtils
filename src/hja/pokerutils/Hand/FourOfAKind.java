@@ -34,7 +34,7 @@ public class FourOfAKind extends Hand {
 		Card rightCard = o.hand.get(0);
 		return leftCard.compareTo(rightCard);
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Four of " + hand.get(0).rank.name();

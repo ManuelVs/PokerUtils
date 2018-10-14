@@ -20,8 +20,7 @@ public class ThreeOfAKind extends Hand {
 			if (secondCard.compareTo(thirdCard) != 0) {
 				swap(hand, 0, 4);
 				swap(hand, 1, 3);
-			}
-			else {
+			} else {
 				swap(hand, 0, 3);
 			}
 		}
@@ -43,7 +42,7 @@ public class ThreeOfAKind extends Hand {
 		
 		return compare;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Three " + hand.get(0).rank.name();

@@ -47,7 +47,7 @@ public abstract class Hand implements Comparable<Hand> {
 	}
 	
 	protected abstract int compareKernel(Hand o);
-
+	
 	public ArrayList<Card> getHand() {
 		return this.hand;
 	}

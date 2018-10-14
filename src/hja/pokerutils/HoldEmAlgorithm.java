@@ -19,8 +19,7 @@ public final class HoldEmAlgorithm {
 	public static Hand calculateHand(ArrayList<Card> cards) {
 		if (cards.size() == 5) {
 			return classifyHand(cards);
-		}
-		else {
+		} else {
 			ArrayList<Card> cards_copy = new ArrayList<>(cards);
 			cards_copy.remove(0);
 			Hand best_hand = classifyHand(cards_copy);
@@ -121,35 +120,26 @@ public final class HoldEmAlgorithm {
 		
 		if (isRoyalFlush(cards)) {
 			return new RoyalFlush(cards);
-		}
-		else if (isStraightFlush(cards)) {
+		} else if (isStraightFlush(cards)) {
 			return new StraightFlush(cards);
-		}
-		else {
+		} else {
 			int[] rank_count = countRank(cards);
 			
 			if (isFourOfAKind(rank_count)) {
 				return new FourOfAKind(cards);
-			}
-			else if (isFullHouse(rank_count)) {
+			} else if (isFullHouse(rank_count)) {
 				return new FullHouse(cards);
-			}
-			else if (isFlush(cards)) {
+			} else if (isFlush(cards)) {
 				return new Flush(cards);
-			}
-			else if (isStraight(cards)) {
+			} else if (isStraight(cards)) {
 				return new Straight(cards);
-			}
-			else if (isThreeOfAKind(rank_count)) {
+			} else if (isThreeOfAKind(rank_count)) {
 				return new ThreeOfAKind(cards);
-			}
-			else if (isTwoPair(rank_count)) {
+			} else if (isTwoPair(rank_count)) {
 				return new TwoPair(cards);
-			}
-			else if (isPair(rank_count)) {
+			} else if (isPair(rank_count)) {
 				return new Pair(cards);
-			}
-			else {
+			} else {
 				return new HighCard(cards);
 			}
 		}

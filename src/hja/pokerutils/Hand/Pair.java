@@ -46,7 +46,7 @@ public class Pair extends Hand {
 		
 		return compare;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Pair of " + hand.get(0).rank.name();
