@@ -53,7 +53,12 @@ public class TwoPair extends Hand {
 		
 		return compare;
 	}
-	
+
+	@Override
+	public ArrayList<Card> getHand() {
+		return this.hand;
+	}
+
 	@Override
 	public String toString() {
 		return "Two pairs of " + hand.get(0).rank.name() + " and " + hand.get(2).rank.name();

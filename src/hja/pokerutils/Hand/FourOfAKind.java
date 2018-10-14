@@ -34,9 +34,14 @@ public class FourOfAKind extends Hand {
 		Card rightCard = o.hand.get(0);
 		return leftCard.compareTo(rightCard);
 	}
-	
+
+	@Override
+	public ArrayList<Card> getHand() {
+		return this.hand;
+	}
+
 	@Override
 	public String toString() {
-		return "Four " + hand.get(0).rank.name();
+		return "Four of " + hand.get(0).rank.name();
 	}
 }
