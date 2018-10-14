@@ -39,7 +39,8 @@ public class HoldEmOption implements OptionMode {
 			if (draws[0]) {
 				output.write(" - Draw: Straight open ended");
 				output.write(System.lineSeparator());
-			} else if (draws[1]) {
+			}
+			else if (draws[1]) {
 				output.write(" - Draw: Straight Gutshot");
 				output.write(System.lineSeparator());
 			}

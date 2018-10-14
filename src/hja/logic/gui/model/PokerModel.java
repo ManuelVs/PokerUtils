@@ -49,7 +49,7 @@ public class PokerModel implements Model {
 	
 	private void consumeLine(Reader reader) throws IOException {
 		int c = 0;
-		while(reader.ready() && c != '\n') {
+		while (reader.ready() && c != '\n') {
 			c = reader.read();
 		}
 	}

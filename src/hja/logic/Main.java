@@ -14,7 +14,8 @@ public class Main {
 		
 		try {
 			mode.start(args);
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

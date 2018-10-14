@@ -26,7 +26,8 @@ public final class CardListParser {
 		
 		try {
 			return CardFactory.createCard(rank, suit);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new IOException("Bad card: " + rank + suit);
 		}
 	}

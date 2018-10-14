@@ -50,7 +50,8 @@ public class UtilsPanel extends JPanel implements ListChangeListener {
 		File boardListFile = chooser.getSelectedFile();
 		try {
 			this.model.changeFile(boardListFile.getAbsolutePath());
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			String message = "Error when reading the selected file." + System.lineSeparator() + "Details: " + e.getMessage();
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -100,7 +101,8 @@ public class UtilsPanel extends JPanel implements ListChangeListener {
 			if (isSelected) {
 				setBackground(list.getSelectionBackground());
 				setForeground(list.getSelectionForeground());
-			} else {
+			}
+			else {
 				setBackground(list.getBackground());
 				setForeground(list.getForeground());
 			}

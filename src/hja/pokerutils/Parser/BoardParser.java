@@ -51,7 +51,8 @@ public final class BoardParser {
 	private static int charToInt(char c) throws IOException {
 		if ('0' <= c && c <= '9') {
 			return c - '0';
-		} else throw new IOException("Bad number: " + c);
+		}
+		else throw new IOException("Bad number: " + c);
 	}
 	
 }

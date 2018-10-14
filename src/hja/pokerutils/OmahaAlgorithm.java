@@ -10,7 +10,8 @@ public final class OmahaAlgorithm {
 	public static Hand calculateHand(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
 		if (playerCards.size() == 2) {
 			return OmahaAlgorithm.calculateHandTwoPlayerCard(playerCards, boardCards);
-		} else {
+		}
+		else {
 			ArrayList<Card> cards_copy = new ArrayList<>(playerCards);
 			cards_copy.remove(0);
 			Hand best_hand = calculateHand(cards_copy, boardCards);
@@ -38,7 +39,8 @@ public final class OmahaAlgorithm {
 			cards.addAll(boardCards);
 			
 			return HoldEmAlgorithm.calculateHand(cards);
-		} else {
+		}
+		else {
 			ArrayList<Card> cards_copy = new ArrayList<>(boardCards);
 			cards_copy.remove(0);
 			Hand best_hand = calculateHandTwoPlayerCard(playerCards, cards_copy);

@@ -20,7 +20,8 @@ public class TwoPair extends Hand {
 		if (firstCard.compareTo(secondCard) != 0) {
 			swap(hand, 0, 2);
 			swap(hand, 4, 2);
-		} else {
+		}
+		else {
 			firstCard = hand.get(2);
 			secondCard = hand.get(3);
 			if (firstCard.compareTo(secondCard) != 0) {
