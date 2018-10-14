@@ -45,18 +45,39 @@ public class UtilsPanel extends JPanel implements ListChangeListener {
 	}
 	
 	private void loadButtonListener(ActionEvent actionEvent) {
-		JFileChooser chooser = new JFileChooser();
-		chooser.showOpenDialog(this);
-		File boardListFile = chooser.getSelectedFile();
-		try {
-			this.model.changeFile(boardListFile.getAbsolutePath());
-		}
-		catch (IOException e) {
-			String message = "Error when reading the selected file." + System.lineSeparator() + "Details: " + e.getMessage();
-			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-		}
-		
-		
+		EventQueue.invokeLater(() -> {
+			try {
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.showOpenDialog(UtilsPanel.this);
+				File file = fileChooser.getSelectedFile();
+				if(file != null){
+					String path = file.getAbsolutePath();
+					model.changeFile(path);
+				}
+			}
+			catch (IOException e){
+				e.printStackTrace();
+				StringBuilder message = new StringBuilder("Error reading the file. Is well formatted?");
+				message.append(System.lineSeparator());
+				message.append("Details: ");
+				message.append(System.lineSeparator());
+				message.append(e.getMessage());
+				
+				JOptionPane.showMessageDialog(UtilsPanel.this, message, "Bad file", JOptionPane.ERROR_MESSAGE);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+				StringBuilder message = new StringBuilder("Unknown error.");
+				message.append(System.lineSeparator());
+				message.append("Details: ");
+				message.append(System.lineSeparator());
+				message.append(e.getMessage());
+				
+				JOptionPane.showMessageDialog(UtilsPanel.this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		});
 	}
 	
 	private void updateList() {

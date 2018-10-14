@@ -13,13 +13,17 @@ public class MainWindow extends JFrame {
 	}
 	
 	private void initGUI() throws IOException {
-		PokerModel model = new PokerModel();
-		PokerBoard pokerBoard = new PokerBoard();
-		UtilsPanel utilsPanel = new UtilsPanel(model);
-		model.addListener(utilsPanel);
-		model.addListener(pokerBoard);
 		this.setLayout(new BorderLayout());
-		this.add(pokerBoard, BorderLayout.CENTER);
+		
+		PokerModel model = new PokerModel();
+		UtilsPanel utilsPanel = new UtilsPanel(model);
+		PokerBoard pokerBoard = new PokerBoard();
+		model.addListener(pokerBoard);
+		model.addListener(utilsPanel);
+		
+		utilsPanel.setBorder(BorderFactory.createTitledBorder("Use cases: "));
+		
 		this.add(utilsPanel, BorderLayout.EAST);
+		this.add(pokerBoard, BorderLayout.CENTER);
 	}
 }
