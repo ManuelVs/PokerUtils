@@ -30,11 +30,6 @@ public class StraightFlush extends Hand {
 	}
 
 	@Override
-	public ArrayList<Card> getHand() {
-		return this.hand;
-	}
-
-	@Override
 	public String toString() {
 		return "Straight flush ended in " + hand.get(0).rank.name();
 	}

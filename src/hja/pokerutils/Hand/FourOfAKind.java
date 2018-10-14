@@ -36,11 +36,6 @@ public class FourOfAKind extends Hand {
 	}
 
 	@Override
-	public ArrayList<Card> getHand() {
-		return this.hand;
-	}
-
-	@Override
 	public String toString() {
 		return "Four of " + hand.get(0).rank.name();
 	}

@@ -16,11 +16,6 @@ public class HighCard extends Hand {
 	}
 
 	@Override
-	public ArrayList<Card> getHand() {
-		return this.hand;
-	}
-
-	@Override
 	public String toString() {
 		return "High card: " + hand.get(0).rank.name();
 	}

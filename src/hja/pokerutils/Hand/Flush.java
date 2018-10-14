@@ -29,11 +29,6 @@ public class Flush extends Hand {
 	}
 
 	@Override
-	public ArrayList<Card> getHand() {
-		return this.hand;
-	}
-
-	@Override
 	public String toString() {
 		return "Flush ended in " + hand.get(0).rank.name();
 	}

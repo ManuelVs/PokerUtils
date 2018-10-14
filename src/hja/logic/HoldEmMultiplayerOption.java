@@ -78,10 +78,6 @@ public class HoldEmMultiplayerOption implements OptionMode {
 		public int compareTo(Player o) {
 			int compare = this.hand.compareTo(o.hand);
 
-			if (compare == 0) {
-				compare = this.name.compareTo(o.name);
-			}
-
 			return compare;
 		}
 

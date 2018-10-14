@@ -42,11 +42,6 @@ public class FullHouse extends Hand {
 	}
 
 	@Override
-	public ArrayList<Card> getHand() {
-		return this.hand;
-	}
-
-	@Override
 	public String toString() {
 		return "Full of " + hand.get(0).rank.name() + " and " + hand.get(3).rank.name();
 	}

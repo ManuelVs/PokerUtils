@@ -48,11 +48,6 @@ public class Pair extends Hand {
 	}
 
 	@Override
-	public ArrayList<Card> getHand() {
-		return this.hand;
-	}
-
-	@Override
 	public String toString() {
 		return "Pair of " + hand.get(0).rank.name();
 	}

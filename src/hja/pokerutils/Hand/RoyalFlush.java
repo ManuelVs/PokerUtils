@@ -16,11 +16,6 @@ public class RoyalFlush extends Hand {
 	}
 
 	@Override
-	public ArrayList<Card> getHand() {
-		return this.hand;
-	}
-
-	@Override
 	public String toString() {
 		return "Royal flush";
 	}
