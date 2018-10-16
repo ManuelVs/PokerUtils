@@ -4,6 +4,7 @@ import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.Hand;
 import hja.pokerutils.HoldEmAlgorithm;
 import hja.pokerutils.Parser.CardListParser;
+import hja.pokerutils.Utils;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -21,12 +22,11 @@ public class HoldEmOption implements OptionMode {
 			
 			ArrayList<Card> playerCards = CardListParser.parseListCard(stringReaderPlayer, 2);
 			ArrayList<Card> boardCards = CardListParser.parseListCard(stringReaderBoard, numBoardCards);
-			ArrayList<Card> allCards = new ArrayList<Card>();
+			ArrayList<Card> allCards = new ArrayList<>();
 			allCards.addAll(playerCards);
 			allCards.addAll(boardCards);
 			
 			Hand bestHand = HoldEmAlgorithm.calculateHand(allCards);
-			boolean[] draws = HoldEmAlgorithm.calculateDraws(allCards);
 			
 			output.write(line);
 			output.write(System.lineSeparator());
@@ -36,17 +36,20 @@ public class HoldEmOption implements OptionMode {
 			output.write(Utils.cardsToString(bestHand.getHand()));
 			output.write(System.lineSeparator());
 			
-			if (draws[0]) {
-				output.write(" - Draw: Straight open ended");
-				output.write(System.lineSeparator());
-			}
-			else if (draws[1]) {
-				output.write(" - Draw: Straight Gutshot");
-				output.write(System.lineSeparator());
-			}
-			if (draws[2]) {
-				output.write(" - Draw: Flush");
-				output.write(System.lineSeparator());
+			if(allCards.size() != 7) {
+				boolean[] draws = HoldEmAlgorithm.calculateDraws(allCards);
+				if (draws[0]) {
+					output.write(" - Draw: Straight open ended");
+					output.write(System.lineSeparator());
+				}
+				else if (draws[1]) {
+					output.write(" - Draw: Straight Gutshot");
+					output.write(System.lineSeparator());
+				}
+				if (draws[2]) {
+					output.write(" - Draw: Flush");
+					output.write(System.lineSeparator());
+				}
 			}
 			
 			output.write(System.lineSeparator());
