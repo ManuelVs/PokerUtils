@@ -1,6 +1,24 @@
 4;J1AhAc;J2JsJh;J37c8c;J44sKc;5dKs6cTh9h
 J3 Th9h8c7c6c (Straight ended in TEN)
 J1 AhAcKsTh9h (Pair of ACE)
-J4 KcKsTh9h6c5d (Pair of KING)
+J4 KcKsTh9h6c (Pair of KING)
 J2 JsJhKsTh9h (Pair of JACK)
+
+4;J1QhKd;J2QsJh;J37c8c;J44sKc;5dKs6cTh9h
+J2 KsQsJhTh9h (Straight ended in KING)
+J3 Th9h8c7c6c (Straight ended in TEN)
+J1 KdKsQhTh9h (Pair of KING)
+J4 KcKsTh9h6c (Pair of KING)
+
+4;J1Jh9c;J25s6h;J37c8c;J44sKc;6d7s8cTh9h
+J1 JhTh9h8c7s (Straight ended in JACK)
+J2 Th9h8c7s6d (Straight ended in TEN)
+J3 Th9h8c7s6d (Straight ended in TEN)
+J4 Th9h8c7s6d (Straight ended in TEN)
+
+4;J1Tc6c;J2As9h;J37c8c;J44sKc;AdKdQdJdTd
+J1 AdKdQdJdTd (Royal flush)
+J2 AdKdQdJdTd (Royal flush)
+J3 AdKdQdJdTd (Royal flush)
+J4 AdKdQdJdTd (Royal flush)
 
