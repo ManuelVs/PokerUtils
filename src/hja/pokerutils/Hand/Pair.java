@@ -12,22 +12,22 @@ public class Pair extends Hand {
 	}
 	
 	private void sort() {
+		ArrayList<Card> aux = new ArrayList<>(3);
+		
 		Card firstCard = hand.get(0);
 		Card secondCard = hand.get(1);
-		
 		int compare = firstCard.compareTo(secondCard);
-		int index = 1;
 		
-		while (index < hand.size() - 1 && compare != 0) {
-			firstCard = hand.get(index);
-			secondCard = hand.get(index + 1);
+		while (compare != 0){
+			Card badCard = this.hand.remove(0);
+			aux.add(badCard);
 			
+			firstCard = hand.get(0);
+			secondCard = hand.get(1);
 			compare = firstCard.compareTo(secondCard);
-			++index;
 		}
 		
-		swap(hand, index - 1, 0);
-		swap(hand, index, 1);
+		this.hand.addAll(2, aux);
 	}
 	
 	private void swap(ArrayList<Card> hand, int i, int j) {
