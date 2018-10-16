@@ -1,6 +1,6 @@
 package hja.logic.gui.components;
 
-import hja.logic.Utils;
+import hja.pokerutils.Utils;
 import hja.logic.gui.model.ListChangeListener;
 import hja.logic.gui.model.Model;
 import hja.pokerutils.Board.Board;
