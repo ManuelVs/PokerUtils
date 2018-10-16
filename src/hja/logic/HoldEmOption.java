@@ -36,7 +36,7 @@ public class HoldEmOption implements OptionMode {
 			output.write(Utils.cardsToString(bestHand.getHand()));
 			output.write(System.lineSeparator());
 			
-			if(allCards.size() != 7) {
+			if (allCards.size() != 7) {
 				boolean[] draws = HoldEmAlgorithm.calculateDraws(allCards);
 				if (draws[0]) {
 					output.write(" - Draw: Straight open ended");

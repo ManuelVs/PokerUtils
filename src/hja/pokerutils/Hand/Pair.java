@@ -18,7 +18,7 @@ public class Pair extends Hand {
 		Card secondCard = hand.get(1);
 		int compare = firstCard.compareTo(secondCard);
 		
-		while (compare != 0){
+		while (compare != 0) {
 			Card badCard = this.hand.remove(0);
 			aux.add(badCard);
 			

@@ -1,8 +1,8 @@
 package hja.pokerutils.Board;
 
-import hja.pokerutils.Utils;
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.Hand;
+import hja.pokerutils.Utils;
 
 import java.util.ArrayList;
 

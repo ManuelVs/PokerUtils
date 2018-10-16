@@ -1,9 +1,9 @@
 package hja.logic.gui.components;
 
-import hja.pokerutils.Utils;
 import hja.logic.gui.model.ListChangeListener;
 import hja.logic.gui.model.Model;
 import hja.pokerutils.Board.Board;
+import hja.pokerutils.Utils;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -52,12 +52,12 @@ public class UtilsPanel extends JPanel implements ListChangeListener {
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.showOpenDialog(UtilsPanel.this);
 				File file = fileChooser.getSelectedFile();
-				if(file != null){
+				if (file != null) {
 					String path = file.getAbsolutePath();
 					model.changeFile(path);
 				}
 			}
-			catch (IOException e){
+			catch (IOException e) {
 				e.printStackTrace();
 				StringBuilder message = new StringBuilder("Error reading the file. Is well formatted?");
 				message.append(System.lineSeparator());
