@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public final class BoardParser {
+	
 	public static Board parseBoard(Reader reader) throws IOException {
 		int cNumPlayers = reader.read();
 		int numPlayers = charToInt((char) cNumPlayers);
@@ -30,7 +31,7 @@ public final class BoardParser {
 		
 		ArrayList<Player> players = new ArrayList<>();
 		
-		for (int i = 1; i <= numPlayers; ++i) {
+		for (int i = 0; i < numPlayers; ++i) {
 			String playerName = parts[i].substring(0, 2);
 			String pCards = parts[i].substring(2);
 			StringReader stringReaderPlayer = new StringReader(pCards);
