@@ -23,7 +23,7 @@ public final class HoldEmAlgorithm {
 		else {
 			ArrayList<Card> cards_copy = new ArrayList<>(cards);
 			cards_copy.remove(0);
-			Hand best_hand = classifyHand(cards_copy);
+			Hand best_hand = calculateHand(cards_copy);
 			
 			for (int i = 1; i < cards.size(); ++i) {
 				cards_copy = new ArrayList<>(cards);
