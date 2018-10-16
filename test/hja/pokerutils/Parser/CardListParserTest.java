@@ -1,7 +1,7 @@
 package hja.pokerutils.Parser;
 
 import hja.pokerutils.Card.Card;
-import hja.pokerutils.Utils;
+import hja.pokerutils.TestUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,42 +18,42 @@ class CardListParserTest {
 	private static Stream<Arguments> cardListsProvider() {
 		return Stream.of(
 				Arguments.of("AhAcQhJhTh", 5, new ArrayList<>(Arrays.asList(
-						Utils.ACEh,
-						Utils.ACEc,
-						Utils.QUEENh,
-						Utils.JACKh,
-						Utils.TENh
+						TestUtils.ACEh,
+						TestUtils.ACEc,
+						TestUtils.QUEENh,
+						TestUtils.JACKh,
+						TestUtils.TENh
 				))),
 				
 				Arguments.of("As2s3h4dJd", 5, new ArrayList<>(Arrays.asList(
-						Utils.ACEs,
-						Utils.TWOs,
-						Utils.THREEh,
-						Utils.FOURd,
-						Utils.JACKd
+						TestUtils.ACEs,
+						TestUtils.TWOs,
+						TestUtils.THREEh,
+						TestUtils.FOURd,
+						TestUtils.JACKd
 				))),
 				
 				Arguments.of("AhAcAs4dJd", 5, new ArrayList<>(Arrays.asList(
-						Utils.ACEh,
-						Utils.ACEc,
-						Utils.ACEs,
-						Utils.FOURd,
-						Utils.JACKd
+						TestUtils.ACEh,
+						TestUtils.ACEc,
+						TestUtils.ACEs,
+						TestUtils.FOURd,
+						TestUtils.JACKd
 				))),
 				
 				Arguments.of("5dKs6cTh9h", 5, new ArrayList<>(Arrays.asList(
-						Utils.FIVEd,
-						Utils.KINGs,
-						Utils.SIXc,
-						Utils.TENh,
-						Utils.NINEh
+						TestUtils.FIVEd,
+						TestUtils.KINGs,
+						TestUtils.SIXc,
+						TestUtils.TENh,
+						TestUtils.NINEh
 				))),
 				
 				Arguments.of("2h2d2c2s", 4, new ArrayList<>(Arrays.asList(
-						Utils.TWOh,
-						Utils.TWOd,
-						Utils.TWOc,
-						Utils.TWOs
+						TestUtils.TWOh,
+						TestUtils.TWOd,
+						TestUtils.TWOc,
+						TestUtils.TWOs
 				)))
 		);
 	}

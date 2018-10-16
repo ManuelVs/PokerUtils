@@ -13,38 +13,38 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HoldEmAlgorithmTest {
-	private static final ArrayList<Card> highCard1 = new ArrayList<>(Arrays.asList(Utils.ACEc, Utils.KINGd, Utils.SEVENc, Utils.THREEd, Utils.TWOd));
-	private static final ArrayList<Card> highCard2 = new ArrayList<>(Arrays.asList(Utils.KINGd, Utils.QUEENd, Utils.SEVENc, Utils.THREEd, Utils.TWOh));
+	private static final ArrayList<Card> highCard1 = new ArrayList<>(Arrays.asList(TestUtils.ACEc, TestUtils.KINGd, TestUtils.SEVENc, TestUtils.THREEd, TestUtils.TWOd));
+	private static final ArrayList<Card> highCard2 = new ArrayList<>(Arrays.asList(TestUtils.KINGd, TestUtils.QUEENd, TestUtils.SEVENc, TestUtils.THREEd, TestUtils.TWOh));
 	
-	private static final ArrayList<Card> pair1 = new ArrayList<>(Arrays.asList(Utils.ACEc, Utils.ACEd, Utils.SEVENc, Utils.THREEd, Utils.TWOs));
-	private static final ArrayList<Card> pair2 = new ArrayList<>(Arrays.asList(Utils.ACEc, Utils.KINGd, Utils.KINGh, Utils.SEVENs, Utils.THREEd));
+	private static final ArrayList<Card> pair1 = new ArrayList<>(Arrays.asList(TestUtils.ACEc, TestUtils.ACEd, TestUtils.SEVENc, TestUtils.THREEd, TestUtils.TWOs));
+	private static final ArrayList<Card> pair2 = new ArrayList<>(Arrays.asList(TestUtils.ACEc, TestUtils.KINGd, TestUtils.KINGh, TestUtils.SEVENs, TestUtils.THREEd));
 	
-	private static final ArrayList<Card> twoPair1 = new ArrayList<>(Arrays.asList(Utils.ACEc, Utils.ACEd, Utils.SEVENc, Utils.SEVENd, Utils.TWOc));
-	private static final ArrayList<Card> twoPair2 = new ArrayList<>(Arrays.asList(Utils.KINGd, Utils.KINGh, Utils.EIGHTs, Utils.THREEh, Utils.THREEc));
+	private static final ArrayList<Card> twoPair1 = new ArrayList<>(Arrays.asList(TestUtils.ACEc, TestUtils.ACEd, TestUtils.SEVENc, TestUtils.SEVENd, TestUtils.TWOc));
+	private static final ArrayList<Card> twoPair2 = new ArrayList<>(Arrays.asList(TestUtils.KINGd, TestUtils.KINGh, TestUtils.EIGHTs, TestUtils.THREEh, TestUtils.THREEc));
 	
-	private static final ArrayList<Card> threeOf1 = new ArrayList<>(Arrays.asList(Utils.ACEc, Utils.ACEd, Utils.ACEh, Utils.THREEs, Utils.TWOd));
-	private static final ArrayList<Card> threeOf2 = new ArrayList<>(Arrays.asList(Utils.ACEs, Utils.KINGd, Utils.KINGs, Utils.KINGc, Utils.FOURd));
+	private static final ArrayList<Card> threeOf1 = new ArrayList<>(Arrays.asList(TestUtils.ACEc, TestUtils.ACEd, TestUtils.ACEh, TestUtils.THREEs, TestUtils.TWOd));
+	private static final ArrayList<Card> threeOf2 = new ArrayList<>(Arrays.asList(TestUtils.ACEs, TestUtils.KINGd, TestUtils.KINGs, TestUtils.KINGc, TestUtils.FOURd));
 	
-	private static final ArrayList<Card> straight1 = new ArrayList<>(Arrays.asList(Utils.ACEc, Utils.KINGs, Utils.QUEENh, Utils.JACKh, Utils.TENd));
-	private static final ArrayList<Card> straight2 = new ArrayList<>(Arrays.asList(Utils.QUEENs, Utils.JACKd, Utils.TENh, Utils.NINEh, Utils.EIGHTd));
+	private static final ArrayList<Card> straight1 = new ArrayList<>(Arrays.asList(TestUtils.ACEc, TestUtils.KINGs, TestUtils.QUEENh, TestUtils.JACKh, TestUtils.TENd));
+	private static final ArrayList<Card> straight2 = new ArrayList<>(Arrays.asList(TestUtils.QUEENs, TestUtils.JACKd, TestUtils.TENh, TestUtils.NINEh, TestUtils.EIGHTd));
 	
-	private static final ArrayList<Card> flush1 = new ArrayList<>(Arrays.asList(Utils.ACEs, Utils.JACKs, Utils.TENs, Utils.NINEs, Utils.FOURs));
-	private static final ArrayList<Card> flush2 = new ArrayList<>(Arrays.asList(Utils.QUEENc, Utils.JACKc, Utils.TENc, Utils.FIVEc, Utils.FOURc));
+	private static final ArrayList<Card> flush1 = new ArrayList<>(Arrays.asList(TestUtils.ACEs, TestUtils.JACKs, TestUtils.TENs, TestUtils.NINEs, TestUtils.FOURs));
+	private static final ArrayList<Card> flush2 = new ArrayList<>(Arrays.asList(TestUtils.QUEENc, TestUtils.JACKc, TestUtils.TENc, TestUtils.FIVEc, TestUtils.FOURc));
 	
-	private static final ArrayList<Card> full1 = new ArrayList<>(Arrays.asList(Utils.ACEs, Utils.ACEd, Utils.ACEh, Utils.FIVEs, Utils.FIVEd));
-	private static final ArrayList<Card> full2 = new ArrayList<>(Arrays.asList(Utils.QUEENs, Utils.QUEENd, Utils.TENc, Utils.TENh, Utils.TENd));
+	private static final ArrayList<Card> full1 = new ArrayList<>(Arrays.asList(TestUtils.ACEs, TestUtils.ACEd, TestUtils.ACEh, TestUtils.FIVEs, TestUtils.FIVEd));
+	private static final ArrayList<Card> full2 = new ArrayList<>(Arrays.asList(TestUtils.QUEENs, TestUtils.QUEENd, TestUtils.TENc, TestUtils.TENh, TestUtils.TENd));
 	
-	private static final ArrayList<Card> fourOf1 = new ArrayList<>(Arrays.asList(Utils.ACEs, Utils.ACEh, Utils.ACEd, Utils.ACEc, Utils.EIGHTc));
-	private static final ArrayList<Card> fourOf2 = new ArrayList<>(Arrays.asList(Utils.NINEd, Utils.SIXc, Utils.SIXd, Utils.SIXh, Utils.SIXs));
+	private static final ArrayList<Card> fourOf1 = new ArrayList<>(Arrays.asList(TestUtils.ACEs, TestUtils.ACEh, TestUtils.ACEd, TestUtils.ACEc, TestUtils.EIGHTc));
+	private static final ArrayList<Card> fourOf2 = new ArrayList<>(Arrays.asList(TestUtils.NINEd, TestUtils.SIXc, TestUtils.SIXd, TestUtils.SIXh, TestUtils.SIXs));
 	
-	private static final ArrayList<Card> straightF1 = new ArrayList<>(Arrays.asList(Utils.KINGc, Utils.QUEENc, Utils.JACKc, Utils.TENc, Utils.NINEc));
-	private static final ArrayList<Card> straightF2 = new ArrayList<>(Arrays.asList(Utils.EIGHTh, Utils.SEVENh, Utils.SIXh, Utils.FIVEh, Utils.FOURh));
+	private static final ArrayList<Card> straightF1 = new ArrayList<>(Arrays.asList(TestUtils.KINGc, TestUtils.QUEENc, TestUtils.JACKc, TestUtils.TENc, TestUtils.NINEc));
+	private static final ArrayList<Card> straightF2 = new ArrayList<>(Arrays.asList(TestUtils.EIGHTh, TestUtils.SEVENh, TestUtils.SIXh, TestUtils.FIVEh, TestUtils.FOURh));
 	
-	private static final ArrayList<Card> royalF = new ArrayList<>(Arrays.asList(Utils.ACEh, Utils.KINGh, Utils.QUEENh, Utils.JACKh, Utils.TENh));
+	private static final ArrayList<Card> royalF = new ArrayList<>(Arrays.asList(TestUtils.ACEh, TestUtils.KINGh, TestUtils.QUEENh, TestUtils.JACKh, TestUtils.TENh));
 	
 	// Impossibles...
-	private static final ArrayList<Card> flush_full = new ArrayList<>(Arrays.asList(Utils.ACEs, Utils.ACEh, Utils.ACEd, Utils.NINEs, Utils.NINEh, Utils.EIGHTs, Utils.SEVENs, Utils.SIXs));
-	private static final ArrayList<Card> straight_poker = new ArrayList<>(Arrays.asList(Utils.ACEs, Utils.ACEh, Utils.ACEd, Utils.ACEc, Utils.KINGs, Utils.QUEENd, Utils.JACKs, Utils.TENs));
+	private static final ArrayList<Card> flush_full = new ArrayList<>(Arrays.asList(TestUtils.ACEs, TestUtils.ACEh, TestUtils.ACEd, TestUtils.NINEs, TestUtils.NINEh, TestUtils.EIGHTs, TestUtils.SEVENs, TestUtils.SIXs));
+	private static final ArrayList<Card> straight_poker = new ArrayList<>(Arrays.asList(TestUtils.ACEs, TestUtils.ACEh, TestUtils.ACEd, TestUtils.ACEc, TestUtils.KINGs, TestUtils.QUEENd, TestUtils.JACKs, TestUtils.TENs));
 	
 	private static Stream<Arguments> handProvider() {
 		return Stream.of(

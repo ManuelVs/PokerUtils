@@ -13,16 +13,16 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OmahaAlgorithmTest {
-	private static final ArrayList<Card> pair1 = new ArrayList<>(Arrays.asList(Utils.ACEh, Utils.ACEc, Utils.EIGHTs, Utils.FIVEh));
-	private static final ArrayList<Card> fourOf1 = new ArrayList<>(Arrays.asList(Utils.TWOh, Utils.TWOd, Utils.TWOc, Utils.TWOs));
+	private static final ArrayList<Card> pair1 = new ArrayList<>(Arrays.asList(TestUtils.ACEh, TestUtils.ACEc, TestUtils.EIGHTs, TestUtils.FIVEh));
+	private static final ArrayList<Card> fourOf1 = new ArrayList<>(Arrays.asList(TestUtils.TWOh, TestUtils.TWOd, TestUtils.TWOc, TestUtils.TWOs));
 	
 	// Wikipedia:
-	private static final ArrayList<Card> board = new ArrayList<>(Arrays.asList(Utils.TWOs, Utils.FIVEc, Utils.TENh, Utils.SEVENd, Utils.EIGHTc));
-	private static final ArrayList<Card> mike = new ArrayList<>(Arrays.asList(Utils.ACEs, Utils.FOURs, Utils.FIVEh, Utils.KINGc));
-	private static final ArrayList<Card> brian = new ArrayList<>(Arrays.asList(Utils.ACEh, Utils.THREEh, Utils.TENs, Utils.TENc));
-	private static final ArrayList<Card> jess = new ArrayList<>(Arrays.asList(Utils.SEVENc, Utils.NINEc, Utils.JACKs, Utils.QUEENs));
-	private static final ArrayList<Card> tony = new ArrayList<>(Arrays.asList(Utils.FOURh, Utils.SIXh, Utils.KINGs, Utils.KINGd));
-	private static final ArrayList<Card> emily = new ArrayList<>(Arrays.asList(Utils.ACEd, Utils.THREEd, Utils.SIXd, Utils.NINEh));
+	private static final ArrayList<Card> board = new ArrayList<>(Arrays.asList(TestUtils.TWOs, TestUtils.FIVEc, TestUtils.TENh, TestUtils.SEVENd, TestUtils.EIGHTc));
+	private static final ArrayList<Card> mike = new ArrayList<>(Arrays.asList(TestUtils.ACEs, TestUtils.FOURs, TestUtils.FIVEh, TestUtils.KINGc));
+	private static final ArrayList<Card> brian = new ArrayList<>(Arrays.asList(TestUtils.ACEh, TestUtils.THREEh, TestUtils.TENs, TestUtils.TENc));
+	private static final ArrayList<Card> jess = new ArrayList<>(Arrays.asList(TestUtils.SEVENc, TestUtils.NINEc, TestUtils.JACKs, TestUtils.QUEENs));
+	private static final ArrayList<Card> tony = new ArrayList<>(Arrays.asList(TestUtils.FOURh, TestUtils.SIXh, TestUtils.KINGs, TestUtils.KINGd));
+	private static final ArrayList<Card> emily = new ArrayList<>(Arrays.asList(TestUtils.ACEd, TestUtils.THREEd, TestUtils.SIXd, TestUtils.NINEh));
 	
 	
 	private static Stream<Arguments> handProvider() {

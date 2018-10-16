@@ -4,7 +4,7 @@ import hja.pokerutils.Card.Card;
 import hja.pokerutils.Card.Rank;
 import hja.pokerutils.Card.Suit;
 
-public final class Utils {
+public final class TestUtils {
 	public static final Card ACEh = new Card(Rank.ACE, Suit.HEARTS);
 	public static final Card KINGh = new Card(Rank.KING, Suit.HEARTS);
 	public static final Card QUEENh = new Card(Rank.QUEEN, Suit.HEARTS);
