@@ -4,12 +4,28 @@ import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.Hand;
 import hja.pokerutils.OmahaAlgorithm;
 import hja.pokerutils.Parser.CardListParser;
+import hja.pokerutils.Utils;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class OmahaOption implements OptionMode {
+	
+	@Override
+	public void start(String... args) throws IOException {
+		String inputFile = args[1];
+		String outputFile = args[2];
+		
+		FileReader reader = new FileReader(inputFile);
+		FileWriter writer = new FileWriter(outputFile);
+		
+		calculateBestHandOmaha(reader, writer);
+		
+		reader.close();
+		writer.close();
+	}
+	
 	private static void calculateBestHandOmaha(Reader input, Writer output) throws IOException {
 		Scanner scanner = new Scanner(input);
 		while (scanner.hasNext()) {
@@ -31,22 +47,10 @@ public class OmahaOption implements OptionMode {
 			output.write(System.lineSeparator());
 			output.write(" - Best hand: ");
 			output.write(bestHand.toString());
+			output.write(" with ");
+			output.write(Utils.cardsToString(bestHand.getHand()));
 			output.write(System.lineSeparator());
 			output.write(System.lineSeparator());
 		}
-	}
-	
-	@Override
-	public void start(String... args) throws IOException {
-		String inputFile = args[1];
-		String outputFile = args[2];
-		
-		FileReader reader = new FileReader(inputFile);
-		FileWriter writer = new FileWriter(outputFile);
-		
-		calculateBestHandOmaha(reader, writer);
-		
-		reader.close();
-		writer.close();
 	}
 }
