@@ -1,6 +1,6 @@
 package hja.pokerutils.Board;
 
-import hja.logic.Utils;
+import hja.pokerutils.Utils;
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.Hand;
 
