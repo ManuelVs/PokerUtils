@@ -1,6 +1,7 @@
 .idea
 *.iml
 
+out/
 
 # Github's default .gitignore below
 # Compiled class file
