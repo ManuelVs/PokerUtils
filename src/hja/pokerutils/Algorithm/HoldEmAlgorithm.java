@@ -16,28 +16,21 @@ public final class HoldEmAlgorithm {
 	 * @return The best hand
 	 */
 	public static Hand calculateHand(ArrayList<Card> cards) {
-		if (cards.size() == 5) {
-			return classifyHand(cards);
-		}
-		else {
-
-			ArrayList<Card> cards_copy = new ArrayList<>(cards);
-			cards_copy.remove(0);
-			Hand best_hand = calculateHand(cards_copy);
+		CombinationIterator combinationIterator = new CombinationIterator(cards, 5);
+		
+		ArrayList<Card> combination = combinationIterator.next();
+		Hand best_hand = classifyHand(combination);
+		while (combinationIterator.hasNext()){
+			combination = combinationIterator.next();
+			combination.sort(Collections.reverseOrder());
+			Hand current_hand = classifyHand(combination);
 			
-			for (int i = 1; i < cards.size(); ++i) {
-				cards_copy = new ArrayList<>(cards);
-				cards_copy.remove(i);
-				
-				Hand actual_hand = calculateHand(cards_copy);
-				
-				if (actual_hand.compareTo(best_hand) > 0) {
-					best_hand = actual_hand;
-				}
+			if(current_hand.compareTo(best_hand) > 0){
+				best_hand = current_hand;
 			}
-			
-			return best_hand;
 		}
+		
+		return best_hand;
 	}
 	
 	/**

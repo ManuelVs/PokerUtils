@@ -4,59 +4,51 @@ import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.Hand;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public final class OmahaAlgorithm {
 	
 	public static Hand calculateHand(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
-		if (playerCards.size() == 2) {
-			return OmahaAlgorithm.calculateHandTwoPlayerCard(playerCards, boardCards);
-		}
-		else {
-			ArrayList<Card> cards_copy = new ArrayList<>(playerCards);
-			cards_copy.remove(0);
-			Hand best_hand = calculateHand(cards_copy, boardCards);
+		CombinationIterator combinationIterator = new CombinationIterator(playerCards, 2);
+		
+		ArrayList<Card> combination = combinationIterator.next();
+		Hand best_hand = calculateHandTwoPlayerCard(combination, boardCards);
+		while (combinationIterator.hasNext()){
+			combination = combinationIterator.next();
+			combination.sort(Collections.reverseOrder());
+			Hand current_hand = calculateHandTwoPlayerCard(combination, boardCards);
 			
-			for (int i = 1; i < playerCards.size(); ++i) {
-				cards_copy = new ArrayList<>(playerCards);
-				cards_copy.remove(i);
-				
-				Hand actual_hand = calculateHand(cards_copy, boardCards);
-				
-				if (actual_hand.compareTo(best_hand) > 0) {
-					best_hand = actual_hand;
-				}
+			if(current_hand.compareTo(best_hand) > 0){
+				best_hand = current_hand;
 			}
-			
-			return best_hand;
 		}
+		
+		return best_hand;
 	}
 	
 	private static Hand calculateHandTwoPlayerCard(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
-		if (boardCards.size() == 3) {
-			ArrayList<Card> cards = new ArrayList<>(7);
+		CombinationIterator combinationIterator = new CombinationIterator(boardCards, 3);
+		
+		ArrayList<Card> boardCombination = combinationIterator.next();
+		ArrayList<Card> playerAndBoardCards = new ArrayList<>(5);
+		playerAndBoardCards.addAll(playerCards);
+		playerAndBoardCards.addAll(boardCombination);
+		
+		Hand best_hand = HoldEmAlgorithm.calculateHand(playerAndBoardCards);
+		while (combinationIterator.hasNext()){
+			boardCombination = combinationIterator.next();
+			boardCombination.sort(Collections.reverseOrder());
 			
-			cards.addAll(playerCards);
-			cards.addAll(boardCards);
+			playerAndBoardCards = new ArrayList<>(5);
+			playerAndBoardCards.addAll(playerCards);
+			playerAndBoardCards.addAll(boardCombination);
+			Hand current_hand = HoldEmAlgorithm.calculateHand(playerAndBoardCards);
 			
-			return HoldEmAlgorithm.calculateHand(cards);
-		}
-		else {
-			ArrayList<Card> cards_copy = new ArrayList<>(boardCards);
-			cards_copy.remove(0);
-			Hand best_hand = calculateHandTwoPlayerCard(playerCards, cards_copy);
-			
-			for (int i = 1; i < playerCards.size(); ++i) {
-				cards_copy = new ArrayList<>(boardCards);
-				cards_copy.remove(i);
-				
-				Hand actual_hand = calculateHandTwoPlayerCard(playerCards, cards_copy);
-				
-				if (actual_hand.compareTo(best_hand) > 0) {
-					best_hand = actual_hand;
-				}
+			if(current_hand.compareTo(best_hand) > 0){
+				best_hand = current_hand;
 			}
-			
-			return best_hand;
 		}
+		
+		return best_hand;
 	}
 }

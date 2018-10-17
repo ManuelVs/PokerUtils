@@ -1,6 +1,5 @@
 package hja.pokerutils.Algorithm;
 
-import hja.pokerutils.Algorithm.OmahaAlgorithm;
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.*;
 import hja.pokerutils.TestUtils;
@@ -39,7 +38,7 @@ class OmahaAlgorithmTest {
 		);
 	}
 	
-	@ParameterizedTest(name = "{index} => {1}")
+	@ParameterizedTest(name = "{index} => {0}, {1}")
 	@MethodSource("handProvider")
 	void compareToTest(ArrayList<Card> player, ArrayList<Card> board, Class<Hand> handClass) {
 		Hand hand = OmahaAlgorithm.calculateHand(player, board);

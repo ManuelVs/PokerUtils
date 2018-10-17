@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HoldEmOption implements OptionMode {
+	
 	private static void classifyHand(Reader input, Writer output) throws IOException {
 		Scanner scanner = new Scanner(input);
 		while (scanner.hasNext()) {

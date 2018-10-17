@@ -9,12 +9,14 @@ AhTc;5;2s5cTh7d8c
 
 7c9c;5;2s5cTh7d8c
  - Best hand: Pair of SEVEN with 7c7dTh9c8c
- - Draw: Straight open ended
 
 KsKd;5;2s5cTh7d8c
  - Best hand: Pair of KING with KsKdTh8c7d
 
 Ad9h;5;2s5cTh7d8c
  - Best hand: High card: ACE with AdTh9h8c7d
- - Draw: Straight open ended
+
+AhAc;4;2h3hKh2s
+ - Best hand: Two pairs of ACE and TWO with AhAc2s2hKh
+ - Draw: Flush
 

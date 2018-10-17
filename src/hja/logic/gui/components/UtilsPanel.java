@@ -41,7 +41,9 @@ public class UtilsPanel extends JPanel implements ListChangeListener {
 	}
 	
 	private void itemSelectedListener(ListSelectionEvent e) {
-		model.selectBoard(this.boardJList.getSelectedIndex());
+		if(this.boardJList.getSelectedIndex() != -1) {
+			model.selectBoard(this.boardJList.getSelectedIndex());
+		}
 	}
 	
 	private void loadButtonListener(ActionEvent actionEvent) {
