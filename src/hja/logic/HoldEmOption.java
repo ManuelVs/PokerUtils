@@ -2,7 +2,7 @@ package hja.logic;
 
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.Hand;
-import hja.pokerutils.HoldEmAlgorithm;
+import hja.pokerutils.Algorithm.HoldEmAlgorithm;
 import hja.pokerutils.Parser.CardListParser;
 import hja.pokerutils.Utils;
 

@@ -1,4 +1,4 @@
-package hja.pokerutils;
+package hja.pokerutils.Algorithm;
 
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Card.Rank;
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public final class HoldEmAlgorithm {
-	
 	/**
 	 * Calculates the best hand given 5 cards or more.
 	 *
@@ -21,6 +20,7 @@ public final class HoldEmAlgorithm {
 			return classifyHand(cards);
 		}
 		else {
+
 			ArrayList<Card> cards_copy = new ArrayList<>(cards);
 			cards_copy.remove(0);
 			Hand best_hand = calculateHand(cards_copy);

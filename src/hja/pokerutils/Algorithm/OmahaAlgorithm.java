@@ -1,4 +1,4 @@
-package hja.pokerutils;
+package hja.pokerutils.Algorithm;
 
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.Hand;

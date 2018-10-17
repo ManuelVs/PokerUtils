@@ -53,4 +53,9 @@ public abstract class Hand implements Comparable<Hand> {
 	}
 	
 	public abstract String toString();
+	
+	@Override
+	public int hashCode() {
+		return hand.hashCode();
+	}
 }

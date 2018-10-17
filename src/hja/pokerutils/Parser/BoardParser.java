@@ -4,7 +4,7 @@ import hja.pokerutils.Board.Board;
 import hja.pokerutils.Board.Player;
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.Hand;
-import hja.pokerutils.HoldEmAlgorithm;
+import hja.pokerutils.Algorithm.HoldEmAlgorithm;
 
 import java.io.IOException;
 import java.io.Reader;

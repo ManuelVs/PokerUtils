@@ -1,7 +1,8 @@
-package hja.pokerutils;
+package hja.pokerutils.Algorithm;
 
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.*;
+import hja.pokerutils.TestUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
