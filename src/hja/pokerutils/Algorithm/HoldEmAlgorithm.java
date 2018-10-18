@@ -214,7 +214,7 @@ public final class HoldEmAlgorithm {
 	
 	private static int[] countRank(ArrayList<Card> cards) {
 		int[] rank_count = new int[Rank.values().length];
-		for (int i = 0; i < 5; ++i) {
+		for (int i = 0; i < cards.size(); ++i) {
 			Rank card_rank = cards.get(i).rank;
 			rank_count[card_rank.ordinal()]++;
 		}
@@ -224,7 +224,7 @@ public final class HoldEmAlgorithm {
 	
 	private static int[] countSuit(ArrayList<Card> cards) {
 		int[] suit_count = new int[Suit.values().length];
-		for (int i = 0; i < 5; ++i) {
+		for (int i = 0; i < cards.size(); ++i) {
 			Suit card_suit = cards.get(i).suit;
 			suit_count[card_suit.ordinal()]++;
 		}
