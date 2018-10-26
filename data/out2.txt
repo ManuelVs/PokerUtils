@@ -1,0 +1,22 @@
+AhQh;3;AcJhTh
+ - Best hand: Pair of ACE with AhAcQhJhTh
+ - Draw: Straight Gutshot
+ - Draw: Flush
+
+AhAc;4;2hAs2cAd
+ - Best hand: Four of ACE with AhAcAsAd2c
+
+2h5c;5;7s4h9dTdKc
+ - Best hand: High card: KING with KcTd9d7s5c
+
+2hQd;4;4h3h7c5h
+ - Best hand: High card: QUEEN with Qd7c5h4h3h
+ - Draw: Straight Gutshot
+ - Draw: Flush
+
+2cKd;4;Ah2sAdAs
+ - Best hand: Full of ACE and TWO with AhAdAs2c2s
+
+8sKh;5;Td8c3h8hAc
+ - Best hand: Three EIGHT with 8h8s8cAc3h
+

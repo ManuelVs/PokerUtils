@@ -1,0 +1,25 @@
+4;J1AhAc;J2JsJh;J37c8c;J44sKc;5dKs6cTh9h
+J3 Th9h8c7c6c (Straight ended in TEN)
+J1 AhAcKsTh9h (Pair of ACE)
+J4 KcKsTh9h6c (Pair of KING)
+J2 JsJhKsTh9h (Pair of JACK)
+
+3;J1TsAh;J2ThKc;J3Ks9s;8sKhTcTd9d
+J2 TcTdThKcKh (Full of TEN and KING)
+J1 TdTsTcAh9d (Three TEN)
+J3 KsKhTcTd9d (Two pairs of KING and TEN)
+
+6;J12s3c;J22c3s;J32h3d;J42d3h;J54s5c;J64c5s;AhKcQsTd9s
+J1 AhKcQsTd9s (High card: ACE)
+J2 AhKcQsTd9s (High card: ACE)
+J3 AhKcQsTd9s (High card: ACE)
+J4 AhKcQsTd9s (High card: ACE)
+J5 AhKcQsTd9s (High card: ACE)
+J6 AhKcQsTd9s (High card: ACE)
+
+4;J1Ah9c;J2Kh9s;J3Qh9h;J4Jh9d;5h7hTh2h5c
+J1 AhTh7h5h2h (Flush ended in ACE)
+J2 KhTh7h5h2h (Flush ended in KING)
+J3 QhTh9h7h5h (Flush ended in QUEEN)
+J4 JhTh7h5h2h (Flush ended in JACK)
+
