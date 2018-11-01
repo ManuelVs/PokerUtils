@@ -31,7 +31,7 @@ public final class CardFactory {
 		return CardFactory.cards[suit_pos][rank_pos];
 	}
 	
-	private static Suit getSuit(char suit) {
+	public static Suit getSuit(char suit) {
 		switch (suit) {
 			case 'h':
 				return Suit.HEARTS;
@@ -46,7 +46,7 @@ public final class CardFactory {
 		}
 	}
 	
-	private static Rank getRank(char rank) {
+	public static Rank getRank(char rank) {
 		switch (rank) {
 			case '2':
 				return Rank.TWO;
