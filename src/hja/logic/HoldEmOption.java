@@ -34,7 +34,7 @@ public class HoldEmOption implements OptionMode {
 			output.write(" - Best hand: ");
 			output.write(bestHand.toString());
 			output.write(" with ");
-			output.write(Utils.cardsToString(bestHand.getHand()));
+			output.write(Utils.cardsToString(bestHand.getCards()));
 			output.write(System.lineSeparator());
 			
 			if (allCards.size() != 7) {

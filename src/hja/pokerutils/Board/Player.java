@@ -24,6 +24,6 @@ public class Player implements Comparable<Player> {
 	
 	@Override
 	public String toString() {
-		return this.name + " " + Utils.cardsToString(hand.getHand()) + " (" + hand.toString() + ")";
+		return this.name + " " + Utils.cardsToString(hand.getCards()) + " (" + hand.toString() + ")";
 	}
 }

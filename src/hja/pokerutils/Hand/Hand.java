@@ -48,8 +48,19 @@ public abstract class Hand implements Comparable<Hand> {
 	
 	protected abstract int compareKernel(Hand o);
 	
-	public ArrayList<Card> getHand() {
+	public ArrayList<Card> getCards() {
 		return this.hand;
+	}
+	
+	public ArrayList<Card> getKernel(){
+		int numCardsKernel = type.firstKicker;
+		ArrayList<Card> kernel = new ArrayList<>(numCardsKernel);
+		
+		for(int i = 0; i < numCardsKernel; ++i){
+			kernel.add(this.hand.get(i));
+		}
+		
+		return kernel;
 	}
 	
 	public abstract String toString();
