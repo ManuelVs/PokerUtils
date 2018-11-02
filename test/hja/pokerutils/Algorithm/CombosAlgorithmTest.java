@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CombosAlgorithmTest {
 	private static Stream<Arguments> combosProvider() {
 		return Stream.of(
+				// Tests del enunciado
 				Arguments.of(
 						new Range(
 								new Range(Rank.ACE, false),
@@ -64,6 +65,56 @@ class CombosAlgorithmTest {
 						new CombosAlgorithm.Combos(0,1,0,0,1,3,0,6,
 								0,0,0,0,0,
 								3)
+				),
+				
+				// Otros tests comparados con Flopzilla
+				Arguments.of(
+						new Range(
+								new Range(Rank.TWO, true),
+								new Range(Rank.ACE, Rank.TEN, true, true),
+								new Range(Rank.KING, Rank.TEN, true, true),
+								new Range(Rank.QUEEN, Rank.TEN, true, true),
+								new Range(Rank.JACK, Rank.TEN, true, true),
+								
+								new Range(Rank.ACE, Rank.TEN, false, true),
+								new Range(Rank.KING, Rank.TEN, false, true),
+								new Range(Rank.QUEEN, Rank.TEN, false, true),
+								new Range(Rank.JACK, Rank.TEN, false, true)
+						),
+						new ArrayList<>(Arrays.asList(TestUtils.NINEd, TestUtils.SEVENs, TestUtils.FIVEh)),
+						new CombosAlgorithm.Combos(0,0,0,0,0,0,9,0,
+								30,0,6,0,24,
+								160)
+				),
+				Arguments.of(
+						new Range(
+								new Range(Rank.TWO, true),
+								new Range(Rank.ACE, Rank.TEN, true, true),
+								new Range(Rank.KING, Rank.TEN, true, true),
+								new Range(Rank.QUEEN, Rank.TEN, true, true),
+								new Range(Rank.JACK, Rank.TEN, true, true),
+								
+								new Range(Rank.ACE, Rank.TEN, false, true),
+								new Range(Rank.KING, Rank.TEN, false, true),
+								new Range(Rank.QUEEN, Rank.TEN, false, true),
+								new Range(Rank.JACK, Rank.TEN, false, true)
+						),
+						new ArrayList<>(Arrays.asList(TestUtils.KINGh, TestUtils.QUEENc, TestUtils.JACKd)),
+						new CombosAlgorithm.Combos(0,0,0,0,0,16,9,27,
+								6,24,0,24,78,
+								0)
+				),
+				Arguments.of(
+						new Range(
+								new Range(Rank.ACE, Rank.EIGHT, false, false),
+								new Range(Rank.ACE, Rank.TWO, false, false),
+								new Range(Rank.TEN, false),
+								new Range(Rank.NINE, Rank.FIVE, true, false)
+						),
+						new ArrayList<>(Arrays.asList(TestUtils.QUEENd, TestUtils.EIGHTc, TestUtils.THREEh)),
+						new CombosAlgorithm.Combos(0,0,0,0,0,0,0,0,
+								0,0,6,9,0,
+								16)
 				)
 		);
 	}
