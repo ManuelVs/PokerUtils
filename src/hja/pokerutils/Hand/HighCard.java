@@ -12,7 +12,9 @@ public class HighCard extends Hand {
 	
 	@Override
 	public int compareKernel(Hand o) {
-		return 0;
+		Card leftCard = this.hand.get(0);
+		Card rightCard = o.hand.get(0);
+		return leftCard.compareTo(rightCard);
 	}
 	
 	@Override
