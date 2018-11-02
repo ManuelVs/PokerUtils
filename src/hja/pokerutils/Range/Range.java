@@ -45,6 +45,13 @@ public class Range implements Iterable<CardPair> {
 		}
 	}
 	
+	public Range(Range... ranges){
+		this.cardPairs = new ArrayList<>();
+		for(Range r : ranges){
+			this.cardPairs.addAll(r.cardPairs);
+		}
+	}
+	
 	@Override
 	public Iterator<CardPair> iterator() {
 		return this.cardPairs.iterator();
