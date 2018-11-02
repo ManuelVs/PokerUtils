@@ -16,19 +16,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class RangeParserTest {
 	private static Stream<Arguments> rangeProvider() {
 		return Stream.of(
-				Arguments.of("AA",  new ArrayList<>(Arrays.asList(
+				Arguments.of("AA", new ArrayList<>(Arrays.asList(
 						new CardPair(Rank.ACE, Rank.ACE, false))
 				)),
-				Arguments.of("AQs",  new ArrayList<>(Arrays.asList(
+				Arguments.of("AQs", new ArrayList<>(Arrays.asList(
 						new CardPair(Rank.ACE, Rank.QUEEN, true))
 				)),
-				Arguments.of("AQo",  new ArrayList<>(Arrays.asList(
+				Arguments.of("AQo", new ArrayList<>(Arrays.asList(
 						new CardPair(Rank.ACE, Rank.QUEEN, false))
 				)),
-				Arguments.of("94s",  new ArrayList<>(Arrays.asList(
+				Arguments.of("94s", new ArrayList<>(Arrays.asList(
 						new CardPair(Rank.NINE, Rank.FOUR, true))
 				)),
-				Arguments.of("94s+",  new ArrayList<>(Arrays.asList(
+				Arguments.of("94s+", new ArrayList<>(Arrays.asList(
 						new CardPair(Rank.NINE, Rank.FOUR, true),
 						new CardPair(Rank.NINE, Rank.FIVE, true),
 						new CardPair(Rank.NINE, Rank.SIX, true),
@@ -47,18 +47,35 @@ class RangeParserTest {
 						new CardPair(Rank.KING, Rank.KING, false),
 						new CardPair(Rank.ACE, Rank.ACE, false))
 				)),
-				Arguments.of("92s-95s",  new ArrayList<>(Arrays.asList(
+				Arguments.of("92s-95s", new ArrayList<>(Arrays.asList(
 						new CardPair(Rank.NINE, Rank.TWO, true),
 						new CardPair(Rank.NINE, Rank.THREE, true),
 						new CardPair(Rank.NINE, Rank.FOUR, true),
 						new CardPair(Rank.NINE, Rank.FIVE, true))
 				)),
-				Arguments.of("ATo-AKo",  new ArrayList<>(Arrays.asList(
+				Arguments.of("ATo-AKo", new ArrayList<>(Arrays.asList(
 						new CardPair(Rank.ACE, Rank.TEN, false),
 						new CardPair(Rank.ACE, Rank.JACK, false),
 						new CardPair(Rank.ACE, Rank.QUEEN, false),
 						new CardPair(Rank.ACE, Rank.KING, false))
 				))
+		);
+	}
+	
+	private static Stream<Arguments> outOfRangeProvider() {
+		return Stream.of(
+				Arguments.of("ATo-AAo"),
+				Arguments.of("54s, ATo-AAo"),
+				Arguments.of("32s-3As")
+		);
+	}
+	
+	private static Stream<Arguments> malformedProvider() {
+		return Stream.of(
+				Arguments.of("AAs"),
+				Arguments.of("AAo"),
+				Arguments.of("QQs"),
+				Arguments.of("93s,65o,JJo")
 		);
 	}
 	
@@ -72,39 +89,22 @@ class RangeParserTest {
 		assertEquals(aRange, cards);
 	}
 	
-	private static Stream<Arguments> outOfRangeProvider() {
-		return Stream.of(
-				Arguments.of("ATo-AAo"),
-				Arguments.of("54s, ATo-AAo"),
-				Arguments.of("32s-3As")
-		);
-	}
-	
 	@ParameterizedTest(name = "{index} => {0}")
 	@MethodSource("outOfRangeProvider")
-	void testOutOfBoundsRange(String range){
+	void testOutOfBoundsRange(String range) {
 		assertThrows(IllegalArgumentException.class, () -> RangeParser.parseRange(range));
-	}
-	
-	private static Stream<Arguments> malformedProvider() {
-		return Stream.of(
-				Arguments.of("AAs"),
-				Arguments.of("AAo"),
-				Arguments.of("QQs"),
-				Arguments.of("93s,65o,JJo")
-		);
 	}
 	
 	@ParameterizedTest(name = "{index} => {0}")
 	@MethodSource("malformedProvider")
-	void testMalformedRange(String range){
+	void testMalformedRange(String range) {
 		assertNull(RangeParser.parseRange(range));
 	}
 	
-	private <T> ArrayList<T> createArrayFromIterable(Iterable<T> iterable){
+	private <T> ArrayList<T> createArrayFromIterable(Iterable<T> iterable) {
 		ArrayList<T> ts = new ArrayList<>();
 		
-		for(T t : iterable){
+		for (T t : iterable) {
 			ts.add(t);
 		}
 		

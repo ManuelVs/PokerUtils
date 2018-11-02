@@ -52,18 +52,18 @@ public abstract class Hand implements Comparable<Hand> {
 		return this.hand;
 	}
 	
-	public ArrayList<Card> getKernel(){
+	public ArrayList<Card> getKernel() {
 		int numCardsKernel = type.firstKicker;
 		ArrayList<Card> kernel = new ArrayList<>(numCardsKernel);
 		
-		for(int i = 0; i < numCardsKernel; ++i){
+		for (int i = 0; i < numCardsKernel; ++i) {
 			kernel.add(this.hand.get(i));
 		}
 		
 		return kernel;
 	}
 	
-	public HandType getType(){
+	public HandType getType() {
 		return this.type;
 	}
 	

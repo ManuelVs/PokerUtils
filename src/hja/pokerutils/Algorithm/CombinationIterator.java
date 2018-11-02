@@ -10,12 +10,12 @@ public class CombinationIterator implements Iterator<ArrayList<Card>> {
 	private int nElements;
 	private int[] perm;
 	
-	public CombinationIterator(ArrayList<Card> cards, int nElements){
+	public CombinationIterator(ArrayList<Card> cards, int nElements) {
 		this.cards = cards;
 		this.nElements = nElements;
 		
 		this.perm = new int[cards.size()];
-		for(int i = 0; i < nElements; ++i){
+		for (int i = 0; i < nElements; ++i) {
 			perm[i] = 1;
 		}
 	}
@@ -23,7 +23,7 @@ public class CombinationIterator implements Iterator<ArrayList<Card>> {
 	@Override
 	public boolean hasNext() {
 		int i = 0;
-		while (i < nElements && perm[i] == 1){
+		while (i < nElements && perm[i] == 1) {
 			++i;
 		}
 		
@@ -35,8 +35,8 @@ public class CombinationIterator implements Iterator<ArrayList<Card>> {
 		nextPermutation();
 		
 		ArrayList<Card> currentCombination = new ArrayList<>(nElements);
-		for(int i = 0; i < cards.size(); ++i){
-			if(perm[i] == 1){
+		for (int i = 0; i < cards.size(); ++i) {
+			if (perm[i] == 1) {
 				Card currentCard = cards.get(i);
 				currentCombination.add(currentCard);
 			}

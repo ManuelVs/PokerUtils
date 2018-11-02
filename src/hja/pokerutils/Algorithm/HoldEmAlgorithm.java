@@ -20,11 +20,11 @@ public final class HoldEmAlgorithm {
 		
 		ArrayList<Card> combination = combinationIterator.next();
 		Hand best_hand = classifyHand(combination);
-		while (combinationIterator.hasNext()){
+		while (combinationIterator.hasNext()) {
 			combination = combinationIterator.next();
 			Hand current_hand = classifyHand(combination);
 			
-			if(current_hand.compareTo(best_hand) > 0){
+			if (current_hand.compareTo(best_hand) > 0) {
 				best_hand = current_hand;
 			}
 		}

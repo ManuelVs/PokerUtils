@@ -16,10 +16,10 @@ public final class CombosAlgorithm {
 	public static Combos getCombos(Range range, ArrayList<Card> boardCards) {
 		Combos combos = new Combos();
 		
-		for(CardPair cp : range) {
+		for (CardPair cp : range) {
 			ArrayList<ArrayList<Card>> validPlayerCards = getValidCards(cp, boardCards);
 			
-			for(ArrayList<Card> playerCards : validPlayerCards){
+			for (ArrayList<Card> playerCards : validPlayerCards) {
 				ArrayList<Card> cards = new ArrayList<>();
 				cards.addAll(playerCards);
 				cards.addAll(boardCards);
@@ -34,10 +34,10 @@ public final class CombosAlgorithm {
 	}
 	
 	private static ArrayList<ArrayList<Card>> getValidCards(CardPair cp, ArrayList<Card> boardCards) {
-		if(cp.firstRank == cp.secondRank) {
+		if (cp.firstRank == cp.secondRank) {
 			return getValidPairCards(cp.firstRank, boardCards);
 		}
-		else if(cp.isSuited){
+		else if (cp.isSuited) {
 			return getValidSuitedCards(cp.firstRank, cp.secondRank, boardCards);
 		}
 		else {
@@ -55,7 +55,7 @@ public final class CombosAlgorithm {
 				Card first = CardFactory.createCard(firstRank, suits[i]);
 				Card second = CardFactory.createCard(firstRank, suits[j]);
 				
-				if(!boardCards.contains(first) && !boardCards.contains(second)){
+				if (!boardCards.contains(first) && !boardCards.contains(second)) {
 					ArrayList<Card> cards = new ArrayList<>();
 					cards.add(first);
 					cards.add(second);
@@ -77,7 +77,7 @@ public final class CombosAlgorithm {
 			Card first = CardFactory.createCard(firstRank, suits[i]);
 			Card second = CardFactory.createCard(secondRank, suits[i]);
 			
-			if(!boardCards.contains(first) && !boardCards.contains(second)){
+			if (!boardCards.contains(first) && !boardCards.contains(second)) {
 				ArrayList<Card> cards = new ArrayList<>();
 				cards.add(first);
 				cards.add(second);
@@ -96,11 +96,11 @@ public final class CombosAlgorithm {
 		
 		for (int i = 0; i < suits.length; ++i) {
 			for (int j = 0; j < suits.length; ++j) {
-				if(i != j){
+				if (i != j) {
 					Card first = CardFactory.createCard(firstRank, suits[i]);
 					Card second = CardFactory.createCard(secondRank, suits[j]);
 					
-					if(!boardCards.contains(first) && !boardCards.contains(second)){
+					if (!boardCards.contains(first) && !boardCards.contains(second)) {
 						ArrayList<Card> cards = new ArrayList<>();
 						cards.add(first);
 						cards.add(second);
@@ -117,7 +117,7 @@ public final class CombosAlgorithm {
 	private static void updateCombos(Combos combos, Hand hand, ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
 		// Hacemos un combo cuando por lo menos una de nuestras cartas
 		// participa en el "kernel" de la mano.
-		if(!isIntersectionEmpty(playerCards, hand.getKernel())) {
+		if (!isIntersectionEmpty(playerCards, hand.getKernel())) {
 			switch (hand.getType()) {
 				case HIGH_CARD:
 					combos.noHandMade++;
@@ -129,11 +129,11 @@ public final class CombosAlgorithm {
 				case TWO_PAIR:
 					// Caso especial. En una doble pareja donde una pareja pertenece integra a la mesa,
 					// hay que computarlo como un combo de pareja. (overpair, top overPair...)
-					if(isPair(boardCards)){
+					if (isPair(boardCards)) {
 						// Computar tipos de pareja (overpair, top overPair...)
 						updatePairCombos(combos, playerCards, boardCards);
 					}
-					else{
+					else {
 						combos.twoPair++;
 					}
 					break;
@@ -167,9 +167,10 @@ public final class CombosAlgorithm {
 	
 	/**
 	 * Precondition: Hand formed with player and board cards is a overPair or two overPair
-	 * @param combos Combos struct to update
+	 *
+	 * @param combos      Combos struct to update
 	 * @param playerCards Player cards
-	 * @param boardCards Board cards
+	 * @param boardCards  Board cards
 	 */
 	private static void updatePairCombos(Combos combos, ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
 		boardCards.sort(Collections.reverseOrder());
@@ -178,38 +179,38 @@ public final class CombosAlgorithm {
 		
 		// Over overPair and pocket overPair below top overPair
 		boolean isPlayerCardsPair = isPair(playerCards);
-		if(isPlayerCardsPair){
+		if (isPlayerCardsPair) {
 			Card handCard = playerCards.get(0);
 			
-			if(handCard.compareTo(bestBoardCard) > 0){
+			if (handCard.compareTo(bestBoardCard) > 0) {
 				combos.overPair++;
 			}
-			else if (handCard.compareTo(secondBestBoardCard) > 0){
+			else if (handCard.compareTo(secondBestBoardCard) > 0) {
 				combos.pocketPairBelowTopPair++;
 			}
 			else combos.weakPair++;
 		}
 		
 		// Top overPair
-		if(playerCards.get(0).rank == bestBoardCard.rank || playerCards.get(1).rank == bestBoardCard.rank) {
+		if (playerCards.get(0).rank == bestBoardCard.rank || playerCards.get(1).rank == bestBoardCard.rank) {
 			combos.topPair++;
 		}
 		
 		// middle overPair
-		else if(playerCards.get(0).rank == secondBestBoardCard.rank || playerCards.get(1).rank == secondBestBoardCard.rank) {
+		else if (playerCards.get(0).rank == secondBestBoardCard.rank || playerCards.get(1).rank == secondBestBoardCard.rank) {
 			combos.middlePair++;
 		}
 		
 		// weak overPair
-		else if(!isPlayerCardsPair) {
+		else if (!isPlayerCardsPair) {
 			combos.weakPair++;
 		}
 	}
 	
 	private static boolean isIntersectionEmpty(ArrayList<Card> playerCards, ArrayList<Card> kernel) {
-		for(Card p : playerCards){
-			for(Card b : kernel){
-				if(p == b){
+		for (Card p : playerCards) {
+			for (Card b : kernel) {
+				if (p == b) {
 					return false;
 				}
 			}
@@ -223,10 +224,10 @@ public final class CombosAlgorithm {
 		return AlgorithmUtils.find(rank_count, 0, rank_count.length, 2) < rank_count.length;
 	}
 	
-	private static Card getSecondBestCard(ArrayList<Card> cards){
+	private static Card getSecondBestCard(ArrayList<Card> cards) {
 		int i = 0;
 		
-		while(i + 1 < cards.size() && cards.get(i).rank == cards.get(i + 1).rank) {
+		while (i + 1 < cards.size() && cards.get(i).rank == cards.get(i + 1).rank) {
 			++i;
 		}
 		
@@ -249,17 +250,17 @@ public final class CombosAlgorithm {
 		public int weakPair;
 		public int noHandMade;
 		
-		public Combos(){
-			this(0,0,0,0,0,0,
-					0,0,
-					0,0,0,0,0,
+		public Combos() {
+			this(0, 0, 0, 0, 0, 0,
+					0, 0,
+					0, 0, 0, 0, 0,
 					0);
 		}
 		
 		public Combos(int royalFlush, int straightFlush, int fourOfAKind, int fullHouse, int flush,
 		              int straight, int threeOfAKind, int twoPair,
 		              int overPair, int topPair, int pocketPairBelowTopPair, int middlePair, int weakPair,
-		              int noHandMade){
+		              int noHandMade) {
 			this.royalFlush = royalFlush;
 			this.straightFlush = straightFlush;
 			this.fourOfAKind = fourOfAKind;
@@ -269,7 +270,7 @@ public final class CombosAlgorithm {
 			this.threeOfAKind = threeOfAKind;
 			this.twoPair = twoPair;
 			this.overPair = overPair;
-			this.topPair =topPair;
+			this.topPair = topPair;
 			this.pocketPairBelowTopPair = pocketPairBelowTopPair;
 			this.middlePair = middlePair;
 			this.weakPair = weakPair;
@@ -277,7 +278,7 @@ public final class CombosAlgorithm {
 		}
 		
 		@Override
-		public String toString(){
+		public String toString() {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Royal flush   : " + royalFlush);
 			sb.append(System.lineSeparator());

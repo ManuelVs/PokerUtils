@@ -13,12 +13,12 @@ public final class OmahaAlgorithm {
 		
 		ArrayList<Card> combination = combinationIterator.next();
 		Hand best_hand = calculateHandTwoPlayerCard(combination, boardCards);
-		while (combinationIterator.hasNext()){
+		while (combinationIterator.hasNext()) {
 			combination = combinationIterator.next();
 			combination.sort(Collections.reverseOrder());
 			Hand current_hand = calculateHandTwoPlayerCard(combination, boardCards);
 			
-			if(current_hand.compareTo(best_hand) > 0){
+			if (current_hand.compareTo(best_hand) > 0) {
 				best_hand = current_hand;
 			}
 		}
@@ -35,7 +35,7 @@ public final class OmahaAlgorithm {
 		playerAndBoardCards.addAll(boardCombination);
 		
 		Hand best_hand = HoldEmAlgorithm.calculateHand(playerAndBoardCards);
-		while (combinationIterator.hasNext()){
+		while (combinationIterator.hasNext()) {
 			boardCombination = combinationIterator.next();
 			boardCombination.sort(Collections.reverseOrder());
 			
@@ -44,7 +44,7 @@ public final class OmahaAlgorithm {
 			playerAndBoardCards.addAll(boardCombination);
 			Hand current_hand = HoldEmAlgorithm.calculateHand(playerAndBoardCards);
 			
-			if(current_hand.compareTo(best_hand) > 0){
+			if (current_hand.compareTo(best_hand) > 0) {
 				best_hand = current_hand;
 			}
 		}

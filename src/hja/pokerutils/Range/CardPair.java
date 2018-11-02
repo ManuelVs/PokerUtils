@@ -9,10 +9,10 @@ public class CardPair {
 	
 	public CardPair(Rank firstRank, Rank secondRank, boolean isSuited) {
 		int compare = firstRank.compareTo(secondRank);
-		if(compare < 0) {
+		if (compare < 0) {
 			throw new IllegalArgumentException("First rank lower than second rank");
 		}
-		else if(compare == 0 && isSuited){
+		else if (compare == 0 && isSuited) {
 			throw new IllegalArgumentException("Same rank suited");
 		}
 		
@@ -33,7 +33,7 @@ public class CardPair {
 				&& this.isSuited == other.isSuited;
 	}
 	
-	public String toString(){
+	public String toString() {
 		return this.firstRank.rank + "" + this.secondRank.rank + (this.isSuited ? "s" : "o");
 	}
 }

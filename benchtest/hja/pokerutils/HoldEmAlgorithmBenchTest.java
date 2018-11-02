@@ -10,7 +10,6 @@ import hja.pokerutils.Hand.RoyalFlush;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,7 +32,7 @@ public class HoldEmAlgorithmBenchTest {
 	}
 	
 	@Test
-	void allHands(){
+	void allHands() {
 		ArrayList<Card> allCards = new ArrayList<>();
 		Rank[] ranks = Rank.values();
 		Suit[] suits = Suit.values();
@@ -50,7 +49,7 @@ public class HoldEmAlgorithmBenchTest {
 		Hand hand = HoldEmAlgorithm.calculateHand(cards);
 		allHands.add(hand);
 		
-		while (iterator.hasNext()){
+		while (iterator.hasNext()) {
 			cards = iterator.next();
 			hand = HoldEmAlgorithm.calculateHand(cards);
 			allHands.add(hand);

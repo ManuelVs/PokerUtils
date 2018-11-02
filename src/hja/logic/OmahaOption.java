@@ -1,8 +1,8 @@
 package hja.logic;
 
+import hja.pokerutils.Algorithm.OmahaAlgorithm;
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.Hand;
-import hja.pokerutils.Algorithm.OmahaAlgorithm;
 import hja.pokerutils.Parser.CardListParser;
 import hja.pokerutils.Utils;
 
