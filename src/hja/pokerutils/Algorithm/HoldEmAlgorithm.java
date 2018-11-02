@@ -2,7 +2,6 @@ package hja.pokerutils.Algorithm;
 
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Card.Rank;
-import hja.pokerutils.Card.Suit;
 import hja.pokerutils.Hand.*;
 
 import java.util.ArrayList;
@@ -16,13 +15,13 @@ public final class HoldEmAlgorithm {
 	 * @return The best hand
 	 */
 	public static Hand calculateHand(ArrayList<Card> cards) {
+		cards.sort(Collections.reverseOrder());
 		CombinationIterator combinationIterator = new CombinationIterator(cards, 5);
 		
 		ArrayList<Card> combination = combinationIterator.next();
 		Hand best_hand = classifyHand(combination);
 		while (combinationIterator.hasNext()){
 			combination = combinationIterator.next();
-			combination.sort(Collections.reverseOrder());
 			Hand current_hand = classifyHand(combination);
 			
 			if(current_hand.compareTo(best_hand) > 0){
@@ -57,7 +56,7 @@ public final class HoldEmAlgorithm {
 	 * Returns 0 if there is no straight draw, 1 if there is open ended straight and 2
 	 * if there is gutshot straight
 	 *
-	 * @param cards The array of cards
+	 * @param cards The ordered array of cards
 	 * @return 0 no draw, 1 open ended, 2 gutshot
 	 */
 	private static int calculateStraightDraw(ArrayList<Card> cards) {
@@ -68,7 +67,7 @@ public final class HoldEmAlgorithm {
 		final int STRAIGHT_SIZE = 5;
 		final int STRAIGHT_CRITICAL_SIZE = 4;
 		
-		int[] rank_count = countRank(cards);
+		int[] rank_count = AlgorithmUtils.countRank(cards);
 		int count = 0, pos = -1;
 		
 		for (int i = 0; i < STRAIGHT_SIZE; ++i) {
@@ -104,14 +103,12 @@ public final class HoldEmAlgorithm {
 	}
 	
 	private static boolean isFlushDraw(ArrayList<Card> cards) {
-		int[] suit_count = countSuit(cards);
+		int[] suit_count = AlgorithmUtils.countSuit(cards);
 		
-		return find(suit_count, 0, suit_count.length, 4) < suit_count.length;
+		return AlgorithmUtils.find(suit_count, 0, suit_count.length, 4) < suit_count.length;
 	}
 	
 	private static Hand classifyHand(ArrayList<Card> cards) {
-		cards.sort(Collections.reverseOrder());
-		
 		if (isRoyalFlush(cards)) {
 			return new RoyalFlush(cards);
 		}
@@ -119,7 +116,7 @@ public final class HoldEmAlgorithm {
 			return new StraightFlush(cards);
 		}
 		else {
-			int[] rank_count = countRank(cards);
+			int[] rank_count = AlgorithmUtils.countRank(cards);
 			
 			if (isFourOfAKind(rank_count)) {
 				return new FourOfAKind(cards);
@@ -162,7 +159,7 @@ public final class HoldEmAlgorithm {
 	}
 	
 	private static boolean isFourOfAKind(int[] rank_count) {
-		return find(rank_count, 0, rank_count.length, 4) < rank_count.length;
+		return AlgorithmUtils.find(rank_count, 0, rank_count.length, 4) < rank_count.length;
 	}
 	
 	private static boolean isFullHouse(int[] rank_count) {
@@ -189,46 +186,16 @@ public final class HoldEmAlgorithm {
 	}
 	
 	private static boolean isThreeOfAKind(int[] rank_count) {
-		return find(rank_count, 0, rank_count.length, 3) < rank_count.length;
+		return AlgorithmUtils.find(rank_count, 0, rank_count.length, 3) < rank_count.length;
 	}
 	
 	private static boolean isTwoPair(int[] rank_count) {
-		int pos_first_pair = find(rank_count, 0, rank_count.length, 2);
-		int pos_second_pair = find(rank_count, pos_first_pair + 1, rank_count.length, 2);
+		int pos_first_pair = AlgorithmUtils.find(rank_count, 0, rank_count.length, 2);
+		int pos_second_pair = AlgorithmUtils.find(rank_count, pos_first_pair + 1, rank_count.length, 2);
 		return pos_second_pair < rank_count.length;
 	}
 	
 	private static boolean isPair(int[] rank_count) {
-		return find(rank_count, 0, rank_count.length, 2) < rank_count.length;
-	}
-	
-	private static int find(int[] arr, int start, int end, int elem) {
-		int i = start;
-		
-		while (i < end && arr[i] != elem) {
-			++i;
-		}
-		
-		return i;
-	}
-	
-	private static int[] countRank(ArrayList<Card> cards) {
-		int[] rank_count = new int[Rank.values().length];
-		for (int i = 0; i < cards.size(); ++i) {
-			Rank card_rank = cards.get(i).rank;
-			rank_count[card_rank.ordinal()]++;
-		}
-		
-		return rank_count;
-	}
-	
-	private static int[] countSuit(ArrayList<Card> cards) {
-		int[] suit_count = new int[Suit.values().length];
-		for (int i = 0; i < cards.size(); ++i) {
-			Suit card_suit = cards.get(i).suit;
-			suit_count[card_suit.ordinal()]++;
-		}
-		
-		return suit_count;
+		return AlgorithmUtils.find(rank_count, 0, rank_count.length, 2) < rank_count.length;
 	}
 }
