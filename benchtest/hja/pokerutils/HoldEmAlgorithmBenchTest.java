@@ -55,7 +55,6 @@ public class HoldEmAlgorithmBenchTest {
 			hand = HoldEmAlgorithm.calculateHand(cards);
 			allHands.add(hand);
 		}
-		allHands.sort(Collections.reverseOrder());
 		
 		assertEquals(2598960, allHands.size());
 	}
