@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RangeParserTest {
+class RangeParserTest {
 	private static Stream<Arguments> rangeProvider() {
 		return Stream.of(
 				Arguments.of("AA",  new ArrayList<>(Arrays.asList(
