@@ -63,6 +63,10 @@ public abstract class Hand implements Comparable<Hand> {
 		return kernel;
 	}
 	
+	public HandType getType(){
+		return this.type;
+	}
+	
 	public abstract String toString();
 	
 	@Override
