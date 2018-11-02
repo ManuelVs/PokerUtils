@@ -160,7 +160,7 @@ public final class CombosAlgorithm {
 					break;
 			}
 		}
-		else{
+		else {
 			combos.noHandMade++;
 		}
 	}
@@ -247,7 +247,6 @@ public final class CombosAlgorithm {
 		public int pocketPairBelowTopPair;
 		public int middlePair;
 		public int weakPair;
-		public int highCard;
 		public int noHandMade;
 		
 		public Combos(){
@@ -319,7 +318,7 @@ public final class CombosAlgorithm {
 			sb.append("Weak pair     : " + weakPair);
 			sb.append(System.lineSeparator());
 			
-			sb.append("High card     : " + highCard);
+			sb.append("No hand made  : " + noHandMade);
 			sb.append(System.lineSeparator());
 			
 			return sb.toString();
@@ -341,7 +340,11 @@ public final class CombosAlgorithm {
 					&& this.threeOfAKind == other.threeOfAKind
 					&& this.twoPair == other.twoPair
 					&& this.overPair == other.overPair
-					&& this.highCard == other.highCard;
+					&& this.topPair == other.topPair
+					&& this.pocketPairBelowTopPair == other.pocketPairBelowTopPair
+					&& this.middlePair == other.middlePair
+					&& this.weakPair == other.weakPair
+					&& this.noHandMade == other.noHandMade;
 		}
 	}
 }
