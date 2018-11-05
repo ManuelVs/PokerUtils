@@ -8,6 +8,10 @@ import java.util.Iterator;
 public class Range implements Iterable<CardPair> {
 	private ArrayList<CardPair> cardPairs;
 	
+	public Range(){
+		this.cardPairs = new ArrayList<>();
+	}
+	
 	public Range(Rank pairRank, boolean isPairRange) {
 		this.cardPairs = new ArrayList<>();
 		this.cardPairs.add(new CardPair(pairRank, pairRank, false));
@@ -50,6 +54,14 @@ public class Range implements Iterable<CardPair> {
 		for (Range r : ranges) {
 			this.cardPairs.addAll(r.cardPairs);
 		}
+	}
+	
+	public void add(CardPair cardPair){
+		this.cardPairs.add(cardPair);
+	}
+	
+	public boolean delete(CardPair cardPair){
+		return this.cardPairs.remove(cardPair);
 	}
 	
 	@Override
