@@ -14,4 +14,8 @@ public interface Model {
 	void addCombosListener(CombosListener listener);
 	
 	void addRangeListener(RangeListener listener);
+	
+	void addRankingListener(RankingListener listener);
+	
+	void addPercentageListener(PercentageListener listener);
 }
