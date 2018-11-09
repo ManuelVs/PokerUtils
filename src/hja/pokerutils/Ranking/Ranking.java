@@ -16,7 +16,7 @@ public class Ranking {
 	public Range selectTopCardPairs(double percentage){
 		long numCards = 0;
 		if(percentage > 0) {
-			numCards = Math.round(this.cardPairArray.size() * percentage);
+			numCards = Math.round(this.cardPairArray.size() * percentage / 100);
 		}
 		
 		Range out = new Range();
