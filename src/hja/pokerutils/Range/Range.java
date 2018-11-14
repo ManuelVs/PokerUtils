@@ -76,13 +76,32 @@ public class Range implements Iterable<CardPair> {
 			throw new IllegalArgumentException("First rank lower than interval");
 		}
 		
-		int numPairs = lastRank.ordinal() - initialRank.ordinal() + 1;
+		int numPairs = initialRank.ordinal() - lastRank.ordinal() + 1;
 		
 		this.cardPairs = new HashSet<>(numPairs);
 		
 		Rank[] ranks = Rank.values();
-		for (int i = initialRank.ordinal(); i <= lastRank.ordinal(); ++i) {
+		for (int i = lastRank.ordinal(); i <= initialRank.ordinal(); ++i) {
 			this.cardPairs.add(new CardPair(firstRank, ranks[i], isSuited));
 		}
+	}
+	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		
+		Iterator<CardPair> it = cardPairs.iterator();
+		if(it.hasNext()){
+			CardPair cp = it.next();
+			sb.append(cp.toString());
+			
+			while(it.hasNext()){
+				cp = it.next();
+				
+				sb.append(',');
+				sb.append(cp.toString());
+			}
+		}
+		
+		return sb.toString();
 	}
 }
