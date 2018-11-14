@@ -1,13 +1,15 @@
 package hja.logic.gui.components;
 
 import hja.logic.gui.model.Model;
-import hja.pokerutils.Parser.RangeParser;
 import hja.pokerutils.Parser.RankingParser;
 import hja.pokerutils.Ranking.Ranking;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 
 public class PercentageRange extends JPanel {
 	private Model model;
@@ -35,7 +37,7 @@ public class PercentageRange extends JPanel {
 			percentageLabel.setText(Double.toString(val / 100));
 			
 			
-			PercentageRange.this.model.setRange(PercentageRange.this.ranking.selectTopCardPairs(PercentageRange.this.percentage));
+			model.setRange(ranking.selectTopCardPairs(percentage));
 		});
 		
 		openRankingChooser.addActionListener((e) -> {
@@ -47,7 +49,7 @@ public class PercentageRange extends JPanel {
 				String name = f.getName();
 				updateRanking(f);
 				rankingLabel.setText(name.substring(0, name.length() - 4));
-				PercentageRange.this.model.setRange(PercentageRange.this.ranking.selectTopCardPairs(PercentageRange.this.percentage));
+				model.setRange(ranking.selectTopCardPairs(percentage));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
