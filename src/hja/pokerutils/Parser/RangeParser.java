@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public final class RangeParser {
 	
 	public static Range parseRange(String ranges) {
-		String[] stringArrayRanges = ranges.split(", +");
+		String[] stringArrayRanges = ranges.split(", *");
 		
 		ArrayList<Range> rangesArray = new ArrayList<>(stringArrayRanges.length);
 		
@@ -26,6 +26,8 @@ public final class RangeParser {
 	}
 	
 	private static Range parseSingleRange(String range) {
+		if(range.isEmpty()) return new Range();
+		
 		Pattern simpleRange = Pattern.compile("(?<first>[23456789TJQKA])(?<second>[23456789TJQKA])(?<suited>[os]?)(?<range>\\+?)");
 		Pattern linearRange = Pattern.compile(
 				"(?<first>[23456789TJQKA])(?<second>[23456789TJQKA])(?<suited1>[os])" +
@@ -45,7 +47,7 @@ public final class RangeParser {
 			if (firstRank == secondRank) {
 				if (!suited.isEmpty()) return null;
 				
-				boolean isPairRange = isRange != null;
+				boolean isPairRange = !isRange.isEmpty();
 				return new Range(firstRank, isPairRange);
 			}
 			else {
