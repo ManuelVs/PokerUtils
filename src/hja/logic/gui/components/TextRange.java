@@ -10,46 +10,41 @@ import java.awt.*;
 
 public class TextRange extends JPanel implements RangeListener{
 	private Model model;
+	private JTextField rangeTextField;
 	
-	private JTextField textField;
+	private Range range;
 	
 	public TextRange(Model model){
 		this.model = model;
+		this.model.addRangeListener(this);
 		initGUI();
-		
 	}
 	
 	private void initGUI() {
-		
-		this.textField = new JTextField();
+		this.rangeTextField = new JTextField();
 		JLabel label = new JLabel("Range: ");
-		label.setLabelFor(textField);
+		label.setLabelFor(rangeTextField);
 		
 		JButton button = new JButton("Set");
 		button.setFocusPainted(false);
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.add(label);
-		this.add(textField);
+		this.add(rangeTextField);
 		this.add(button);
-		textField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
-		
-
+		rangeTextField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
 		
 		button.addActionListener((e) -> {
-			Range range = RangeParser.parseRange(textField.getText());
-			System.out.println(range.toString());
+			TextRange.this.range = RangeParser.parseRange(rangeTextField.getText());
 			this.model.setRange(range);
-			});
-		
-		}
-		
-		
-		@Override
-		public void notify(Range range){
-			this.textField.setText(range.toString());
-		
-		}
-
-	
+		});
 	}
+	
+	
+	@Override
+	public void notify(Range range){
+		if(range != this.range) {
+			this.rangeTextField.setText(range.toString());
+		}
+	}
+}
