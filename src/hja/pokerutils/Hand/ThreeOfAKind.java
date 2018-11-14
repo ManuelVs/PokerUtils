@@ -1,6 +1,7 @@
 package hja.pokerutils.Hand;
 
 import hja.pokerutils.Card.Card;
+import hja.pokerutils.Utils;
 
 import java.util.ArrayList;
 
@@ -18,30 +19,21 @@ public class ThreeOfAKind extends Hand {
 		
 		if (firstCard.compareTo(secondCard) != 0) {
 			if (secondCard.compareTo(thirdCard) != 0) {
-				swap(hand, 0, 4);
-				swap(hand, 1, 3);
+				Utils.swap(hand, 0, 4);
+				Utils.swap(hand, 1, 3);
 			}
 			else {
-				swap(hand, 0, 3);
+				Utils.swap(hand, 0, 3);
 			}
 		}
-	}
-	
-	private void swap(ArrayList<Card> hand, int i, int j) {
-		Card firstCard = hand.get(i);
-		Card secondCard = hand.get(j);
-		
-		hand.set(i, secondCard);
-		hand.set(j, firstCard);
 	}
 	
 	@Override
 	public int compareKernel(Hand o) {
 		Card leftThreeCard = hand.get(0);
 		Card rightThreeCard = o.hand.get(0);
-		int compare = leftThreeCard.compareTo(rightThreeCard);
 		
-		return compare;
+		return leftThreeCard.compareTo(rightThreeCard);
 	}
 	
 	@Override

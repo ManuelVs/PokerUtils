@@ -15,4 +15,12 @@ public final class Utils {
 		
 		return sb.toString();
 	}
+	
+	public static void swap(ArrayList<Card> hand, int i, int j) {
+		Card firstCard = hand.get(i);
+		Card secondCard = hand.get(j);
+		
+		hand.set(i, secondCard);
+		hand.set(j, firstCard);
+	}
 }

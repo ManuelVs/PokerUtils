@@ -1,6 +1,7 @@
 package hja.pokerutils.Hand;
 
 import hja.pokerutils.Card.Card;
+import hja.pokerutils.Utils;
 
 import java.util.ArrayList;
 
@@ -16,16 +17,8 @@ public class FourOfAKind extends Hand {
 		Card secondCard = hand.get(1);
 		
 		if (firstCard.compareTo(secondCard) != 0) {
-			swap(hand, 0, 4);
+			Utils.swap(hand, 0, 4);
 		}
-	}
-	
-	private void swap(ArrayList<Card> hand, int i, int j) {
-		Card firstCard = hand.get(i);
-		Card secondCard = hand.get(j);
-		
-		hand.set(i, secondCard);
-		hand.set(j, firstCard);
 	}
 	
 	@Override

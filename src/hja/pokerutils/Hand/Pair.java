@@ -30,21 +30,12 @@ public class Pair extends Hand {
 		this.hand.addAll(2, aux);
 	}
 	
-	private void swap(ArrayList<Card> hand, int i, int j) {
-		Card firstCard = hand.get(i);
-		Card secondCard = hand.get(j);
-		
-		hand.set(i, secondCard);
-		hand.set(j, firstCard);
-	}
-	
 	@Override
 	public int compareKernel(Hand o) {
 		Card leftTwoCard = hand.get(0);
 		Card rightTwoCard = o.hand.get(0);
-		int compare = leftTwoCard.compareTo(rightTwoCard);
-		
-		return compare;
+
+		return leftTwoCard.compareTo(rightTwoCard);
 	}
 	
 	@Override

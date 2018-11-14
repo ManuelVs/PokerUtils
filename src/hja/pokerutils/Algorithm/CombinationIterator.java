@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class CombinationIterator implements Iterator<ArrayList<Card>> {
-	private ArrayList<Card> cards;
-	private int nElements;
-	private int[] perm;
+	private final ArrayList<Card> cards;
+	private final int nElements;
+	private final int[] perm;
 	
 	public CombinationIterator(ArrayList<Card> cards, int nElements) {
 		this.cards = cards;

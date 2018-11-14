@@ -1,6 +1,7 @@
 package hja.pokerutils.Hand;
 
 import hja.pokerutils.Card.Card;
+import hja.pokerutils.Utils;
 
 import java.util.ArrayList;
 
@@ -15,27 +16,17 @@ public class TwoPair extends Hand {
 		Card firstCard = hand.get(0);
 		Card secondCard = hand.get(1);
 		
-		int compare = firstCard.compareTo(secondCard);
-		
 		if (firstCard.compareTo(secondCard) != 0) {
-			swap(hand, 0, 2);
-			swap(hand, 4, 2);
+			Utils.swap(hand, 0, 2);
+			Utils.swap(hand, 4, 2);
 		}
 		else {
 			firstCard = hand.get(2);
 			secondCard = hand.get(3);
 			if (firstCard.compareTo(secondCard) != 0) {
-				swap(hand, 4, 2);
+				Utils.swap(hand, 4, 2);
 			}
 		}
-	}
-	
-	private void swap(ArrayList<Card> hand, int i, int j) {
-		Card firstCard = hand.get(i);
-		Card secondCard = hand.get(j);
-		
-		hand.set(i, secondCard);
-		hand.set(j, firstCard);
 	}
 	
 	@Override

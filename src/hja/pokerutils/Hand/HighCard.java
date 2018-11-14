@@ -14,6 +14,7 @@ public class HighCard extends Hand {
 	public int compareKernel(Hand o) {
 		Card leftCard = this.hand.get(0);
 		Card rightCard = o.hand.get(0);
+		
 		return leftCard.compareTo(rightCard);
 	}
 	

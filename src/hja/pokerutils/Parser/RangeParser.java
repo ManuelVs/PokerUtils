@@ -15,8 +15,8 @@ public final class RangeParser {
 		
 		ArrayList<Range> rangesArray = new ArrayList<>(stringArrayRanges.length);
 		
-		for (int i = 0; i < stringArrayRanges.length; ++i) {
-			Range range = parseSingleRange(stringArrayRanges[i]);
+		for (String sRange : stringArrayRanges) {
+			Range range = parseSingleRange(sRange);
 			if (range == null) return null;
 			
 			rangesArray.add(range);

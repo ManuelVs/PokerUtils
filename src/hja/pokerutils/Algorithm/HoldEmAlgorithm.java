@@ -174,10 +174,10 @@ public final class HoldEmAlgorithm {
 	}
 	
 	private static boolean isStraight(ArrayList<Card> cards) {
-		return cards.get(0).rank.compareTo(cards.get(1).rank) == 1
-				&& cards.get(1).rank.compareTo(cards.get(2).rank) == 1
-				&& cards.get(2).rank.compareTo(cards.get(3).rank) == 1
-				&& cards.get(3).rank.compareTo(cards.get(4).rank) == 1
+		return cards.get(0).rank.ordinal() - cards.get(1).rank.ordinal() == 1
+				&& cards.get(1).rank.ordinal() - cards.get(2).rank.ordinal() == 1
+				&& cards.get(2).rank.ordinal() - cards.get(3).rank.ordinal() == 1
+				&& cards.get(3).rank.ordinal() - cards.get(4).rank.ordinal() == 1
 				|| cards.get(0).rank == Rank.ACE
 				&& cards.get(1).rank == Rank.FIVE
 				&& cards.get(2).rank == Rank.FOUR

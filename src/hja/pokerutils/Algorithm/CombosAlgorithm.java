@@ -73,9 +73,9 @@ public final class CombosAlgorithm {
 		
 		Suit[] suits = Suit.values();
 		
-		for (int i = 0; i < suits.length; ++i) {
-			Card first = CardFactory.createCard(firstRank, suits[i]);
-			Card second = CardFactory.createCard(secondRank, suits[i]);
+		for (Suit suit : suits) {
+			Card first = CardFactory.createCard(firstRank, suit);
+			Card second = CardFactory.createCard(secondRank, suit);
 			
 			if (!boardCards.contains(first) && !boardCards.contains(second)) {
 				ArrayList<Card> cards = new ArrayList<>();

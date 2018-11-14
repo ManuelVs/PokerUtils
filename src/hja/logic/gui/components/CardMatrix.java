@@ -11,7 +11,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class CardMatrix extends JPanel implements RangeListener {
-	private Model model;
+	private final Model model;
 	private Range range;
 	
 	private CardButton[][] cardPairButtons;

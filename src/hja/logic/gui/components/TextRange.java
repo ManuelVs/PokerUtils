@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TextRange extends JPanel implements RangeListener {
-	private Model model;
+	private final Model model;
 	private JTextField rangeTextField;
 	
 	private Range range;

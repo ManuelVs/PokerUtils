@@ -14,20 +14,20 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class BoardCards extends JPanel implements BoardCardsListener {
-	private static Color[] suit_color = new Color[]{
+	private static final Color[] suit_color = new Color[]{
 			new Color(255, 182, 181),
 			new Color(183, 240, 128),
 			new Color(181, 210, 255),
 			new Color(214, 214, 214),
 	};
-	private static Color[] suit_selected_color = new Color[]{
+	private static final Color[] suit_selected_color = new Color[]{
 			new Color(240, 39, 6),
 			new Color(56, 164, 17),
 			new Color(4, 85, 227),
 			new Color(100, 100, 100),
 	};
 	
-	private Model model;
+	private final Model model;
 	
 	private Color defaultColor;
 	private CardButton[] cardButtons;
@@ -127,9 +127,9 @@ public class BoardCards extends JPanel implements BoardCardsListener {
 	}
 	
 	private static class CardClicked implements ActionListener {
-		private Rank rank;
-		private Suit suit;
-		private Model model;
+		private final Rank rank;
+		private final Suit suit;
+		private final Model model;
 		
 		public CardClicked(Rank r, Suit s, Model model) {
 			this.rank = r;

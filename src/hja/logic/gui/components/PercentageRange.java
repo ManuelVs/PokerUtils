@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.Reader;
 
 public class PercentageRange extends JPanel {
-	private Model model;
+	private final Model model;
 	private Ranking ranking;
 	private double percentage;
 	
@@ -40,9 +40,8 @@ public class PercentageRange extends JPanel {
 			model.setRange(ranking.selectTopCardPairs(percentage));
 		});
 		
-		openRankingChooser.addActionListener((e) -> {
-			rankingChooser.showOpenDialog((Component) e.getSource());
-		});
+		openRankingChooser.addActionListener((e) -> rankingChooser.showOpenDialog((Component) e.getSource()));
+		
 		rankingChooser.addActionListener((e) -> {
 			try {
 				File f = rankingChooser.getSelectedFile();
