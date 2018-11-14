@@ -3,7 +3,6 @@ package hja.logic.gui.model;
 import hja.pokerutils.Algorithm.CombosAlgorithm;
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Range.Range;
-import hja.pokerutils.Ranking.Ranking;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -58,7 +57,7 @@ public class ModelImpl implements Model {
 	private void updateCombos(){
 		Thread thread = new Thread(() -> {
 			if(ModelImpl.this.cards.size() >= 3) {
-				ModelImpl.this.combos = CombosAlgorithm.getCombos(range, cards);
+				ModelImpl.this.combos = CombosAlgorithm.getCombos(range, new ArrayList<>(cards));
 			}
 			else combos = new CombosAlgorithm.Combos();
 			notifyCombosListener();

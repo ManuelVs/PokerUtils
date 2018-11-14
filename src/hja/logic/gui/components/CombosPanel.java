@@ -5,24 +5,23 @@ import hja.logic.gui.model.Model;
 import hja.pokerutils.Algorithm.CombosAlgorithm;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class CombosPanel extends JPanel implements CombosListener {
-	private JSlider royalFlush;
-	private JSlider straightFlush;
-	private JSlider fourOfAKind;
-	private JSlider fullHouse;
-	private JSlider flush;
-	private JSlider straight;
-	private JSlider threeOfAKind;
-	private JSlider twoPair;
-	private JSlider overPair;
-	private JSlider topPair;
-	private JSlider pocketPairBelowTopPair;
-	private JSlider middlePair;
-	private JSlider weakPair;
-	private JSlider noHandMade;
-	
-	private JTextArea combosArea;
+	private JLabel royalFlush;
+	private JLabel straightFlush;
+	private JLabel fourOfAKind;
+	private JLabel fullHouse;
+	private JLabel flush;
+	private JLabel straight;
+	private JLabel threeOfAKind;
+	private JLabel twoPair;
+	private JLabel overPair;
+	private JLabel topPair;
+	private JLabel pocketPairBelowTopPair;
+	private JLabel middlePair;
+	private JLabel weakPair;
+	private JLabel noHandMade;
 	
 	public CombosPanel(Model model){
 		model.addCombosListener(this);
@@ -30,105 +29,124 @@ public class CombosPanel extends JPanel implements CombosListener {
 	}
 	
 	private void initGUI() {
-		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		this.setLayout(new GridLayout(14,2));
 		
-		combosArea = new JTextArea();
 		
-		this.add(combosArea);
-		
-		/*
-		this.royalFlush = new JSlider();
+		this.royalFlush = new JLabel();
 		JLabel labelRoyalFlush = new JLabel("Royal flush");
 		labelRoyalFlush.setLabelFor(this.royalFlush);
 		
-		this.straightFlush = new JSlider();
+		this.straightFlush = new JLabel();
 		JLabel labelStraightFlush = new JLabel("Straight");
 		labelStraightFlush.setLabelFor(this.straightFlush);
 		
-		this.fourOfAKind = new JSlider();
+		this.fourOfAKind = new JLabel();
 		JLabel labelFourOfAKind = new JLabel("Four of a kind");
 		labelFourOfAKind.setLabelFor(this.fourOfAKind);
 		
-		this.fullHouse = new JSlider();
+		this.fullHouse = new JLabel();
 		JLabel labelFullHouse = new JLabel("Full House");
 		labelFullHouse.setLabelFor(this.fullHouse);
 		
-		this.flush = new JSlider();
+		this.flush = new JLabel();
 		JLabel labelFlush = new JLabel("Flush");
 		labelFlush.setLabelFor(this.flush);
 		
-		this.straight = new JSlider();
+		this.straight = new JLabel();
 		JLabel labelStraight = new JLabel("Straight");
 		labelStraight.setLabelFor(this.straight);
 		
-		this.threeOfAKind = new JSlider();
+		this.threeOfAKind = new JLabel();
 		JLabel labelThreeOfAKind = new JLabel("Three of a kind");
 		labelThreeOfAKind.setLabelFor(this.threeOfAKind);
 		
-		this.twoPair = new JSlider();
+		this.twoPair = new JLabel();
 		JLabel labelTwoPair = new JLabel("Two pair");
 		labelTwoPair.setLabelFor(this.twoPair);
 		
-		this.overPair = new JSlider();
+		this.overPair = new JLabel();
 		JLabel labelOverPair = new JLabel("Over pair");
 		labelOverPair.setLabelFor(this.overPair);
 		//--
-		this.topPair = new JSlider();
+		this.topPair = new JLabel();
 		JLabel labelTopPair = new JLabel("Top pair");
 		labelTopPair.setLabelFor(this.topPair);
 		
-		this.pocketPairBelowTopPair = new JSlider();
-		JLabel labelPocketPairBelowTopPair = new JLabel("PP below tp");
+		this.pocketPairBelowTopPair = new JLabel();
+		JLabel labelPocketPairBelowTopPair = new JLabel("Pocket Pair below top pair");
 		labelPocketPairBelowTopPair.setLabelFor(this.pocketPairBelowTopPair);
 		
-		this.middlePair = new JSlider();
+		this.middlePair = new JLabel();
 		JLabel labelMiddlePair = new JLabel("Middle pair");
 		labelMiddlePair.setLabelFor(this.middlePair);
 		
-		this.weakPair = new JSlider();
+		this.weakPair = new JLabel();
 		JLabel labelWeakPair = new JLabel("Weak pair");
 		labelWeakPair.setLabelFor(this.weakPair);
 		
-		this.noHandMade = new JSlider();
-		JLabel noHandMade = new JLabel("No hand made");
-		noHandMade.setLabelFor(this.noHandMade);
+		this.noHandMade = new JLabel();
+		JLabel labelNoHandMade = new JLabel("No hand made");
+		labelNoHandMade.setLabelFor(this.noHandMade);
 		
 		
+		this.add(labelRoyalFlush);
 		this.add(this.royalFlush);
+		
+		this.add(labelStraightFlush);
 		this.add(this.straightFlush);
+		
+		this.add(labelFourOfAKind);
 		this.add(this.fourOfAKind);
+		
+		this.add(labelFullHouse);
 		this.add(this.fullHouse);
+		
+		this.add(labelFlush);
 		this.add(this.flush);
+		
+		this.add(labelStraight);
 		this.add(this.straight);
+		
+		this.add(labelThreeOfAKind);
 		this.add(this.threeOfAKind);
+		
+		this.add(labelTwoPair);
 		this.add(this.twoPair);
+		
+		this.add(labelOverPair);
 		this.add(this.overPair);
+		
+		this.add(labelTopPair);
 		this.add(this.topPair);
+		
+		this.add(labelPocketPairBelowTopPair);
 		this.add(this.pocketPairBelowTopPair);
+		
+		this.add(labelMiddlePair);
 		this.add(this.middlePair);
+		
+		this.add(labelWeakPair);
 		this.add(this.weakPair);
+		
+		this.add(labelNoHandMade);
 		this.add(this.noHandMade);
-		*/
 	}
 	
 	@Override
 	public void notify(CombosAlgorithm.Combos combos) {
-		this.combosArea.setText(combos.toString());
-		/*
-		royalFlush.setValue(combos.royalFlush);
-		straightFlush.setValue(combos.straightFlush);
-		fourOfAKind.setValue(combos.fourOfAKind);
-		fullHouse.setValue(combos.fullHouse);
-		flush.setValue(combos.flush);
-		straight.setValue(combos.straight);
-		threeOfAKind.setValue(combos.threeOfAKind);
-		twoPair.setValue(combos.twoPair);
-		overPair.setValue(combos.overPair);
-		topPair.setValue(combos.topPair);
-		pocketPairBelowTopPair.setValue(combos.pocketPairBelowTopPair);
-		middlePair.setValue(combos.middlePair);
-		weakPair.setValue(combos.weakPair);
-		noHandMade.setValue(combos.noHandMade);
-		*/
+		royalFlush.setText(Integer.toString(combos.royalFlush));
+		straightFlush.setText(Integer.toString(combos.straightFlush));
+		fourOfAKind.setText(Integer.toString(combos.fourOfAKind));
+		fullHouse.setText(Integer.toString(combos.fullHouse));
+		flush.setText(Integer.toString(combos.flush));
+		straight.setText(Integer.toString(combos.straight));
+		threeOfAKind.setText(Integer.toString(combos.threeOfAKind));
+		twoPair.setText(Integer.toString(combos.twoPair));
+		overPair.setText(Integer.toString(combos.overPair));
+		topPair.setText(Integer.toString(combos.topPair));
+		pocketPairBelowTopPair.setText(Integer.toString(combos.pocketPairBelowTopPair));
+		middlePair.setText(Integer.toString(combos.middlePair));
+		weakPair.setText(Integer.toString(combos.weakPair));
+		noHandMade.setText(Integer.toString(combos.noHandMade));
 	}
 }
