@@ -28,9 +28,9 @@ class CombosAlgorithmTest {
 								new Range(Rank.TWO, false)
 						),
 						new ArrayList<>(Arrays.asList(TestUtils.ACEh, TestUtils.QUEENh, TestUtils.JACKs)),
-						new CombosAlgorithm.Combos(0, 0, 0, 0, 0, 0, 3, 0,
+						new Combos(0, 0, 0, 0, 0, 0, 3, 0,
 								0, 3, 6, 3, 6,
-								4)
+								4, 0, 0, 0)
 				),
 				Arguments.of(
 						new Range(
@@ -50,9 +50,9 @@ class CombosAlgorithmTest {
 								new Range(Rank.SEVEN, Rank.SIX, true, false)
 						),
 						new ArrayList<>(Arrays.asList(TestUtils.KINGh, TestUtils.JACKh, TestUtils.NINEh, TestUtils.JACKd)),
-						new CombosAlgorithm.Combos(0, 0, 1, 10, 1, 0, 6, 0,
+						new Combos(0, 0, 1, 10, 1, 0, 6, 0,
 								6, 33, 6, 0, 33,
-								15)
+								15, 0, 0, 0)
 				),
 				Arguments.of(
 						new Range(
@@ -62,9 +62,9 @@ class CombosAlgorithmTest {
 								new Range(Rank.TEN, Rank.EIGHT, true, false)
 						),
 						new ArrayList<>(Arrays.asList(TestUtils.KINGh, TestUtils.JACKh, TestUtils.NINEh)),
-						new CombosAlgorithm.Combos(0, 1, 0, 0, 1, 3, 0, 6,
+						new Combos(0, 1, 0, 0, 1, 3, 0, 6,
 								0, 0, 0, 0, 0,
-								3)
+								3, 0, 0, 0)
 				),
 				
 				// Otros tests comparados con Flopzilla
@@ -82,9 +82,9 @@ class CombosAlgorithmTest {
 								new Range(Rank.JACK, Rank.TEN, false, true)
 						),
 						new ArrayList<>(Arrays.asList(TestUtils.NINEd, TestUtils.SEVENs, TestUtils.FIVEh)),
-						new CombosAlgorithm.Combos(0, 0, 0, 0, 0, 0, 9, 0,
+						new Combos(0, 0, 0, 0, 0, 0, 9, 0,
 								30, 0, 6, 0, 24,
-								160)
+								160, 0, 0, 0)
 				),
 				Arguments.of(
 						new Range(
@@ -100,9 +100,9 @@ class CombosAlgorithmTest {
 								new Range(Rank.JACK, Rank.TEN, false, true)
 						),
 						new ArrayList<>(Arrays.asList(TestUtils.KINGh, TestUtils.QUEENc, TestUtils.JACKd)),
-						new CombosAlgorithm.Combos(0, 0, 0, 0, 0, 16, 9, 27,
+						new Combos(0, 0, 0, 0, 0, 16, 9, 27,
 								6, 24, 0, 24, 78,
-								0)
+								0, 0, 0, 0)
 				),
 				Arguments.of(
 						new Range(
@@ -112,17 +112,17 @@ class CombosAlgorithmTest {
 								new Range(Rank.NINE, Rank.FIVE, true, false)
 						),
 						new ArrayList<>(Arrays.asList(TestUtils.QUEENd, TestUtils.EIGHTc, TestUtils.THREEh)),
-						new CombosAlgorithm.Combos(0, 0, 0, 0, 0, 0, 0, 0,
+						new Combos(0, 0, 0, 0, 0, 0, 0, 0,
 								0, 0, 6, 9, 0,
-								16)
+								16, 0, 0, 0)
 				)
 		);
 	}
 	
 	@ParameterizedTest(name = "{index} => {0}")
 	@MethodSource("combosProvider")
-	void getCombosTest(Range range, ArrayList<Card> boardCards, CombosAlgorithm.Combos combos) {
-		CombosAlgorithm.Combos aCombos = CombosAlgorithm.getCombos(range, boardCards);
+	void getCombosTest(Range range, ArrayList<Card> boardCards, Combos combos) {
+		Combos aCombos = CombosAlgorithm.getCombos(range, boardCards);
 		
 		assertEquals(combos, aCombos);
 	}

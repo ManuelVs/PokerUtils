@@ -2,6 +2,7 @@ package hja.logic.gui.components;
 
 import hja.logic.gui.model.CombosListener;
 import hja.logic.gui.model.Model;
+import hja.pokerutils.Algorithm.Combos;
 import hja.pokerutils.Algorithm.CombosAlgorithm;
 
 import javax.swing.*;
@@ -23,13 +24,17 @@ public class CombosPanel extends JPanel implements CombosListener {
 	private JLabel weakPair;
 	private JLabel noHandMade;
 	
+	private JLabel gutshotDraw;
+	private JLabel openEndedDraw;
+	private JLabel flushDraw;
+	
 	public CombosPanel(Model model) {
 		model.addCombosListener(this);
 		initGUI();
 	}
 	
 	private void initGUI() {
-		this.setLayout(new GridLayout(14, 2));
+		this.setLayout(new GridLayout(17, 2));
 		
 		
 		this.royalFlush = new JLabel();
@@ -88,6 +93,18 @@ public class CombosPanel extends JPanel implements CombosListener {
 		JLabel labelNoHandMade = new JLabel("No hand made");
 		labelNoHandMade.setLabelFor(this.noHandMade);
 		
+		this.gutshotDraw = new JLabel();
+		JLabel labelGutshotDraw = new JLabel("Gutshot draw");
+		labelMiddlePair.setLabelFor(this.gutshotDraw);
+		
+		this.openEndedDraw = new JLabel();
+		JLabel labelOpenEndedDraw = new JLabel("Open-ended draw");
+		labelWeakPair.setLabelFor(this.openEndedDraw);
+		
+		this.flushDraw = new JLabel();
+		JLabel labelFlushDraw = new JLabel("Flush draw");
+		labelNoHandMade.setLabelFor(this.flushDraw);
+		
 		
 		this.add(labelRoyalFlush);
 		this.add(this.royalFlush);
@@ -130,10 +147,19 @@ public class CombosPanel extends JPanel implements CombosListener {
 		
 		this.add(labelNoHandMade);
 		this.add(this.noHandMade);
+		
+		this.add(labelGutshotDraw);
+		this.add(this.gutshotDraw);
+		
+		this.add(labelOpenEndedDraw);
+		this.add(this.openEndedDraw);
+		
+		this.add(labelFlushDraw);
+		this.add(this.flushDraw);
 	}
 	
 	@Override
-	public void notify(CombosAlgorithm.Combos combos) {
+	public void notify(Combos combos) {
 		royalFlush.setText(Integer.toString(combos.royalFlush));
 		straightFlush.setText(Integer.toString(combos.straightFlush));
 		fourOfAKind.setText(Integer.toString(combos.fourOfAKind));
@@ -148,5 +174,9 @@ public class CombosPanel extends JPanel implements CombosListener {
 		middlePair.setText(Integer.toString(combos.middlePair));
 		weakPair.setText(Integer.toString(combos.weakPair));
 		noHandMade.setText(Integer.toString(combos.noHandMade));
+		
+		gutshotDraw.setText(Integer.toString(combos.gutshotDraw));
+		openEndedDraw.setText(Integer.toString(combos.openEndedDraw));
+		flushDraw.setText(Integer.toString(combos.flushDraw));
 	}
 }
