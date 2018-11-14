@@ -100,7 +100,7 @@ public class CardMatrix extends JPanel implements RangeListener {
 	
 	@Override
 	public void notify(Range range) {
-		this.range = range;
+		this.range = new Range(range);
 		
 		clearButtons();
 		for(CardPair cp : range){
