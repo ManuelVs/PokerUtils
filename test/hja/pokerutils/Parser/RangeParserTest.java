@@ -96,7 +96,7 @@ class RangeParserTest {
 		Range range = RangeParser.parseRange(sRange);
 		
 		int i = 0;
-		for(CardPair cp : range){
+		for (CardPair cp : range) {
 			assertTrue(aRange.contains(cp));
 			++i;
 		}
@@ -114,15 +114,5 @@ class RangeParserTest {
 	@MethodSource("malformedProvider")
 	void testMalformedRange(String range) {
 		assertNull(RangeParser.parseRange(range));
-	}
-	
-	private <T> ArrayList<T> createArrayFromIterable(Iterable<T> iterable) {
-		ArrayList<T> ts = new ArrayList<>();
-		
-		for (T t : iterable) {
-			ts.add(t);
-		}
-		
-		return ts;
 	}
 }

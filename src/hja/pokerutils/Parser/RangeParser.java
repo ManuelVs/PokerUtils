@@ -26,7 +26,7 @@ public final class RangeParser {
 	}
 	
 	private static Range parseSingleRange(String range) {
-		if(range.isEmpty()) return new Range();
+		if (range.isEmpty()) return new Range();
 		
 		Pattern simpleRange = Pattern.compile("(?<first>[23456789TJQKA])(?<second>[23456789TJQKA])(?<suited>[os]?)(?<range>\\+?)");
 		Pattern linearRange = Pattern.compile(

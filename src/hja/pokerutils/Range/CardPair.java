@@ -35,7 +35,7 @@ public class CardPair {
 	
 	public String toString() {
 		String ret = this.firstRank.rank + "" + this.secondRank.rank;
-		if(firstRank == secondRank) return ret;
+		if (firstRank == secondRank) return ret;
 		else return ret + (this.isSuited ? "s" : "o");
 	}
 }

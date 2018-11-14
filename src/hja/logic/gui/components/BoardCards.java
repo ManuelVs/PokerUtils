@@ -14,17 +14,17 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class BoardCards extends JPanel implements BoardCardsListener {
-	private static Color[] suit_color = new Color[] {
+	private static Color[] suit_color = new Color[]{
 			new Color(255, 182, 181),
-			new Color(183,240,128),
+			new Color(183, 240, 128),
 			new Color(181, 210, 255),
-			new Color(214,214,214),
+			new Color(214, 214, 214),
 	};
-	private static Color[] suit_selected_color = new Color[] {
+	private static Color[] suit_selected_color = new Color[]{
 			new Color(240, 39, 6),
-			new Color(56,164,17),
+			new Color(56, 164, 17),
 			new Color(4, 85, 227),
-			new Color(100,100,100),
+			new Color(100, 100, 100),
 	};
 	
 	private Model model;
@@ -53,14 +53,14 @@ public class BoardCards extends JPanel implements BoardCardsListener {
 		cardButtons[4] = new CardButton("  ");
 		this.defaultColor = cardButtons[0].getBackground();
 		
-		boardPanel.setLayout(new GridLayout(1,4));
+		boardPanel.setLayout(new GridLayout(1, 4));
 		boardPanel.add(cardButtons[0]);
 		boardPanel.add(cardButtons[1]);
 		boardPanel.add(cardButtons[2]);
 		boardPanel.add(cardButtons[3]);
 		boardPanel.add(cardButtons[4]);
 		
-
+		
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 0.5;
 		c.weighty = 0.5;
@@ -75,8 +75,8 @@ public class BoardCards extends JPanel implements BoardCardsListener {
 		Suit[] suits = Suit.values();
 		Rank[] ranks = Rank.values();
 		this.matrixButtons = new CardButton[suits.length][ranks.length];
-		for(int s = 0; s < suits.length; ++s) {
-			for(int r = 0; r < ranks.length; ++r){
+		for (int s = 0; s < suits.length; ++s) {
+			for (int r = 0; r < ranks.length; ++r) {
 				Rank rank = ranks[ranks.length - r - 1];
 				Suit suit = suits[s];
 				
@@ -98,7 +98,7 @@ public class BoardCards extends JPanel implements BoardCardsListener {
 	public void notify(ArrayList<Card> cards) {
 		clearMatrix();
 		
-		for(int i = 0; i < cards.size(); ++i){
+		for (int i = 0; i < cards.size(); ++i) {
 			Rank rank = cards.get(i).rank;
 			Suit suit = cards.get(i).suit;
 			
@@ -113,8 +113,8 @@ public class BoardCards extends JPanel implements BoardCardsListener {
 	}
 	
 	private void clearMatrix() {
-		for(int i = 0; i < matrixButtons.length; ++i){
-			for(int j = 0; j < matrixButtons[i].length; ++j){
+		for (int i = 0; i < matrixButtons.length; ++i) {
+			for (int j = 0; j < matrixButtons[i].length; ++j) {
 				matrixButtons[i][j].setSelected(false);
 			}
 		}
@@ -126,12 +126,12 @@ public class BoardCards extends JPanel implements BoardCardsListener {
 		}
 	}
 	
-	private static class CardClicked implements ActionListener{
+	private static class CardClicked implements ActionListener {
 		private Rank rank;
 		private Suit suit;
 		private Model model;
 		
-		public CardClicked(Rank r, Suit s, Model model){
+		public CardClicked(Rank r, Suit s, Model model) {
 			this.rank = r;
 			this.suit = s;
 			this.model = model;

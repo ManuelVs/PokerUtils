@@ -8,13 +8,13 @@ import hja.pokerutils.Range.Range;
 import javax.swing.*;
 import java.awt.*;
 
-public class TextRange extends JPanel implements RangeListener{
+public class TextRange extends JPanel implements RangeListener {
 	private Model model;
 	private JTextField rangeTextField;
 	
 	private Range range;
 	
-	public TextRange(Model model){
+	public TextRange(Model model) {
 		this.model = model;
 		this.model.addRangeListener(this);
 		initGUI();
@@ -42,8 +42,8 @@ public class TextRange extends JPanel implements RangeListener{
 	
 	
 	@Override
-	public void notify(Range range){
-		if(range != this.range) {
+	public void notify(Range range) {
+		if (range != this.range) {
 			this.rangeTextField.setText(range.toString());
 		}
 	}

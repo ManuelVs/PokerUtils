@@ -23,13 +23,13 @@ public class CombosPanel extends JPanel implements CombosListener {
 	private JLabel weakPair;
 	private JLabel noHandMade;
 	
-	public CombosPanel(Model model){
+	public CombosPanel(Model model) {
 		model.addCombosListener(this);
 		initGUI();
 	}
 	
 	private void initGUI() {
-		this.setLayout(new GridLayout(14,2));
+		this.setLayout(new GridLayout(14, 2));
 		
 		
 		this.royalFlush = new JLabel();

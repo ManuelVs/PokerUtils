@@ -16,7 +16,7 @@ public class ModelImpl implements Model {
 	private ArrayList<CombosListener> combosListeners;
 	private ArrayList<RangeListener> rangeListeners;
 	
-	public ModelImpl(){
+	public ModelImpl() {
 		this.cards = new ArrayList<>(5);
 		this.range = new Range();
 		this.combos = new CombosAlgorithm.Combos();
@@ -34,7 +34,7 @@ public class ModelImpl implements Model {
 	}
 	
 	public void setCard(Card card) {
-		if(!this.cards.remove(card) && this.cards.size() < 5){
+		if (!this.cards.remove(card) && this.cards.size() < 5) {
 			this.cards.add(card);
 		}
 		
@@ -42,21 +42,21 @@ public class ModelImpl implements Model {
 		notifyBoardCardsListeners();
 	}
 	
-	public void addBoardCardsListener(BoardCardsListener listener){
+	public void addBoardCardsListener(BoardCardsListener listener) {
 		this.boardCardsListeners.add(listener);
 	}
 	
-	public void addCombosListener(CombosListener listener){
+	public void addCombosListener(CombosListener listener) {
 		this.combosListeners.add(listener);
 	}
 	
-	public void addRangeListener(RangeListener listener){
+	public void addRangeListener(RangeListener listener) {
 		this.rangeListeners.add(listener);
 	}
-
-	private void updateCombos(){
+	
+	private void updateCombos() {
 		Thread thread = new Thread(() -> {
-			if(ModelImpl.this.cards.size() >= 3) {
+			if (ModelImpl.this.cards.size() >= 3) {
 				ModelImpl.this.combos = CombosAlgorithm.getCombos(range, new ArrayList<>(cards));
 			}
 			else combos = new CombosAlgorithm.Combos();
@@ -65,25 +65,25 @@ public class ModelImpl implements Model {
 		thread.start();
 	}
 	
-	private void notifyBoardCardsListeners(){
+	private void notifyBoardCardsListeners() {
 		SwingUtilities.invokeLater(() -> {
-			for(BoardCardsListener listener : boardCardsListeners){
+			for (BoardCardsListener listener : boardCardsListeners) {
 				listener.notify(ModelImpl.this.cards);
 			}
 		});
 	}
 	
-	private void notifyRangeListeners(){
+	private void notifyRangeListeners() {
 		SwingUtilities.invokeLater(() -> {
-			for(RangeListener listener : rangeListeners){
+			for (RangeListener listener : rangeListeners) {
 				listener.notify(ModelImpl.this.range);
 			}
 		});
 	}
 	
-	private void notifyCombosListener(){
+	private void notifyCombosListener() {
 		SwingUtilities.invokeLater(() -> {
-			for(CombosListener listener : combosListeners){
+			for (CombosListener listener : combosListeners) {
 				listener.notify(combos);
 			}
 		});

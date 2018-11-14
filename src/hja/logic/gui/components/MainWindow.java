@@ -28,7 +28,7 @@ public class MainWindow extends JFrame {
 		leftPanel.add(rangeText);
 		leftPanel.add(rangeMatrix);
 		leftPanel.add(percentageRange);
-
+		
 		
 		JPanel rightPanel = new JPanel();
 		rightPanel.setLayout(new GridLayout(1, 2));

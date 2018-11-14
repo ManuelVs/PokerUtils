@@ -17,16 +17,16 @@ public class CardButton extends JButton {
 		selectedBackgroundColor = getBackground();
 	}
 	
-	public boolean isSelected(){
+	public boolean isSelected() {
 		return selected;
 	}
 	
-	public void setSelected(boolean selected){
+	public void setSelected(boolean selected) {
 		this.selected = selected;
 		repaint();
 	}
 	
-	public void setSelectedBackground(Color color){
+	public void setSelectedBackground(Color color) {
 		this.selectedBackgroundColor = color;
 	}
 	
@@ -36,7 +36,7 @@ public class CardButton extends JButton {
 			g.setColor(getBackground());
 		}
 		else {
-			if(!selected) g.setColor(getBackground());
+			if (!selected) g.setColor(getBackground());
 			else g.setColor(selectedBackgroundColor);
 		}
 		

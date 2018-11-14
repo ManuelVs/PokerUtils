@@ -9,7 +9,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 
 public final class RankingParser {
-	public static Ranking parseRanking(Reader reader, int length)  throws IOException {
+	public static Ranking parseRanking(Reader reader, int length) throws IOException {
 		char[] cRanking = new char[length];
 		reader.read(cRanking);
 		
@@ -17,9 +17,9 @@ public final class RankingParser {
 		String[] parts = ranking.split(",");
 		
 		ArrayList<CardPair> cardPairArray = new ArrayList<>();
-		for (String p: parts) {
+		for (String p : parts) {
 			boolean isSuited = false;
-			if(p.length() == 3 && p.charAt(2) == 's'){
+			if (p.length() == 3 && p.charAt(2) == 's') {
 				isSuited = true;
 			}
 			CardPair cp = new CardPair(CardFactory.getRank(p.charAt(0)), CardFactory.getRank(p.charAt(1)), isSuited);

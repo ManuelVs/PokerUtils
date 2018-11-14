@@ -9,7 +9,7 @@ import java.util.Iterator;
 public class Range implements Iterable<CardPair> {
 	private HashSet<CardPair> cardPairs;
 	
-	public Range(){
+	public Range() {
 		this.cardPairs = new HashSet<>();
 	}
 	
@@ -40,7 +40,7 @@ public class Range implements Iterable<CardPair> {
 	}
 	
 	public Range(Rank firstRank, Rank initialRank, Rank lastRank, boolean isSuited) {
-		if(initialRank.compareTo(lastRank) < 0)
+		if (initialRank.compareTo(lastRank) < 0)
 			this.rangeInitializer(firstRank, initialRank, lastRank, isSuited);
 		else this.rangeInitializer(firstRank, lastRank, initialRank, isSuited);
 	}
@@ -59,11 +59,11 @@ public class Range implements Iterable<CardPair> {
 		}
 	}
 	
-	public void add(CardPair cardPair){
+	public void add(CardPair cardPair) {
 		this.cardPairs.add(cardPair);
 	}
 	
-	public boolean delete(CardPair cardPair){
+	public boolean delete(CardPair cardPair) {
 		return this.cardPairs.remove(cardPair);
 	}
 	
@@ -87,15 +87,15 @@ public class Range implements Iterable<CardPair> {
 		}
 	}
 	
-	public String toString(){
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
 		Iterator<CardPair> it = cardPairs.iterator();
-		if(it.hasNext()){
+		if (it.hasNext()) {
 			CardPair cp = it.next();
 			sb.append(cp.toString());
 			
-			while(it.hasNext()){
+			while (it.hasNext()) {
 				cp = it.next();
 				
 				sb.append(',');
