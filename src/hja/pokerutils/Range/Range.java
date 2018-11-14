@@ -40,14 +40,15 @@ public class Range implements Iterable<CardPair> {
 	}
 	
 	public Range(Rank firstRank, Rank initialRank, Rank lastRank, boolean isSuited) {
-		this.rangeInitializer(firstRank, initialRank, lastRank, isSuited);
+		if(initialRank.compareTo(lastRank) < 0)
+			this.rangeInitializer(firstRank, initialRank, lastRank, isSuited);
+		else this.rangeInitializer(firstRank, lastRank, initialRank, isSuited);
 	}
 	
 	public Range(ArrayList<Range> ranges) {
 		this.cardPairs = new HashSet<>();
 		for (Range r : ranges) {
 			this.cardPairs.addAll(r.cardPairs);
-			
 		}
 	}
 	
@@ -76,12 +77,12 @@ public class Range implements Iterable<CardPair> {
 			throw new IllegalArgumentException("First rank lower than interval");
 		}
 		
-		int numPairs = initialRank.ordinal() - lastRank.ordinal() + 1;
+		int numPairs = lastRank.ordinal() - initialRank.ordinal() + 1;
 		
 		this.cardPairs = new HashSet<>(numPairs);
 		
 		Rank[] ranks = Rank.values();
-		for (int i = lastRank.ordinal(); i <= initialRank.ordinal(); ++i) {
+		for (int i = initialRank.ordinal(); i <= lastRank.ordinal(); ++i) {
 			this.cardPairs.add(new CardPair(firstRank, ranks[i], isSuited));
 		}
 	}
