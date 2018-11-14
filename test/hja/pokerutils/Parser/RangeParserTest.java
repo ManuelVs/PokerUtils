@@ -58,6 +58,17 @@ class RangeParserTest {
 						new CardPair(Rank.ACE, Rank.JACK, false),
 						new CardPair(Rank.ACE, Rank.QUEEN, false),
 						new CardPair(Rank.ACE, Rank.KING, false))
+				)),
+				Arguments.of("ATs-A2s", new ArrayList<>(Arrays.asList(
+						new CardPair(Rank.ACE, Rank.TEN, true),
+						new CardPair(Rank.ACE, Rank.NINE, true),
+						new CardPair(Rank.ACE, Rank.EIGHT, true),
+						new CardPair(Rank.ACE, Rank.SEVEN, true),
+						new CardPair(Rank.ACE, Rank.SIX, true),
+						new CardPair(Rank.ACE, Rank.FIVE, true),
+						new CardPair(Rank.ACE, Rank.FOUR, true),
+						new CardPair(Rank.ACE, Rank.THREE, true),
+						new CardPair(Rank.ACE, Rank.TWO, true))
 				))
 		);
 	}
