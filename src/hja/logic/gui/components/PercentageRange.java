@@ -25,7 +25,7 @@ public class PercentageRange extends JPanel {
 	
 	private void initGUI() {
 		JButton openRankingChooser = new JButton("...");
-		JFileChooser rankingChooser = new JFileChooser("./data/rankings/");
+		JFileChooser rankingChooser = new JFileChooser("./res/rankings/");
 		JLabel rankingLabel = new JLabel("Sklansky-Chubukov");
 		JSlider slider = new JSlider(0, 100 * 100, JSlider.HORIZONTAL);
 		JLabel percentageLabel = new JLabel("0.0");
@@ -40,7 +40,7 @@ public class PercentageRange extends JPanel {
 			model.setRange(ranking.selectTopCardPairs(percentage));
 		});
 		
-		openRankingChooser.addActionListener((e) -> rankingChooser.showOpenDialog((Component) e.getSource()));
+		openRankingChooser.addActionListener((e) -> rankingChooser.showOpenDialog(this));
 		
 		rankingChooser.addActionListener((e) -> {
 			try {
@@ -55,7 +55,7 @@ public class PercentageRange extends JPanel {
 			}
 		});
 		
-		File f = new File("./data/rankings/Sklansky-Chubukov.txt");
+		File f = new File("./res/rankings/Sklansky-Chubukov.txt");
 		try {
 			updateRanking(f);
 		}
