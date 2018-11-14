@@ -84,9 +84,13 @@ class RangeParserTest {
 	void parseListCardTest(String sRange, ArrayList<CardPair> aRange) {
 		Range range = RangeParser.parseRange(sRange);
 		
-		ArrayList<CardPair> cards = createArrayFromIterable(range);
+		int i = 0;
+		for(CardPair cp : range){
+			assertTrue(aRange.contains(cp));
+			++i;
+		}
 		
-		assertEquals(aRange, cards);
+		assertEquals(aRange.size(), i);
 	}
 	
 	@ParameterizedTest(name = "{index} => {0}")

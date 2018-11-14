@@ -3,17 +3,18 @@ package hja.pokerutils.Range;
 import hja.pokerutils.Card.Rank;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 
 public class Range implements Iterable<CardPair> {
-	private ArrayList<CardPair> cardPairs;
+	private HashSet<CardPair> cardPairs;
 	
 	public Range(){
-		this.cardPairs = new ArrayList<>();
+		this.cardPairs = new HashSet<>();
 	}
 	
 	public Range(Rank pairRank, boolean isPairRange) {
-		this.cardPairs = new ArrayList<>();
+		this.cardPairs = new HashSet<>();
 		this.cardPairs.add(new CardPair(pairRank, pairRank, false));
 		
 		if (isPairRange) {
@@ -32,7 +33,7 @@ public class Range implements Iterable<CardPair> {
 			this.rangeInitializer(firstRank, secondRank, lastRank, isSuited);
 		}
 		else {
-			this.cardPairs = new ArrayList<>(1);
+			this.cardPairs = new HashSet<>(1);
 			this.cardPairs.add(new CardPair(firstRank, secondRank, isSuited));
 		}
 		
@@ -43,14 +44,15 @@ public class Range implements Iterable<CardPair> {
 	}
 	
 	public Range(ArrayList<Range> ranges) {
-		this.cardPairs = new ArrayList<>();
+		this.cardPairs = new HashSet<>();
 		for (Range r : ranges) {
 			this.cardPairs.addAll(r.cardPairs);
+			
 		}
 	}
 	
 	public Range(Range... ranges) {
-		this.cardPairs = new ArrayList<>();
+		this.cardPairs = new HashSet<>();
 		for (Range r : ranges) {
 			this.cardPairs.addAll(r.cardPairs);
 		}
@@ -76,7 +78,7 @@ public class Range implements Iterable<CardPair> {
 		
 		int numPairs = lastRank.ordinal() - initialRank.ordinal() + 1;
 		
-		this.cardPairs = new ArrayList<>(numPairs);
+		this.cardPairs = new HashSet<>(numPairs);
 		
 		Rank[] ranks = Rank.values();
 		for (int i = initialRank.ordinal(); i <= lastRank.ordinal(); ++i) {
