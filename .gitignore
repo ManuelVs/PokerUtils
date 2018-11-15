@@ -13,6 +13,12 @@ build/
 *.iws
 out/
 
+# Eclipse
+/.classpath
+/.settings/
+/.project
+/bin/
+
 # Github's default .gitignore below
 # Compiled class file
 *.class
