@@ -1,7 +1,16 @@
-.idea
-*.iml
+
+# VSCode
 .vscode
 
+# Gradle
+.gradle
+build/
+
+# IntelliJ
+.idea
+*.iml
+*.ipr
+*.iws
 out/
 
 # Github's default .gitignore below
@@ -18,7 +27,7 @@ out/
 .mtj.tmp/
 
 # Package Files #
-*.jar
+# *.jar
 *.war
 *.nar
 *.ear
