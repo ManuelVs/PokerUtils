@@ -31,7 +31,7 @@ public final class HoldEmAlgorithm {
 	 */
 	public static Hand calculateHand(ArrayList<Card> cards) {
 		cards.sort(Collections.reverseOrder());
-		CombinationIterator combinationIterator = new CombinationIterator(cards, 5);
+		CombinationIterator<Card> combinationIterator = new CombinationIterator<>(cards, 5);
 		
 		ArrayList<Card> combination = combinationIterator.next();
 		Hand best_hand = classifyHand(combination);

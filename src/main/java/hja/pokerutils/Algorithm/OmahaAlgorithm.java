@@ -9,7 +9,7 @@ import java.util.Collections;
 public final class OmahaAlgorithm {
 	
 	public static Hand calculateHand(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
-		CombinationIterator combinationIterator = new CombinationIterator(playerCards, 2);
+		CombinationIterator<Card> combinationIterator = new CombinationIterator<>(playerCards, 2);
 		
 		ArrayList<Card> combination = combinationIterator.next();
 		Hand best_hand = calculateHandTwoPlayerCard(combination, boardCards);
@@ -27,7 +27,7 @@ public final class OmahaAlgorithm {
 	}
 	
 	private static Hand calculateHandTwoPlayerCard(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
-		CombinationIterator combinationIterator = new CombinationIterator(boardCards, 3);
+		CombinationIterator<Card> combinationIterator = new CombinationIterator<>(boardCards, 3);
 		
 		ArrayList<Card> boardCombination = combinationIterator.next();
 		ArrayList<Card> playerAndBoardCards = new ArrayList<>(5);
