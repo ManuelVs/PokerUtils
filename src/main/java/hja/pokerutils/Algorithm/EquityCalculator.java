@@ -60,8 +60,31 @@ public final class EquityCalculator {
 	*/
 	
 	public static double[] calculateEquity(Board board) {
-		ArrayList<Card> allPossibleCards = CardFactory.getAllCards();
+		ArrayList<Card> allPossibleCards = getPossibleCards(board);
 		double[] equity = new double[board.players.size()];
+		
+		int nTotal = 0;
+		try {
+			for (Future<int[]> future : sendTasks(board, allPossibleCards)) {
+				int[] partialEquity = future.get();
+				
+				for (int i = 0; i < partialEquity.length; ++i) {
+					equity[i] += partialEquity[i];
+					nTotal += partialEquity[i];
+				}
+			}
+			
+			for (int i = 0; i < equity.length; ++i) {
+				equity[i] /= nTotal;
+			}
+		}
+		catch (Exception e) { e.printStackTrace(); }
+		
+		return equity;
+	}
+	
+	private static ArrayList<Card> getPossibleCards(Board board){
+		ArrayList<Card> allPossibleCards = CardFactory.getAllCards();
 		
 		for (Card card : board.boardCards) {
 			allPossibleCards.remove(card);
@@ -73,12 +96,15 @@ public final class EquityCalculator {
 			}
 		}
 		
-		int numLeftCards = 5 - board.boardCards.size();
-		CombinationCalculator<Card> combinations = new CombinationCalculator<>(allPossibleCards, numLeftCards);
+		return allPossibleCards;
+	}
+	
+	private static LinkedList<Future<int[]>> sendTasks(Board board, ArrayList<Card> allPossibleCards){
 		LinkedList<Future<int[]>> futures = new LinkedList<>();
 		
+		int numLeftCards = 5 - board.boardCards.size();
+		CombinationCalculator<Card> combinations = new CombinationCalculator<>(allPossibleCards, numLeftCards);
 		int numCores = Runtime.getRuntime().availableProcessors();
-		
 		Iterator<CountedCombinationIterator<Card>> iterators = combinations.iterators(numCores);
 		while (iterators.hasNext()) {
 			CountedCombinationIterator<Card> iterator = iterators.next();
@@ -97,27 +123,7 @@ public final class EquityCalculator {
 			futures.add(future);
 		}
 		
-		int nTotal = 0;
-		for (Future<int[]> future : futures) {
-			try {
-				int[] partialEquity = future.get();
-				
-				for (int i = 0; i < partialEquity.length; ++i) {
-					equity[i] += partialEquity[i];
-					nTotal += partialEquity[i];
-				}
-				
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		for (int i = 0; i < equity.length; ++i) {
-			equity[i] /= nTotal;
-		}
-		
-		return equity;
+		return futures;
 	}
 	
 	private static int calculateBest(ArrayList<Card> combination, Board board) {
