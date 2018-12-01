@@ -28,13 +28,13 @@ class OmahaAlgorithmTest {
 	
 	private static Stream<Arguments> handProvider() {
 		return Stream.of(
-				Arguments.of(pair1, fourOf1, FullHouse.class),
-				
-				Arguments.of(mike, board, Pair.class),
-				Arguments.of(brian, board, ThreeOfAKind.class),
-				Arguments.of(jess, board, Straight.class),
-				Arguments.of(tony, board, Straight.class),
-				Arguments.of(emily, board, Straight.class)
+			Arguments.of(pair1, fourOf1, FullHouse.class),
+			
+			Arguments.of(mike, board, Pair.class),
+			Arguments.of(brian, board, ThreeOfAKind.class),
+			Arguments.of(jess, board, Straight.class),
+			Arguments.of(tony, board, Straight.class),
+			Arguments.of(emily, board, Straight.class)
 		);
 	}
 	

@@ -1,9 +1,9 @@
 package hja.pokerutils.Hand;
 
 import hja.pokerutils.Card.Card;
-import hja.pokerutils.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ThreeOfAKind extends Hand {
 	
@@ -19,11 +19,11 @@ public class ThreeOfAKind extends Hand {
 		
 		if (firstCard.compareTo(secondCard) != 0) {
 			if (secondCard.compareTo(thirdCard) != 0) {
-				Utils.swap(hand, 0, 4);
-				Utils.swap(hand, 1, 3);
+				Collections.swap(hand, 0, 4);
+				Collections.swap(hand, 1, 3);
 			}
 			else {
-				Utils.swap(hand, 0, 3);
+				Collections.swap(hand, 0, 3);
 			}
 		}
 	}

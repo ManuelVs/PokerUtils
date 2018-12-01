@@ -15,16 +15,16 @@ import java.util.ArrayList;
 
 public class BoardCards extends JPanel implements BoardCardsListener {
 	private static final Color[] suit_color = new Color[]{
-			new Color(255, 182, 181),
-			new Color(183, 240, 128),
-			new Color(181, 210, 255),
-			new Color(214, 214, 214),
+		new Color(255, 182, 181),
+		new Color(183, 240, 128),
+		new Color(181, 210, 255),
+		new Color(214, 214, 214),
 	};
 	private static final Color[] suit_selected_color = new Color[]{
-			new Color(240, 39, 6),
-			new Color(56, 164, 17),
-			new Color(4, 85, 227),
-			new Color(100, 100, 100),
+		new Color(240, 39, 6),
+		new Color(56, 164, 17),
+		new Color(4, 85, 227),
+		new Color(100, 100, 100),
 	};
 	
 	private final Model model;

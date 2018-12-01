@@ -3,7 +3,6 @@ package hja.logic.gui.components;
 import hja.logic.gui.model.CombosListener;
 import hja.logic.gui.model.Model;
 import hja.pokerutils.Algorithm.Combos;
-import hja.pokerutils.Algorithm.CombosAlgorithm;
 
 import javax.swing.*;
 import java.awt.*;

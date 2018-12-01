@@ -49,37 +49,37 @@ class HoldEmAlgorithmTest {
 	
 	private static Stream<Arguments> handProvider() {
 		return Stream.of(
-				Arguments.of(highCard1, HighCard.class),
-				Arguments.of(highCard2, HighCard.class),
-				
-				Arguments.of(pair1, Pair.class),
-				Arguments.of(pair2, Pair.class),
-				
-				Arguments.of(twoPair1, TwoPair.class),
-				Arguments.of(twoPair2, TwoPair.class),
-				
-				Arguments.of(threeOf1, ThreeOfAKind.class),
-				Arguments.of(threeOf2, ThreeOfAKind.class),
-				
-				Arguments.of(straight1, Straight.class),
-				Arguments.of(straight2, Straight.class),
-				
-				Arguments.of(flush1, Flush.class),
-				Arguments.of(flush2, Flush.class),
-				
-				Arguments.of(full1, FullHouse.class),
-				Arguments.of(full2, FullHouse.class),
-				
-				Arguments.of(fourOf1, FourOfAKind.class),
-				Arguments.of(fourOf2, FourOfAKind.class),
-				
-				Arguments.of(straightF1, StraightFlush.class),
-				Arguments.of(straightF2, StraightFlush.class),
-				
-				Arguments.of(royalF, RoyalFlush.class),
-				
-				Arguments.of(flush_full, FullHouse.class),
-				Arguments.of(straight_poker, FourOfAKind.class)
+			Arguments.of(highCard1, HighCard.class),
+			Arguments.of(highCard2, HighCard.class),
+			
+			Arguments.of(pair1, Pair.class),
+			Arguments.of(pair2, Pair.class),
+			
+			Arguments.of(twoPair1, TwoPair.class),
+			Arguments.of(twoPair2, TwoPair.class),
+			
+			Arguments.of(threeOf1, ThreeOfAKind.class),
+			Arguments.of(threeOf2, ThreeOfAKind.class),
+			
+			Arguments.of(straight1, Straight.class),
+			Arguments.of(straight2, Straight.class),
+			
+			Arguments.of(flush1, Flush.class),
+			Arguments.of(flush2, Flush.class),
+			
+			Arguments.of(full1, FullHouse.class),
+			Arguments.of(full2, FullHouse.class),
+			
+			Arguments.of(fourOf1, FourOfAKind.class),
+			Arguments.of(fourOf2, FourOfAKind.class),
+			
+			Arguments.of(straightF1, StraightFlush.class),
+			Arguments.of(straightF2, StraightFlush.class),
+			
+			Arguments.of(royalF, RoyalFlush.class),
+			
+			Arguments.of(flush_full, FullHouse.class),
+			Arguments.of(straight_poker, FourOfAKind.class)
 		);
 	}
 	

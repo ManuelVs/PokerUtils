@@ -43,25 +43,25 @@ class HandTest {
 	
 	private static Stream<Arguments> compareProvider() {
 		return Stream.of(
-				Arguments.of(highCard1, highCard2),
-				Arguments.of(pair1, pair2),
-				Arguments.of(twoPair1, twoPair2),
-				Arguments.of(threeOf1, threeOf2),
-				Arguments.of(straight1, straight2),
-				Arguments.of(flush1, flush2),
-				Arguments.of(full1, full2),
-				Arguments.of(fourOf1, fourOf2),
-				Arguments.of(straightF1, straightF2),
-				
-				Arguments.of(royalF, straightF1),
-				Arguments.of(straightF1, fourOf1),
-				Arguments.of(fourOf1, full2),
-				Arguments.of(full1, flush2),
-				Arguments.of(flush2, straight2),
-				Arguments.of(straight2, threeOf2),
-				Arguments.of(threeOf2, twoPair1),
-				Arguments.of(twoPair1, pair1),
-				Arguments.of(twoPair1, highCard2)
+			Arguments.of(highCard1, highCard2),
+			Arguments.of(pair1, pair2),
+			Arguments.of(twoPair1, twoPair2),
+			Arguments.of(threeOf1, threeOf2),
+			Arguments.of(straight1, straight2),
+			Arguments.of(flush1, flush2),
+			Arguments.of(full1, full2),
+			Arguments.of(fourOf1, fourOf2),
+			Arguments.of(straightF1, straightF2),
+			
+			Arguments.of(royalF, straightF1),
+			Arguments.of(straightF1, fourOf1),
+			Arguments.of(fourOf1, full2),
+			Arguments.of(full1, flush2),
+			Arguments.of(flush2, straight2),
+			Arguments.of(straight2, threeOf2),
+			Arguments.of(threeOf2, twoPair1),
+			Arguments.of(twoPair1, pair1),
+			Arguments.of(twoPair1, highCard2)
 		);
 	}
 	

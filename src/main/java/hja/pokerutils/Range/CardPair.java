@@ -29,8 +29,8 @@ public class CardPair {
 		
 		CardPair other = (CardPair) obj;
 		return this.firstRank == other.firstRank
-				&& this.secondRank == other.secondRank
-				&& this.isSuited == other.isSuited;
+			&& this.secondRank == other.secondRank
+			&& this.isSuited == other.isSuited;
 	}
 	
 	public String toString() {

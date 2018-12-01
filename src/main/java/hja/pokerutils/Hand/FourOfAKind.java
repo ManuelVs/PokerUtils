@@ -1,9 +1,9 @@
 package hja.pokerutils.Hand;
 
 import hja.pokerutils.Card.Card;
-import hja.pokerutils.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FourOfAKind extends Hand {
 	
@@ -17,7 +17,7 @@ public class FourOfAKind extends Hand {
 		Card secondCard = hand.get(1);
 		
 		if (firstCard.compareTo(secondCard) != 0) {
-			Utils.swap(hand, 0, 4);
+			Collections.swap(hand, 0, 4);
 		}
 	}
 	

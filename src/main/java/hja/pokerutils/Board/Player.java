@@ -11,6 +11,10 @@ public class Player implements Comparable<Player> {
 	public final Hand hand;
 	public final ArrayList<Card> cards;
 	
+	public Player(String name, ArrayList<Card> cards) {
+		this(name, null, cards);
+	}
+	
 	public Player(String name, Hand hand, ArrayList<Card> cards) {
 		this.name = name;
 		this.hand = hand;
@@ -19,6 +23,7 @@ public class Player implements Comparable<Player> {
 	
 	@Override
 	public int compareTo(Player o) {
+		if (this.hand == null) return -1;
 		return this.hand.compareTo(o.hand);
 	}
 	

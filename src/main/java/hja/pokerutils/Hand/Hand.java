@@ -10,7 +10,7 @@ public abstract class Hand implements Comparable<Hand> {
 	
 	Hand(HandType type, ArrayList<Card> hand) {
 		this.type = type;
-		this.hand = new ArrayList<Card>(hand);
+		this.hand = hand;
 	}
 	
 	@Override
@@ -49,7 +49,7 @@ public abstract class Hand implements Comparable<Hand> {
 	protected abstract int compareKernel(Hand o);
 	
 	public ArrayList<Card> getCards() {
-		return this.hand;
+		return new ArrayList<>(this.hand);
 	}
 	
 	public ArrayList<Card> getKernel() {

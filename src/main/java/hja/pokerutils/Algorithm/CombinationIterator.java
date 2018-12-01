@@ -1,23 +1,34 @@
 package hja.pokerutils.Algorithm;
 
-import hja.pokerutils.Card.Card;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
-public class CombinationIterator implements Iterator<ArrayList<Card>> {
-	private final ArrayList<Card> cards;
+public final class CombinationIterator<E> implements Iterator<ArrayList<E>> {
+	private final ArrayList<E> elements;
 	private final int nElements;
 	private final int[] perm;
+	private boolean begin;
 	
-	public CombinationIterator(ArrayList<Card> cards, int nElements) {
-		this.cards = cards;
+	public CombinationIterator(ArrayList<E> elements, int nElements) {
+		this.elements = elements;
 		this.nElements = nElements;
 		
-		this.perm = new int[cards.size()];
+		this.perm = new int[elements.size()];
 		for (int i = 0; i < nElements; ++i) {
 			perm[i] = 1;
 		}
+		
+		this.begin = true;
+		reset();
+	}
+	
+	public void reset() {
+		for (int i = 0; i < nElements; ++i) {
+			perm[i] = 1;
+		}
+		
+		this.begin = true;
 	}
 	
 	@Override
@@ -27,22 +38,26 @@ public class CombinationIterator implements Iterator<ArrayList<Card>> {
 			++i;
 		}
 		
-		return i != nElements;
+		return i != nElements || this.begin;
 	}
 	
 	@Override
-	public ArrayList<Card> next() {
+	public ArrayList<E> next() {
+		this.begin = false;
 		nextPermutation();
 		
-		ArrayList<Card> currentCombination = new ArrayList<>(nElements);
-		for (int i = 0; i < cards.size(); ++i) {
+		//ArrayList<E> currentCombination = new ArrayList<>(nElements);
+		int j = 0;
+		E[] currentCombination = (E[]) new Object[nElements];
+		for (int i = 0; i < elements.size(); ++i) {
 			if (perm[i] == 1) {
-				Card currentCard = cards.get(i);
-				currentCombination.add(currentCard);
+				E currentElement = elements.get(i);
+				currentCombination[j] = currentElement;
+				++j;
 			}
 		}
 		
-		return currentCombination;
+		return new ArrayList<>(Arrays.asList(currentCombination));
 	}
 	
 	private void nextPermutation() {

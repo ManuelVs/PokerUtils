@@ -9,13 +9,12 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class ModelImpl implements Model {
-	private Range range;
 	private final ArrayList<Card> cards;
-	private Combos combos;
-	
 	private final ArrayList<BoardCardsListener> boardCardsListeners;
 	private final ArrayList<CombosListener> combosListeners;
 	private final ArrayList<RangeListener> rangeListeners;
+	private Range range;
+	private Combos combos;
 	
 	public ModelImpl() {
 		this.cards = new ArrayList<>(5);

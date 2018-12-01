@@ -30,9 +30,9 @@ public final class RangeParser {
 		
 		Pattern simpleRange = Pattern.compile("(?<first>[23456789TJQKA])(?<second>[23456789TJQKA])(?<suited>[os]?)(?<range>\\+?)");
 		Pattern linearRange = Pattern.compile(
-				"(?<first>[23456789TJQKA])(?<second>[23456789TJQKA])(?<suited1>[os])" +
-						"-" +
-						"(?<third>[23456789TJQKA])(?<fourth>[23456789TJQKA])(?<suited2>[os])");
+			"(?<first>[23456789TJQKA])(?<second>[23456789TJQKA])(?<suited1>[os])" +
+				"-" +
+				"(?<third>[23456789TJQKA])(?<fourth>[23456789TJQKA])(?<suited2>[os])");
 		
 		Matcher matcher = simpleRange.matcher(range);
 		if (matcher.matches()) {

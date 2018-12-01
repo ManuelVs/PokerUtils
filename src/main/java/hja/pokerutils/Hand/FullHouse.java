@@ -1,9 +1,9 @@
 package hja.pokerutils.Hand;
 
 import hja.pokerutils.Card.Card;
-import hja.pokerutils.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FullHouse extends Hand {
 	
@@ -14,8 +14,8 @@ public class FullHouse extends Hand {
 	
 	private void sort() {
 		if (hand.get(1).rank != hand.get(2).rank) {
-			Utils.swap(hand, 0, 3);
-			Utils.swap(hand, 1, 4);
+			Collections.swap(hand, 0, 3);
+			Collections.swap(hand, 1, 4);
 		}
 	}
 	

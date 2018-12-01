@@ -12,6 +12,7 @@ public class Pair extends Hand {
 	}
 	
 	private void sort() {
+		/*
 		ArrayList<Card> aux = new ArrayList<>(3);
 		
 		Card firstCard = hand.get(0);
@@ -28,13 +29,34 @@ public class Pair extends Hand {
 		}
 		
 		this.hand.addAll(2, aux);
+		*/
+		
+		Card firstCard = hand.get(0);
+		Card secondCard = hand.get(1);
+		
+		int compare = firstCard.compareTo(secondCard);
+		int i = 1;
+		while (i + 1 < hand.size() && compare != 0) {
+			firstCard = hand.get(i);
+			secondCard = hand.get(i + 1);
+			
+			compare = firstCard.compareTo(secondCard);
+			++i;
+		}
+		
+		for (int j = i; j - 2 >= 0; --j) {
+			Card card = hand.get(j - 2);
+			hand.set(j, card);
+		}
+		hand.set(0, firstCard);
+		hand.set(1, secondCard);
 	}
 	
 	@Override
 	public int compareKernel(Hand o) {
 		Card leftTwoCard = hand.get(0);
 		Card rightTwoCard = o.hand.get(0);
-
+		
 		return leftTwoCard.compareTo(rightTwoCard);
 	}
 	

@@ -8,6 +8,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public final class HoldEmAlgorithm {
+	
+	/**
+	 * Calculates the best hand given the player cards and the board cards
+	 *
+	 * @param playerCards Player cards.
+	 * @param boardCards  Board cards
+	 * @return The best hand
+	 */
+	public static Hand calculateHand(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
+		ArrayList<Card> cards = new ArrayList<>(boardCards);
+		cards.addAll(playerCards);
+		
+		return calculateHand(cards);
+	}
+	
 	/**
 	 * Calculates the best hand given 5 cards or more.
 	 *
@@ -92,7 +107,7 @@ public final class HoldEmAlgorithm {
 		
 		if (pos != -1) {
 			boolean isGutshot = rank_count[pos + 1] == 0 || rank_count[pos + 2] == 0
-					|| rank_count[pos + 3] == 0;
+				|| rank_count[pos + 3] == 0;
 			
 			boolean isOpenEnded = rank_count[pos] == 0 || rank_count[pos + 4] == 0;
 			
@@ -112,7 +127,7 @@ public final class HoldEmAlgorithm {
 		if (isRoyalFlush(cards)) {
 			return new RoyalFlush(cards);
 		}
-		else if (isStraightFlush(cards)) {
+		else if (isStraight(cards) && isFlush(cards)) {
 			return new StraightFlush(cards);
 		}
 		else {
@@ -121,7 +136,7 @@ public final class HoldEmAlgorithm {
 			if (isFourOfAKind(rank_count)) {
 				return new FourOfAKind(cards);
 			}
-			else if (isFullHouse(rank_count)) {
+			else if (isThreeOfAKind(rank_count) && isPair(rank_count)) {
 				return new FullHouse(cards);
 			}
 			else if (isFlush(cards)) {
@@ -147,42 +162,34 @@ public final class HoldEmAlgorithm {
 	
 	private static boolean isRoyalFlush(ArrayList<Card> cards) {
 		return isFlush(cards)
-				&& cards.get(0).rank == Rank.ACE
-				&& cards.get(1).rank == Rank.KING
-				&& cards.get(2).rank == Rank.QUEEN
-				&& cards.get(3).rank == Rank.JACK
-				&& cards.get(4).rank == Rank.TEN;
-	}
-	
-	private static boolean isStraightFlush(ArrayList<Card> cards) {
-		return isStraight(cards) && isFlush(cards);
+			&& cards.get(0).rank == Rank.ACE
+			&& cards.get(1).rank == Rank.KING
+			&& cards.get(2).rank == Rank.QUEEN
+			&& cards.get(3).rank == Rank.JACK
+			&& cards.get(4).rank == Rank.TEN;
 	}
 	
 	private static boolean isFourOfAKind(int[] rank_count) {
 		return AlgorithmUtils.find(rank_count, 0, rank_count.length, 4) < rank_count.length;
 	}
 	
-	private static boolean isFullHouse(int[] rank_count) {
-		return isThreeOfAKind(rank_count) && isPair(rank_count);
-	}
-	
 	private static boolean isFlush(ArrayList<Card> cards) {
 		return cards.get(0).suit == cards.get(1).suit
-				&& cards.get(1).suit == cards.get(2).suit
-				&& cards.get(2).suit == cards.get(3).suit
-				&& cards.get(3).suit == cards.get(4).suit;
+			&& cards.get(1).suit == cards.get(2).suit
+			&& cards.get(2).suit == cards.get(3).suit
+			&& cards.get(3).suit == cards.get(4).suit;
 	}
 	
 	private static boolean isStraight(ArrayList<Card> cards) {
 		return cards.get(0).rank.ordinal() - cards.get(1).rank.ordinal() == 1
-				&& cards.get(1).rank.ordinal() - cards.get(2).rank.ordinal() == 1
-				&& cards.get(2).rank.ordinal() - cards.get(3).rank.ordinal() == 1
-				&& cards.get(3).rank.ordinal() - cards.get(4).rank.ordinal() == 1
-				|| cards.get(0).rank == Rank.ACE
-				&& cards.get(1).rank == Rank.FIVE
-				&& cards.get(2).rank == Rank.FOUR
-				&& cards.get(3).rank == Rank.THREE
-				&& cards.get(4).rank == Rank.TWO;
+			&& cards.get(1).rank.ordinal() - cards.get(2).rank.ordinal() == 1
+			&& cards.get(2).rank.ordinal() - cards.get(3).rank.ordinal() == 1
+			&& cards.get(3).rank.ordinal() - cards.get(4).rank.ordinal() == 1
+			|| cards.get(0).rank == Rank.ACE
+			&& cards.get(1).rank == Rank.FIVE
+			&& cards.get(2).rank == Rank.FOUR
+			&& cards.get(3).rank == Rank.THREE
+			&& cards.get(4).rank == Rank.TWO;
 	}
 	
 	private static boolean isThreeOfAKind(int[] rank_count) {

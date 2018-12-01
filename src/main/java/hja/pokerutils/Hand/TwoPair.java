@@ -1,9 +1,9 @@
 package hja.pokerutils.Hand;
 
 import hja.pokerutils.Card.Card;
-import hja.pokerutils.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TwoPair extends Hand {
 	
@@ -17,14 +17,14 @@ public class TwoPair extends Hand {
 		Card secondCard = hand.get(1);
 		
 		if (firstCard.compareTo(secondCard) != 0) {
-			Utils.swap(hand, 0, 2);
-			Utils.swap(hand, 4, 2);
+			Collections.swap(hand, 0, 2);
+			Collections.swap(hand, 4, 2);
 		}
 		else {
 			firstCard = hand.get(2);
 			secondCard = hand.get(3);
 			if (firstCard.compareTo(secondCard) != 0) {
-				Utils.swap(hand, 4, 2);
+				Collections.swap(hand, 4, 2);
 			}
 		}
 	}

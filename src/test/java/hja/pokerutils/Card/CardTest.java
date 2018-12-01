@@ -12,21 +12,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CardTest {
 	private static Stream<Arguments> compareProvider() {
 		return Stream.of(
-				Arguments.of(TestUtils.ACEc, TestUtils.KINGd),
-				Arguments.of(TestUtils.KINGh, TestUtils.QUEENc),
-				Arguments.of(TestUtils.QUEENd, TestUtils.JACKd),
-				Arguments.of(TestUtils.JACKh, TestUtils.TENh),
-				Arguments.of(TestUtils.TENc, TestUtils.NINEd)
+			Arguments.of(TestUtils.ACEc, TestUtils.KINGd),
+			Arguments.of(TestUtils.KINGh, TestUtils.QUEENc),
+			Arguments.of(TestUtils.QUEENd, TestUtils.JACKd),
+			Arguments.of(TestUtils.JACKh, TestUtils.TENh),
+			Arguments.of(TestUtils.TENc, TestUtils.NINEd)
 		);
 	}
 	
 	private static Stream<Arguments> compareEqualProvider() {
 		return Stream.of(
-				Arguments.of(TestUtils.ACEd, TestUtils.ACEc),
-				Arguments.of(TestUtils.KINGd, TestUtils.KINGh),
-				Arguments.of(TestUtils.QUEENd, TestUtils.QUEENc),
-				Arguments.of(TestUtils.JACKd, TestUtils.JACKh),
-				Arguments.of(TestUtils.TENh, TestUtils.TENc)
+			Arguments.of(TestUtils.ACEd, TestUtils.ACEc),
+			Arguments.of(TestUtils.KINGd, TestUtils.KINGh),
+			Arguments.of(TestUtils.QUEENd, TestUtils.QUEENc),
+			Arguments.of(TestUtils.JACKd, TestUtils.JACKh),
+			Arguments.of(TestUtils.TENh, TestUtils.TENc)
 		);
 	}
 	

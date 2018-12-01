@@ -16,77 +16,77 @@ import static org.junit.jupiter.api.Assertions.*;
 class RangeParserTest {
 	private static Stream<Arguments> rangeProvider() {
 		return Stream.of(
-				Arguments.of("AA", new ArrayList<>(Arrays.asList(
-						new CardPair(Rank.ACE, Rank.ACE, false))
-				)),
-				Arguments.of("AQs", new ArrayList<>(Arrays.asList(
-						new CardPair(Rank.ACE, Rank.QUEEN, true))
-				)),
-				Arguments.of("AQo", new ArrayList<>(Arrays.asList(
-						new CardPair(Rank.ACE, Rank.QUEEN, false))
-				)),
-				Arguments.of("94s", new ArrayList<>(Arrays.asList(
-						new CardPair(Rank.NINE, Rank.FOUR, true))
-				)),
-				Arguments.of("94s+", new ArrayList<>(Arrays.asList(
-						new CardPair(Rank.NINE, Rank.FOUR, true),
-						new CardPair(Rank.NINE, Rank.FIVE, true),
-						new CardPair(Rank.NINE, Rank.SIX, true),
-						new CardPair(Rank.NINE, Rank.SEVEN, true),
-						new CardPair(Rank.NINE, Rank.EIGHT, true))
-				)),
-				Arguments.of("55+", new ArrayList<>(Arrays.asList(
-						new CardPair(Rank.FIVE, Rank.FIVE, false),
-						new CardPair(Rank.SIX, Rank.SIX, false),
-						new CardPair(Rank.SEVEN, Rank.SEVEN, false),
-						new CardPair(Rank.EIGHT, Rank.EIGHT, false),
-						new CardPair(Rank.NINE, Rank.NINE, false),
-						new CardPair(Rank.TEN, Rank.TEN, false),
-						new CardPair(Rank.JACK, Rank.JACK, false),
-						new CardPair(Rank.QUEEN, Rank.QUEEN, false),
-						new CardPair(Rank.KING, Rank.KING, false),
-						new CardPair(Rank.ACE, Rank.ACE, false))
-				)),
-				Arguments.of("92s-95s", new ArrayList<>(Arrays.asList(
-						new CardPair(Rank.NINE, Rank.TWO, true),
-						new CardPair(Rank.NINE, Rank.THREE, true),
-						new CardPair(Rank.NINE, Rank.FOUR, true),
-						new CardPair(Rank.NINE, Rank.FIVE, true))
-				)),
-				Arguments.of("ATo-AKo", new ArrayList<>(Arrays.asList(
-						new CardPair(Rank.ACE, Rank.TEN, false),
-						new CardPair(Rank.ACE, Rank.JACK, false),
-						new CardPair(Rank.ACE, Rank.QUEEN, false),
-						new CardPair(Rank.ACE, Rank.KING, false))
-				)),
-				Arguments.of("ATs-A2s", new ArrayList<>(Arrays.asList(
-						new CardPair(Rank.ACE, Rank.TEN, true),
-						new CardPair(Rank.ACE, Rank.NINE, true),
-						new CardPair(Rank.ACE, Rank.EIGHT, true),
-						new CardPair(Rank.ACE, Rank.SEVEN, true),
-						new CardPair(Rank.ACE, Rank.SIX, true),
-						new CardPair(Rank.ACE, Rank.FIVE, true),
-						new CardPair(Rank.ACE, Rank.FOUR, true),
-						new CardPair(Rank.ACE, Rank.THREE, true),
-						new CardPair(Rank.ACE, Rank.TWO, true))
-				))
+			Arguments.of("AA", new ArrayList<>(Arrays.asList(
+				new CardPair(Rank.ACE, Rank.ACE, false))
+			)),
+			Arguments.of("AQs", new ArrayList<>(Arrays.asList(
+				new CardPair(Rank.ACE, Rank.QUEEN, true))
+			)),
+			Arguments.of("AQo", new ArrayList<>(Arrays.asList(
+				new CardPair(Rank.ACE, Rank.QUEEN, false))
+			)),
+			Arguments.of("94s", new ArrayList<>(Arrays.asList(
+				new CardPair(Rank.NINE, Rank.FOUR, true))
+			)),
+			Arguments.of("94s+", new ArrayList<>(Arrays.asList(
+				new CardPair(Rank.NINE, Rank.FOUR, true),
+				new CardPair(Rank.NINE, Rank.FIVE, true),
+				new CardPair(Rank.NINE, Rank.SIX, true),
+				new CardPair(Rank.NINE, Rank.SEVEN, true),
+				new CardPair(Rank.NINE, Rank.EIGHT, true))
+			)),
+			Arguments.of("55+", new ArrayList<>(Arrays.asList(
+				new CardPair(Rank.FIVE, Rank.FIVE, false),
+				new CardPair(Rank.SIX, Rank.SIX, false),
+				new CardPair(Rank.SEVEN, Rank.SEVEN, false),
+				new CardPair(Rank.EIGHT, Rank.EIGHT, false),
+				new CardPair(Rank.NINE, Rank.NINE, false),
+				new CardPair(Rank.TEN, Rank.TEN, false),
+				new CardPair(Rank.JACK, Rank.JACK, false),
+				new CardPair(Rank.QUEEN, Rank.QUEEN, false),
+				new CardPair(Rank.KING, Rank.KING, false),
+				new CardPair(Rank.ACE, Rank.ACE, false))
+			)),
+			Arguments.of("92s-95s", new ArrayList<>(Arrays.asList(
+				new CardPair(Rank.NINE, Rank.TWO, true),
+				new CardPair(Rank.NINE, Rank.THREE, true),
+				new CardPair(Rank.NINE, Rank.FOUR, true),
+				new CardPair(Rank.NINE, Rank.FIVE, true))
+			)),
+			Arguments.of("ATo-AKo", new ArrayList<>(Arrays.asList(
+				new CardPair(Rank.ACE, Rank.TEN, false),
+				new CardPair(Rank.ACE, Rank.JACK, false),
+				new CardPair(Rank.ACE, Rank.QUEEN, false),
+				new CardPair(Rank.ACE, Rank.KING, false))
+			)),
+			Arguments.of("ATs-A2s", new ArrayList<>(Arrays.asList(
+				new CardPair(Rank.ACE, Rank.TEN, true),
+				new CardPair(Rank.ACE, Rank.NINE, true),
+				new CardPair(Rank.ACE, Rank.EIGHT, true),
+				new CardPair(Rank.ACE, Rank.SEVEN, true),
+				new CardPair(Rank.ACE, Rank.SIX, true),
+				new CardPair(Rank.ACE, Rank.FIVE, true),
+				new CardPair(Rank.ACE, Rank.FOUR, true),
+				new CardPair(Rank.ACE, Rank.THREE, true),
+				new CardPair(Rank.ACE, Rank.TWO, true))
+			))
 		);
 	}
 	
 	private static Stream<Arguments> outOfRangeProvider() {
 		return Stream.of(
-				Arguments.of("ATo-AAo"),
-				Arguments.of("54s, ATo-AAo"),
-				Arguments.of("32s-3As")
+			Arguments.of("ATo-AAo"),
+			Arguments.of("54s, ATo-AAo"),
+			Arguments.of("32s-3As")
 		);
 	}
 	
 	private static Stream<Arguments> malformedProvider() {
 		return Stream.of(
-				Arguments.of("AAs"),
-				Arguments.of("AAo"),
-				Arguments.of("QQs"),
-				Arguments.of("93s,65o,JJo")
+			Arguments.of("AAs"),
+			Arguments.of("AAo"),
+			Arguments.of("QQs"),
+			Arguments.of("93s,65o,JJo")
 		);
 	}
 	

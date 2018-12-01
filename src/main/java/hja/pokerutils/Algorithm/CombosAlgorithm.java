@@ -28,7 +28,7 @@ public final class CombosAlgorithm {
 				
 				updateCombos(combos, hand, playerCards, boardCards);
 				
-				if(cards.size() < 7){
+				if (cards.size() < 7) {
 					boolean[] draws = HoldEmAlgorithm.calculateDraws(cards);
 					updateDraws(combos, draws);
 				}
@@ -39,15 +39,15 @@ public final class CombosAlgorithm {
 	}
 	
 	private static void updateDraws(Combos combos, boolean[] draws) {
-		if(draws[0]){
+		if (draws[0]) {
 			combos.openEndedDraw++;
 		}
 		
-		if(draws[1]){
+		if (draws[1]) {
 			combos.gutshotDraw++;
 		}
 		
-		if(draws[2]){
+		if (draws[2]) {
 			combos.flushDraw++;
 		}
 	}

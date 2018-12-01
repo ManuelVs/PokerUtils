@@ -17,44 +17,44 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CardListParserTest {
 	private static Stream<Arguments> cardListsProvider() {
 		return Stream.of(
-				Arguments.of("AhAcQhJhTh", 5, new ArrayList<>(Arrays.asList(
-						TestUtils.ACEh,
-						TestUtils.ACEc,
-						TestUtils.QUEENh,
-						TestUtils.JACKh,
-						TestUtils.TENh
-				))),
-				
-				Arguments.of("As2s3h4dJd", 5, new ArrayList<>(Arrays.asList(
-						TestUtils.ACEs,
-						TestUtils.TWOs,
-						TestUtils.THREEh,
-						TestUtils.FOURd,
-						TestUtils.JACKd
-				))),
-				
-				Arguments.of("AhAcAs4dJd", 5, new ArrayList<>(Arrays.asList(
-						TestUtils.ACEh,
-						TestUtils.ACEc,
-						TestUtils.ACEs,
-						TestUtils.FOURd,
-						TestUtils.JACKd
-				))),
-				
-				Arguments.of("5dKs6cTh9h", 5, new ArrayList<>(Arrays.asList(
-						TestUtils.FIVEd,
-						TestUtils.KINGs,
-						TestUtils.SIXc,
-						TestUtils.TENh,
-						TestUtils.NINEh
-				))),
-				
-				Arguments.of("2h2d2c2s", 4, new ArrayList<>(Arrays.asList(
-						TestUtils.TWOh,
-						TestUtils.TWOd,
-						TestUtils.TWOc,
-						TestUtils.TWOs
-				)))
+			Arguments.of("AhAcQhJhTh", 5, new ArrayList<>(Arrays.asList(
+				TestUtils.ACEh,
+				TestUtils.ACEc,
+				TestUtils.QUEENh,
+				TestUtils.JACKh,
+				TestUtils.TENh
+			))),
+			
+			Arguments.of("As2s3h4dJd", 5, new ArrayList<>(Arrays.asList(
+				TestUtils.ACEs,
+				TestUtils.TWOs,
+				TestUtils.THREEh,
+				TestUtils.FOURd,
+				TestUtils.JACKd
+			))),
+			
+			Arguments.of("AhAcAs4dJd", 5, new ArrayList<>(Arrays.asList(
+				TestUtils.ACEh,
+				TestUtils.ACEc,
+				TestUtils.ACEs,
+				TestUtils.FOURd,
+				TestUtils.JACKd
+			))),
+			
+			Arguments.of("5dKs6cTh9h", 5, new ArrayList<>(Arrays.asList(
+				TestUtils.FIVEd,
+				TestUtils.KINGs,
+				TestUtils.SIXc,
+				TestUtils.TENh,
+				TestUtils.NINEh
+			))),
+			
+			Arguments.of("2h2d2c2s", 4, new ArrayList<>(Arrays.asList(
+				TestUtils.TWOh,
+				TestUtils.TWOd,
+				TestUtils.TWOc,
+				TestUtils.TWOs
+			)))
 		);
 	}
 	

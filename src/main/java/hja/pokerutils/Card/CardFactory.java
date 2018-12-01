@@ -1,13 +1,13 @@
 package hja.pokerutils.Card;
 
+import java.util.ArrayList;
+
 public final class CardFactory {
 	private static Card[][] cards;
-	private static Suit[] suits;
-	private static Rank[] ranks;
 	
 	static {
-		CardFactory.suits = Suit.values();
-		CardFactory.ranks = Rank.values();
+		Suit[] suits = Suit.values();
+		Rank[] ranks = Rank.values();
 		
 		CardFactory.cards = new Card[suits.length][ranks.length];
 		for (int i = 0; i < suits.length; ++i) {
@@ -77,5 +77,16 @@ public final class CardFactory {
 			default:
 				return null;
 		}
+	}
+	
+	public static ArrayList<Card> getAllCards() {
+		ArrayList<Card> allCards = new ArrayList<>(Suit.values().length * Rank.values().length);
+		for (int i = 0; i < cards.length; ++i) {
+			for (int j = 0; j < cards[i].length; ++j) {
+				allCards.add(CardFactory.cards[i][j]);
+			}
+		}
+		
+		return allCards;
 	}
 }
