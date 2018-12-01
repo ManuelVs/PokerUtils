@@ -1,5 +1,7 @@
 package hja.pokerutils.Algorithm;
 
+import hja.pokerutils.Algorithm.Combinations.CombinationCalculator;
+import hja.pokerutils.Algorithm.Combinations.CountedCombinationIterator;
 import hja.pokerutils.Board.Board;
 import hja.pokerutils.Board.Player;
 import hja.pokerutils.Card.Card;
@@ -7,6 +9,7 @@ import hja.pokerutils.Card.CardFactory;
 import hja.pokerutils.Hand.Hand;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -15,8 +18,10 @@ import java.util.concurrent.Future;
 public final class EquityCalculator {
 	private static ExecutorService pool = Executors.newCachedThreadPool();
 	
+	/*
 	public static double[] calculateEquity(Board board) {
 		ArrayList<Card> allPossibleCards = CardFactory.getAllCards();
+		double[] equity = new double[board.players.size()];
 		
 		for (Card card : board.boardCards) {
 			allPossibleCards.remove(card);
@@ -39,7 +44,6 @@ public final class EquityCalculator {
 			++nTotal;
 		}
 		
-		double[] equity = new double[board.players.size()];
 		double s = 1 / (double) nTotal;
 		for (Future<Integer> future : futures) {
 			try {
@@ -49,6 +53,68 @@ public final class EquityCalculator {
 			catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		
+		return equity;
+	}
+	*/
+	
+	public static double[] calculateEquity(Board board) {
+		ArrayList<Card> allPossibleCards = CardFactory.getAllCards();
+		double[] equity = new double[board.players.size()];
+		
+		for (Card card : board.boardCards) {
+			allPossibleCards.remove(card);
+		}
+		
+		for (Player player : board.players) {
+			for (Card card : player.cards) {
+				allPossibleCards.remove(card);
+			}
+		}
+		
+		int numLeftCards = 5 - board.boardCards.size();
+		CombinationCalculator<Card> combinations = new CombinationCalculator<>(allPossibleCards, numLeftCards);
+		LinkedList<Future<int[]>> futures = new LinkedList<>();
+		
+		int numCores = Runtime.getRuntime().availableProcessors();
+		
+		Iterator<CountedCombinationIterator<Card>> iterators = combinations.iterators(numCores);
+		while (iterators.hasNext()) {
+			CountedCombinationIterator<Card> iterator = iterators.next();
+			
+			Future<int[]> future = pool.submit(() -> {
+				int[] partialEquity = new int[board.players.size()];
+				while (iterator.hasNext()) {
+					ArrayList<Card> combination = iterator.next();
+					Integer i = calculateBest(combination, board);
+					partialEquity[i] += 1;
+				}
+				
+				return partialEquity;
+			});
+			
+			futures.add(future);
+		}
+		
+		int nTotal = 0;
+		for (Future<int[]> future : futures) {
+			try {
+				int[] partialEquity = future.get();
+				
+				for (int i = 0; i < partialEquity.length; ++i) {
+					equity[i] += partialEquity[i];
+					nTotal += partialEquity[i];
+				}
+				
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		for (int i = 0; i < equity.length; ++i) {
+			equity[i] /= nTotal;
 		}
 		
 		return equity;

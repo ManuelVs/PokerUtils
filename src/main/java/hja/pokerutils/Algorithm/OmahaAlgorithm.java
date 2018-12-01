@@ -1,5 +1,6 @@
 package hja.pokerutils.Algorithm;
 
+import hja.pokerutils.Algorithm.Combinations.CombinationIterator;
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.Hand;
 

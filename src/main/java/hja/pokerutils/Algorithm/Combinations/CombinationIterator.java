@@ -1,14 +1,14 @@
-package hja.pokerutils.Algorithm;
+package hja.pokerutils.Algorithm.Combinations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public final class CombinationIterator<E> implements Iterator<ArrayList<E>> {
-	private final ArrayList<E> elements;
-	private final int nElements;
-	private final int[] perm;
-	private boolean begin;
+public class CombinationIterator<E> implements Iterator<ArrayList<E>> {
+	protected ArrayList<E> elements;
+	protected int nElements;
+	protected int[] perm;
+	protected boolean begin;
 	
 	public CombinationIterator(ArrayList<E> elements, int nElements) {
 		this.elements = elements;
@@ -60,7 +60,7 @@ public final class CombinationIterator<E> implements Iterator<ArrayList<E>> {
 		return new ArrayList<>(Arrays.asList(currentCombination));
 	}
 	
-	private void nextPermutation() {
+	protected void nextPermutation() {
 		int i = perm.length - 1;
 		while (i > 0 && perm[i] <= perm[i - 1]) {
 			i--;

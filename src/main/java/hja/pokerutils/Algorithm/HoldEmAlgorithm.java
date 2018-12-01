@@ -1,5 +1,6 @@
 package hja.pokerutils.Algorithm;
 
+import hja.pokerutils.Algorithm.Combinations.CombinationCalculator;
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Card.Rank;
 import hja.pokerutils.Hand.*;
@@ -31,16 +32,14 @@ public final class HoldEmAlgorithm {
 	 */
 	public static Hand calculateHand(ArrayList<Card> cards) {
 		cards.sort(Collections.reverseOrder());
-		CombinationIterator<Card> combinationIterator = new CombinationIterator<>(cards, 5);
+		CombinationCalculator<Card> combinations = new CombinationCalculator<>(cards, 5);
 		
-		ArrayList<Card> combination = combinationIterator.next();
-		Hand best_hand = classifyHand(combination);
-		while (combinationIterator.hasNext()) {
-			combination = combinationIterator.next();
-			Hand current_hand = classifyHand(combination);
+		Hand best_hand = null;
+		for (ArrayList<Card> combination : combinations) {
+			Hand hand = classifyHand(combination);
 			
-			if (current_hand.compareTo(best_hand) > 0) {
-				best_hand = current_hand;
+			if (best_hand == null || hand.compareTo(best_hand) > 0) {
+				best_hand = hand;
 			}
 		}
 		
