@@ -38,7 +38,7 @@ public class MainWindow extends JFrame {
 			nextPhaseButton.setFocusPainted(false);
 			
 			nextPhaseButton.addActionListener(e -> {
-
+			
 			});
 			
 			JPanel boardPanel = new JPanel();
@@ -50,7 +50,8 @@ public class MainWindow extends JFrame {
 			
 			this.setJMenuBar(menuBar);
 			this.add(boardPanel);
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

@@ -1,9 +1,7 @@
 package hja.pokerutils.Algorithm;
 
-import hja.logic.gui.model.Config;
 import hja.pokerutils.Algorithm.Combinations.CombinationCalculator;
 import hja.pokerutils.Algorithm.Combinations.CountedCombinationIterator;
-import hja.pokerutils.Board.Board;
 import hja.pokerutils.Board.Player;
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Card.CardFactory;
@@ -38,12 +36,14 @@ public final class EquityCalculator {
 				players.get(i).setEquity(equity[i]);
 			}
 		}
-		catch (Exception e) { e.printStackTrace(); }
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return equity;
 	}
 	
-	private static ArrayList<Card> getPossibleCards(ArrayList<Player> players, ArrayList<Card> boardCards){
+	private static ArrayList<Card> getPossibleCards(ArrayList<Player> players, ArrayList<Card> boardCards) {
 		ArrayList<Card> allPossibleCards = CardFactory.getAllCards();
 		
 		for (Card card : boardCards) {
@@ -59,7 +59,7 @@ public final class EquityCalculator {
 		return allPossibleCards;
 	}
 	
-	private static ArrayList<Future<int[]>> sendTasks(ArrayList<Player> players, ArrayList<Card> boardCards, HandClassifier classifier, ArrayList<Card> allPossibleCards){
+	private static ArrayList<Future<int[]>> sendTasks(ArrayList<Player> players, ArrayList<Card> boardCards, HandClassifier classifier, ArrayList<Card> allPossibleCards) {
 		ArrayList<Future<int[]>> futures = new ArrayList<>();
 		
 		int numLeftCards = 5 - boardCards.size();

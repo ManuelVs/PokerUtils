@@ -9,12 +9,12 @@ import java.util.ArrayList;
 public class PlayerPanel extends JPanel implements PlayerCardsListener {
 	private int numPlayer;
 	
-	public PlayerPanel(int numPlayer){
+	public PlayerPanel(int numPlayer) {
 		this.numPlayer = numPlayer;
 		initGUI();
 	}
 	
-	private void initGUI(){
+	private void initGUI() {
 	
 	}
 	

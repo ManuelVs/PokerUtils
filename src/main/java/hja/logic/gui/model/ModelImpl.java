@@ -25,7 +25,7 @@ public class ModelImpl implements Model {
 	@Override
 	public void nextPhase() {
 		int phase = this.config.getPhase();
-		if(phase >= 3){
+		if (phase >= 3) {
 			phase = 0;
 		}
 		else {
@@ -50,14 +50,14 @@ public class ModelImpl implements Model {
 		this.configListeners.add(listener);
 	}
 	
-	public void notifyAllConfigListeners(){
-		for (ConfigListener listener: this.configListeners) {
+	public void notifyAllConfigListeners() {
+		for (ConfigListener listener : this.configListeners) {
 			listener.notify(this.config);
 		}
 	}
 	
 	private void onConfigChanged() {
-		if(thread == null || !thread.isAlive()){
+		if (thread == null || !thread.isAlive()) {
 			thread = new Thread(() -> {
 				updateEquityOnConfig();
 				notifyAllConfigListeners();

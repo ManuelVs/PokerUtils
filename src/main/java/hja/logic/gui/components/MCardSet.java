@@ -12,9 +12,6 @@ import java.util.ArrayList;
 public class MCardSet {
 	protected static Image[][] pokerCards;
 	
-	protected double posX, posY, width, height, fs;
-	protected ArrayList<Card> images;
-	
 	static {
 		Rank[] ranks = Rank.values();
 		Suit[] suits = Suit.values();
@@ -27,20 +24,30 @@ public class MCardSet {
 				
 				try {
 					pokerCards[i][j] = ImageIO.read(cardURL);
-				} catch (Exception e) {e.printStackTrace(); }
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
+
+	protected double posX, posY, width, height, fs;
+	protected ArrayList<Card> images;
 	
 	public MCardSet() {
 	
+	}
+	
+	private static Image getImageForCard(Card card) {
+		return pokerCards[card.rank.ordinal()][card.suit.ordinal()];
 	}
 	
 	public void draw(Graphics g) {
 		double PACK_SEP = this.width * this.fs;
 		double start = 0;
 		
-		for(Card c : images) {
+		for (Card c : images) {
 			Image cardImage = getImageForCard(c);
 			
 			g.drawImage(cardImage, (int) (posX + start), (int) posY, (int) width, (int) height, null);
@@ -94,9 +101,5 @@ public class MCardSet {
 	
 	public void setImages(ArrayList<Card> images) {
 		this.images = images;
-	}
-	
-	private static Image getImageForCard(Card card) {
-		return pokerCards[card.rank.ordinal()][card.suit.ordinal()];
 	}
 }

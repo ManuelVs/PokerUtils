@@ -2,7 +2,6 @@ package hja.logic.gui.components;
 
 import hja.logic.gui.model.Config;
 import hja.logic.gui.model.ConfigListener;
-import hja.pokerutils.Board.Board;
 import hja.pokerutils.Board.Player;
 
 import javax.imageio.ImageIO;
@@ -45,7 +44,7 @@ public class PokerBoard extends JPanel implements ConfigListener {
 		initGUI();
 	}
 	
-	private void initGUI(){
+	private void initGUI() {
 	
 	}
 	
@@ -65,7 +64,7 @@ public class PokerBoard extends JPanel implements ConfigListener {
 	}
 	
 	private void paintCards(Graphics g) {
-		for(Player player : config.getPlayers()){
+		for (Player player : config.getPlayers()) {
 			this.cardSetDrawer.setImages(player.getCards());
 			int i = player.getPlayerNumber();
 			
@@ -90,7 +89,7 @@ public class PokerBoard extends JPanel implements ConfigListener {
 	private void paintText(Graphics g) {
 		double[] hString = new double[]{-5, -5, -5, this.ch + 12, this.ch + 12, this.ch + 12, this.ch + 12, -5, -5};
 		
-		for(Player player : config.getPlayers()) {
+		for (Player player : config.getPlayers()) {
 			this.cardSetDrawer.setImages(player.getCards());
 			int i = player.getPlayerNumber();
 			String equity = player.getEquity() * 100 + "%";

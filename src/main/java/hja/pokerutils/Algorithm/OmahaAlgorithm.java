@@ -1,14 +1,12 @@
 package hja.pokerutils.Algorithm;
 
 import hja.pokerutils.Algorithm.Combinations.CombinationCalculator;
-import hja.pokerutils.Algorithm.Combinations.CombinationIterator;
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Hand.Hand;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
-public final class OmahaAlgorithm implements HandClassifier  {
+public final class OmahaAlgorithm implements HandClassifier {
 	private static final HandClassifier holdEmEval = new HoldEmAlgorithm();
 	
 	public final Hand calculateHand(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
@@ -16,11 +14,11 @@ public final class OmahaAlgorithm implements HandClassifier  {
 		CombinationCalculator<Card> boardCombinations = new CombinationCalculator<>(boardCards, 3);
 		
 		Hand bestHand = null;
-		for(ArrayList<Card> playerCombination : playerCombinations){
-			for(ArrayList<Card> boardCombination : boardCombinations){
+		for (ArrayList<Card> playerCombination : playerCombinations) {
+			for (ArrayList<Card> boardCombination : boardCombinations) {
 				Hand hand = holdEmEval.calculateHand(playerCombination, boardCombination);
 				
-				if(bestHand == null || hand.compareTo(bestHand) > 0){
+				if (bestHand == null || hand.compareTo(bestHand) > 0) {
 					bestHand = hand;
 				}
 			}

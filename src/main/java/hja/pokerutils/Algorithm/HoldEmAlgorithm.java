@@ -11,42 +11,6 @@ import java.util.Collections;
 public final class HoldEmAlgorithm implements HandClassifier {
 	
 	/**
-	 * Calculates the best hand given the player cards and the board cards
-	 *
-	 * @param playerCards Player cards.
-	 * @param boardCards  Board cards
-	 * @return The best hand
-	 */
-	public final Hand calculateHand(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
-		ArrayList<Card> cards = new ArrayList<>(boardCards);
-		cards.addAll(playerCards);
-		
-		return calculateHand(cards);
-	}
-	
-	/**
-	 * Calculates the best hand given 5 cards or more.
-	 *
-	 * @param cards The array of cards. Can be unordered
-	 * @return The best hand
-	 */
-	public final Hand calculateHand(ArrayList<Card> cards) {
-		cards.sort(Collections.reverseOrder());
-		CombinationCalculator<Card> combinations = new CombinationCalculator<>(cards, 5);
-		
-		Hand best_hand = null;
-		for (ArrayList<Card> combination : combinations) {
-			Hand hand = classifyHand(combination);
-			
-			if (best_hand == null || hand.compareTo(best_hand) > 0) {
-				best_hand = hand;
-			}
-		}
-		
-		return best_hand;
-	}
-	
-	/**
 	 * Calculates draws given 5 or 6 cards.
 	 *
 	 * @param cards The array of cards. Can be unordered
@@ -203,5 +167,41 @@ public final class HoldEmAlgorithm implements HandClassifier {
 	
 	private static boolean isPair(int[] rank_count) {
 		return AlgorithmUtils.find(rank_count, 0, rank_count.length, 2) < rank_count.length;
+	}
+	
+	/**
+	 * Calculates the best hand given the player cards and the board cards
+	 *
+	 * @param playerCards Player cards.
+	 * @param boardCards  Board cards
+	 * @return The best hand
+	 */
+	public final Hand calculateHand(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
+		ArrayList<Card> cards = new ArrayList<>(boardCards);
+		cards.addAll(playerCards);
+		
+		return calculateHand(cards);
+	}
+	
+	/**
+	 * Calculates the best hand given 5 cards or more.
+	 *
+	 * @param cards The array of cards. Can be unordered
+	 * @return The best hand
+	 */
+	public final Hand calculateHand(ArrayList<Card> cards) {
+		cards.sort(Collections.reverseOrder());
+		CombinationCalculator<Card> combinations = new CombinationCalculator<>(cards, 5);
+		
+		Hand best_hand = null;
+		for (ArrayList<Card> combination : combinations) {
+			Hand hand = classifyHand(combination);
+			
+			if (best_hand == null || hand.compareTo(best_hand) > 0) {
+				best_hand = hand;
+			}
+		}
+		
+		return best_hand;
 	}
 }

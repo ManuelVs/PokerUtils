@@ -5,24 +5,16 @@ import hja.logic.gui.model.ConfigListener;
 import hja.logic.gui.model.Model;
 import hja.pokerutils.Board.Player;
 import hja.pokerutils.Card.Card;
-import hja.pokerutils.Card.CardFactory;
-import hja.pokerutils.Parser.CardListParser;
 
 import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 
 public class ConfigWindow extends JFrame implements ConfigListener {
 	private static final int NUM_PLAYERS = 10;
 	
 	private Model model;
 	
-	public ConfigWindow(Model model){
+	public ConfigWindow(Model model) {
 		super("Configuración");
 		this.model = model;
 		initGUI();
