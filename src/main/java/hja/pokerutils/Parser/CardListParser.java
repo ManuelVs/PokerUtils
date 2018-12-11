@@ -5,6 +5,8 @@ import hja.pokerutils.Card.CardFactory;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringReader;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public final class CardListParser {
@@ -29,6 +31,18 @@ public final class CardListParser {
 		}
 		catch (Exception e) {
 			throw new IOException("Bad card: " + rank + suit);
+		}
+	}
+	
+	public static ArrayList<Card> parseListCards(String cards) throws ParseException {
+		try{
+			int numCards = cards.length() / 2;
+			StringReader stringReader = new StringReader(cards);
+			
+			return parseListCard(stringReader, numCards);
+		}
+		catch (IOException e) {
+			throw new ParseException(e.getMessage(), -1);
 		}
 	}
 }

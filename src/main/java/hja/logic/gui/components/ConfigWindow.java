@@ -3,155 +3,144 @@ package hja.logic.gui.components;
 import hja.logic.gui.model.Config;
 import hja.logic.gui.model.ConfigListener;
 import hja.logic.gui.model.Model;
+import hja.logic.gui.model.PlayerCardsListener;
 import hja.pokerutils.Board.Player;
 import hja.pokerutils.Card.Card;
+import hja.pokerutils.Card.CardFactory;
+import hja.pokerutils.Parser.CardListParser;
+import hja.pokerutils.Utils;
 
 import javax.swing.*;
+import java.awt.*;
+import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Random;
 
-public class ConfigWindow extends JFrame implements ConfigListener {
+public class ConfigWindow extends JFrame {
 	private static final int NUM_PLAYERS = 10;
+	private static final int HOLDEM_MODE = 2;
+	private static final int OMAHA_MODE = 4;
 	
 	private Model model;
+	
+	private ArrayList<Card> allPossibleCards;
+	private Player[] players;
+	private boolean[] activePlayers;
+	private int mode;
+	
+	private Random random;
+	private ArrayList<PlayerCardsListener> playerCardsListeners;
 	
 	public ConfigWindow(Model model) {
 		super("Configuración");
 		this.model = model;
+		this.allPossibleCards = CardFactory.getAllCards();
+		
+		this.players = new Player[NUM_PLAYERS];
+		this.activePlayers = new boolean[NUM_PLAYERS];
+		for(int i = 0; i < NUM_PLAYERS; ++i){
+			players[i] = new Player(i, new ArrayList<>());
+			activePlayers[i] = false;
+		}
+		
+		this.mode = HOLDEM_MODE;
+		
+		this.playerCardsListeners = new ArrayList<>();
+		
+		this.random = new Random();
 		initGUI();
 	}
 	
 	private void initGUI() {
-		/* Crear playerPanel,  saber qué jugador es
-		apliicar el setConfig
-		*/
-		/*
-		ArrayList<Player> players = new ArrayList<>(NUM_PLAYERS);
-		
-		JPanel northPanel = new JPanel();
-		northPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
-		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.X_AXIS));
-		
-		JLabel boardLabel = new JLabel("Board");
-		JTextField boardCardsText = new JTextField("");
-		JButton randomBoardCardsButton = new JButton("Random");
-		JButton setBoardCardsButton = new JButton("Set");
-
-		randomBoardCardsButton.addActionListener(e -> {
-			ArrayList<Card> boardCards = this.model.getCards();
-			ArrayList<Card> allPossibleCards = getAllPossibleCards(boardCards, players);
-
-			boardCardsText.setText("");
-			boardCards.clear();
-
-			for (int i = 0; i < 5; i++) {
-				Card card = allPossibleCards.get(new Random().nextInt(allPossibleCards.size()));
-				allPossibleCards.remove(card);
-
-				boardCards.add(card);
-				boardCardsText.setText(boardCardsText.getText() + card.toString());
-			}
-		});
-
-		setBoardCardsButton.addActionListener(e -> {
-			ArrayList<Card> boardCards = new ArrayList<>();
-			ArrayList<Card> allPossibleCards = getAllPossibleCards(boardCards, players);
-
-			String cards = boardCardsText.getText();
-			boardCardsText.setText("");
-
-			if (cards.length() == 10) {
-				Reader reader = new StringReader(cards);
-				try {
-					ArrayList<Card> playerCards = CardListParser.parseListCard(reader, 2);
-					for (int i = 0; i < 5; i++) {
-						Card card = CardFactory.createCard(cards.charAt(i), cards.charAt(i + 1));
-
-						int allCardsSize = allPossibleCards.size();
-						allPossibleCards.remove(card);
-
-						if (allPossibleCards.size() == allCardsSize - 1) {
-							boardCards.add(i, card);
-							boardCardsText.setText(boardCardsText.getText() + card.toString());
-						} else {
-							JOptionPane.showMessageDialog(this, "La carta " + cards.substring(i, i + 1) + "ya se encuentra en el tablero.", "ERROR", JOptionPane.ERROR_MESSAGE);
-						}
-					}
-				} catch (IOException e1) {
-					JOptionPane.showMessageDialog(this, "Las cartas del tablero están mal escritas.", "ERROR", JOptionPane.ERROR_MESSAGE);
-				}
-			} else {
-				JOptionPane.showMessageDialog(this, "Sobran caracteres en las cartas del tablero.", "ERROR", JOptionPane.ERROR_MESSAGE);
-			}
-		});
-		
-		northPanel.add(boardLabel);
-		northPanel.add(boardCardsText);
-		northPanel.add(randomBoardCardsButton);
-		northPanel.add(setBoardCardsButton);
-		
-		JPanel centralPanel = new JPanel();
-		centralPanel.setLayout(new BorderLayout(2, 1));
+		JPanel boardPanel = new JPanel();
+		//AÑADIR EL BOARD
 		
 		JPanel playersPanel = new JPanel();
-		playersPanel.setLayout(new GridLayout(1, 4));
-		playersPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
+		playersPanel.setLayout(new BorderLayout(2, 1));
 		
 		JButton addPlayerButton = new JButton("Añadir jugador");
 		addPlayerButton.addActionListener(e -> {
-			if(this.playersCount < NUM_PLAYERS) {
-				
-				
-				
-				playersPanel.add(text);
-				playersPanel.add(cardPairText);
-				playersPanel.add(randomButton);
-				playersPanel.add(setButton);
-				
-				playersPanel.setLayout(new GridLayout(this.playersCount, 4));
-				playersPanel.revalidate();
-				playersPanel.repaint();
-			}
-			else {
-				JOptionPane.showMessageDialog(this, "No se pueden añadir más de 10 jugadores.", "ERROR", JOptionPane.ERROR_MESSAGE);
-			}
+			PlayerPanel playerPanel = new PlayerPanel(this.playerCardsListeners.size(), this);
+			addPlayerCardsListener(playerPanel);
+			
+			playersPanel.add(playerPanel, BorderLayout.CENTER);
+			playersPanel.revalidate();
+			playersPanel.repaint();
 		});
-		centralPanel.add(playersPanel, BorderLayout.CENTER);
-		centralPanel.add(addPlayerButton, BorderLayout.SOUTH);
+		 playersPanel.add(addPlayerButton, BorderLayout.SOUTH);
 		
-		JButton acceptButton = new JButton("Aceptar");
-		
-		
-		JPanel southPanel = new JPanel();
-		southPanel.add(acceptButton);
+		JPanel buttonsPanel = new JPanel();
+		//AÑADIR LOS BOTONES
 		
 		this.setLayout(new BorderLayout(3, 1));
 		
-		this.add(northPanel, BorderLayout.NORTH);
-		this.add(centralPanel, BorderLayout.CENTER);
-		this.add(southPanel, BorderLayout.SOUTH);
+		this.add(boardPanel, BorderLayout.NORTH);
+		this.add(playersPanel, BorderLayout.CENTER);
+		this.add(buttonsPanel, BorderLayout.SOUTH);
 		this.setSize(525, 580);
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);*/
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	
-	private ArrayList<Card> getAllPossibleCards(ArrayList<Card> boardCards, ArrayList<Player> players) {/*
-		ArrayList<Card> allPossibleCards = CardFactory.getAllCards();
+	private ArrayList<Card> getRandomCards(int n){
+		ArrayList<Card> cards = new ArrayList<>(this.allPossibleCards);
+		ArrayList<Card> out = new ArrayList<>(n);
 		
-		for (Card card : boardCards) {
-			allPossibleCards.remove(card);
+		for(int i = 0; i < n; i++){
+			Card card = cards.get(this.random.nextInt(cards.size()));
+			out.add(card);
+			cards.remove(card);
 		}
 		
-		for (Player player : players) {
-			for (Card card : player.cards) {
-				allPossibleCards.remove(card);
+		return out;
+	}
+	
+	public void setCardsForPlayer(int player, String cards){
+		if(this.activePlayers[player]) {
+			try {
+				ArrayList<Card> playerCards = CardListParser.parseListCards(cards);
+				if(!allPossibleCards.containsAll(playerCards)){
+					this.players[player].setCards(playerCards);
+					notifyAllPlayerCardsListeners(player, cards);
+				}
+				else {
+					//OTRO POPUP
+					notifyAllPlayerCardsListeners(player, "");
+				}
+			} catch (ParseException e) {
+				//OTRO POPUP
+				notifyAllPlayerCardsListeners(player, "");
 			}
 		}
-		
-		return allPossibleCards;*/
-		return null;
+		else {
+			//SACAR POPUP CON ERROR DE LA LECHE
+			notifyAllPlayerCardsListeners(player, "");
+		}
 	}
 	
-	@Override
-	public void notify(Config config) {
+	public void setRandomCardsForPlayer(int player){
+		if(this.activePlayers[player]) {
+			ArrayList<Card> playerCards = getRandomCards(this.mode);
+			this.players[player].setCards(playerCards);
+			notifyAllPlayerCardsListeners(player, Utils.cardsToString(playerCards));
+		} else {
+			//OTRO POPUP
+			notifyAllPlayerCardsListeners(player, "");
+		}
+	}
 	
+	public void foldPlayer(int player){
+		this.activePlayers[player] = false;
+		notifyAllPlayerCardsListeners(player, "fold");
+	}
+	
+	private void addPlayerCardsListener(PlayerCardsListener listener){
+		this.playerCardsListeners.add(listener);
+	}
+	
+	private void notifyAllPlayerCardsListeners(int player, String cards){
+		for(PlayerCardsListener listener : this.playerCardsListeners){
+			listener.notify(player, cards);
+		}
 	}
 }

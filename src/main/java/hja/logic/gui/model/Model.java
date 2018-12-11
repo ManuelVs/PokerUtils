@@ -1,6 +1,6 @@
 package hja.logic.gui.model;
 
-import hja.pokerutils.Board.Player;
+//import hja.pokerutils.Board.Player;
 
 public interface Model {
 	
@@ -8,7 +8,7 @@ public interface Model {
 	
 	void nextPhase();
 	
-	void deletePlayer(Player p);
+//	void deletePlayer(Player p);
 	
 	void addConfigListener(ConfigListener listener);
 }

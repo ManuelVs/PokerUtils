@@ -35,7 +35,7 @@ public class ModelImpl implements Model {
 		this.config.setPhase(phase);
 		onConfigChanged();
 	}
-	
+/*
 	@Override
 	public void deletePlayer(Player p) {
 		ArrayList<Player> players = this.config.getPlayers();
@@ -43,7 +43,7 @@ public class ModelImpl implements Model {
 		
 		this.config = new Config(this.config.getBoardCards(), players);
 		onConfigChanged();
-	}
+	}*/
 	
 	@Override
 	public void addConfigListener(ConfigListener listener) {

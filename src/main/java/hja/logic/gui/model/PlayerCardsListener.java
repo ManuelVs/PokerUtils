@@ -5,5 +5,5 @@ import hja.pokerutils.Card.Card;
 import java.util.ArrayList;
 
 public interface PlayerCardsListener {
-	void notify(int player, ArrayList<Card> cards);
+	void notify(int player, String cards);
 }
