@@ -10,54 +10,12 @@ import hja.pokerutils.Hand.Hand;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public final class EquityCalculator {
+public final class EquityCalculatorOmaha {
 	private static ExecutorService pool = Executors.newCachedThreadPool();
-	
-	/*
-	public static double[] calculateEquity(Board board) {
-		ArrayList<Card> allPossibleCards = CardFactory.getAllCards();
-		double[] equity = new double[board.players.size()];
-		
-		for (Card card : board.boardCards) {
-			allPossibleCards.remove(card);
-		}
-		
-		for (Player player : board.players) {
-			for (Card card : player.cards) {
-				allPossibleCards.remove(card);
-			}
-		}
-		
-		int nTotal = 0;
-		int numLeftCards = 5 - board.boardCards.size();
-		CombinationCalculator<Card> combinations = new CombinationCalculator<>(allPossibleCards, numLeftCards);
-		LinkedList<Future<Integer>> futures = new LinkedList<>();
-		
-		for (ArrayList<Card> combination : combinations) {
-			Future<Integer> future = pool.submit(() -> calculateBest(combination, board));
-			futures.add(future);
-			++nTotal;
-		}
-		
-		double s = 1 / (double) nTotal;
-		for (Future<Integer> future : futures) {
-			try {
-				Integer i = future.get();
-				equity[i] += s;
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return equity;
-	}
-	*/
 	
 	public static double[] calculateEquity(Board board) {
 		ArrayList<Card> allPossibleCards = getPossibleCards(board);
@@ -99,8 +57,8 @@ public final class EquityCalculator {
 		return allPossibleCards;
 	}
 	
-	private static LinkedList<Future<int[]>> sendTasks(Board board, ArrayList<Card> allPossibleCards){
-		LinkedList<Future<int[]>> futures = new LinkedList<>();
+	private static ArrayList<Future<int[]>> sendTasks(Board board, ArrayList<Card> allPossibleCards){
+		ArrayList<Future<int[]>> futures = new ArrayList<>();
 		
 		int numLeftCards = 5 - board.boardCards.size();
 		CombinationCalculator<Card> combinations = new CombinationCalculator<>(allPossibleCards, numLeftCards);
@@ -132,11 +90,11 @@ public final class EquityCalculator {
 		
 		int bestIndex = 0;
 		Player player = board.players.get(0);
-		Hand bestHand = HoldEmAlgorithm.calculateHand(player.cards, cards);
+		Hand bestHand = OmahaAlgorithm.calculateHand(player.cards, cards);
 		
 		for (int i = 1; i < board.players.size(); ++i) {
 			player = board.players.get(i);
-			Hand hand = HoldEmAlgorithm.calculateHand(player.cards, cards);
+			Hand hand = OmahaAlgorithm.calculateHand(player.cards, cards);
 			
 			if (hand.compareTo(bestHand) > 0) {
 				bestHand = hand;

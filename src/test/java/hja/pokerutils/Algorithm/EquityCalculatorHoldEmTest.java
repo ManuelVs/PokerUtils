@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-class EquityCalculatorTest {
+class EquityCalculatorHoldEmTest {
 	
 	private static Stream<Arguments> boardProvider() {
 		return Stream.of(
@@ -133,7 +133,7 @@ class EquityCalculatorTest {
 	@ParameterizedTest(name = "{index} => {1}")
 	@MethodSource("boardProvider")
 	void calculateEquityTest(Board board, double[] equity) {
-		double[] cEquity = EquityCalculator.calculateEquity(board);
+		double[] cEquity = EquityCalculatorHoldEm.calculateEquity(board);
 		
 		assertArrayEquals(equity, cEquity, 0.005);
 	}
