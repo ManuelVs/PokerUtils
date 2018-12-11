@@ -20,11 +20,11 @@ public class FullHouse extends Hand {
 	}
 	
 	@Override
-	public int compareKernel(Hand o) {
+	public int compareKernel(Hand other) {
 		Card leftThreeCard = hand.get(0);
 		Card leftTwoCard = hand.get(3);
-		Card rightThreeCard = o.hand.get(0);
-		Card rightTwoCard = o.hand.get(3);
+		Card rightThreeCard = other.hand.get(0);
+		Card rightTwoCard = other.hand.get(3);
 		
 		int compare = leftThreeCard.compareTo(rightThreeCard);
 		if (compare == 0) {

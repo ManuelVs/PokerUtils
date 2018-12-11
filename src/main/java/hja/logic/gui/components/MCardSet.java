@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class MCardSet {
-	protected static Image[][] pokerCards;
+	protected static final Image[][] pokerCards;
 	
 	static {
 		Rank[] ranks = Rank.values();

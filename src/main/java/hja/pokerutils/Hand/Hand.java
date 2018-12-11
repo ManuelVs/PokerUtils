@@ -28,17 +28,14 @@ public abstract class Hand implements Comparable<Hand> {
 		return compare;
 	}
 	
-	protected final int compareKickers(Hand o) {
+	protected final int compareKickers(Hand other) {
 		int initialPos = this.type.firstKicker;
 		if (initialPos == 5) return 0;
 		
-		ArrayList<Card> leftHand = this.hand;
-		ArrayList<Card> rightHand = o.hand;
-		
 		int compare;
 		do {
-			Card leftCard = leftHand.get(initialPos);
-			Card rightCard = rightHand.get(initialPos);
+			Card leftCard = this.hand.get(initialPos);
+			Card rightCard = other.hand.get(initialPos);
 			compare = leftCard.compareTo(rightCard);
 			initialPos += 1;
 		} while (compare == 0 && initialPos < 5);
@@ -46,7 +43,7 @@ public abstract class Hand implements Comparable<Hand> {
 		return compare;
 	}
 	
-	protected abstract int compareKernel(Hand o);
+	protected abstract int compareKernel(Hand other);
 	
 	public ArrayList<Card> getCards() {
 		return new ArrayList<>(this.hand);

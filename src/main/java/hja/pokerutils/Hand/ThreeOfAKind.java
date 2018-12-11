@@ -29,9 +29,9 @@ public class ThreeOfAKind extends Hand {
 	}
 	
 	@Override
-	public int compareKernel(Hand o) {
+	public int compareKernel(Hand other) {
 		Card leftThreeCard = hand.get(0);
-		Card rightThreeCard = o.hand.get(0);
+		Card rightThreeCard = other.hand.get(0);
 		
 		return leftThreeCard.compareTo(rightThreeCard);
 	}

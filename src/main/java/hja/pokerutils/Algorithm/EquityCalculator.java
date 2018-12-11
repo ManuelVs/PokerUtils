@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public final class EquityCalculator {
-	private static ExecutorService pool = Executors.newCachedThreadPool();
+	private static final ExecutorService pool = Executors.newCachedThreadPool();
 	
 	public static double[] calculateEquity(ArrayList<Player> players, ArrayList<Card> boardCards, HandClassifier classifier) {
 		ArrayList<Card> allPossibleCards = getPossibleCards(players, boardCards);

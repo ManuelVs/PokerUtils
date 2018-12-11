@@ -11,7 +11,7 @@ public class RoyalFlush extends Hand {
 	}
 	
 	@Override
-	public int compareKernel(Hand o) {
+	public int compareKernel(Hand other) {
 		return 0;
 	}
 	

@@ -11,16 +11,13 @@ public class Flush extends Hand {
 	}
 	
 	@Override
-	public int compareKernel(Hand o) {
+	public int compareKernel(Hand other) {
 		int initialPos = 0;
-		
-		ArrayList<Card> leftHand = this.hand;
-		ArrayList<Card> rightHand = o.hand;
 		
 		int compare;
 		do {
-			Card leftCard = leftHand.get(initialPos);
-			Card rightCard = rightHand.get(initialPos);
+			Card leftCard = this.hand.get(initialPos);
+			Card rightCard = other.hand.get(initialPos);
 			compare = leftCard.compareTo(rightCard);
 			initialPos += 1;
 		} while (initialPos < 5 && compare == 0);

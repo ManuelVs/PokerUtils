@@ -30,14 +30,14 @@ public class TwoPair extends Hand {
 	}
 	
 	@Override
-	public int compareKernel(Hand o) {
+	public int compareKernel(Hand other) {
 		Card leftCard = hand.get(0);
-		Card rightCard = o.hand.get(0);
+		Card rightCard = other.hand.get(0);
 		int compare = leftCard.compareTo(rightCard);
 		
 		if (compare == 0) {
 			leftCard = hand.get(2);
-			rightCard = o.hand.get(2);
+			rightCard = other.hand.get(2);
 			
 			compare = leftCard.compareTo(rightCard);
 		}

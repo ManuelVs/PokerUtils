@@ -48,6 +48,7 @@ public class CombinationIterator<E> implements Iterator<ArrayList<E>> {
 		
 		//ArrayList<E> currentCombination = new ArrayList<>(nElements);
 		int j = 0;
+		@SuppressWarnings("unchecked")
 		E[] currentCombination = (E[]) new Object[nElements];
 		for (int i = 0; i < elements.size(); ++i) {
 			if (perm[i] == 1) {

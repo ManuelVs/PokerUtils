@@ -13,7 +13,7 @@ import java.net.URL;
 public class PokerBoard extends JPanel implements ConfigListener {
 	private static final int NUM_PLAYERS = 10;
 	
-	protected double aspect_ratio_card = 1.452;
+	protected final double aspect_ratio_card = 1.452;
 	
 	protected double vs;
 	protected double hs;
@@ -23,13 +23,13 @@ public class PokerBoard extends JPanel implements ConfigListener {
 	protected double cw;
 	protected double ch;
 	
-	protected double[] wPlayer;
-	protected double[] hPlayer;
+	protected final double[] wPlayer;
+	protected final double[] hPlayer;
 	
 	protected Image pokerBoard;
 	
 	protected Config config;
-	protected MCardSet cardSetDrawer;
+	protected final MCardSet cardSetDrawer;
 	
 	public PokerBoard() throws IOException {
 		this.wPlayer = new double[NUM_PLAYERS];
@@ -60,7 +60,7 @@ public class PokerBoard extends JPanel implements ConfigListener {
 	}
 	
 	private void paintBoard(Graphics g) {
-		drawImage(g, pokerBoard, 0, 0, this.getWidth(), this.getHeight());
+		g.drawImage(pokerBoard, 0, 0, this.getWidth(), this.getHeight(), null);
 	}
 	
 	private void paintCards(Graphics g) {
@@ -151,10 +151,6 @@ public class PokerBoard extends JPanel implements ConfigListener {
 		
 		this.wPlayer[9] = v4;
 		this.hPlayer[9] = h4;
-	}
-	
-	private void drawImage(Graphics g, Image image, double x, double y, double width, double height) {
-		g.drawImage(image, (int) x, (int) y, (int) width, (int) height, null);
 	}
 	
 	@Override
