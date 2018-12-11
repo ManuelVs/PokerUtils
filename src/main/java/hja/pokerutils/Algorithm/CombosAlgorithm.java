@@ -15,6 +15,7 @@ public final class CombosAlgorithm {
 	
 	public static Combos getCombos(Range range, ArrayList<Card> boardCards) {
 		Combos combos = new Combos();
+		HoldEmAlgorithm classifier = new HoldEmAlgorithm();
 		
 		for (CardPair cp : range) {
 			ArrayList<ArrayList<Card>> validPlayerCards = getValidCards(cp, boardCards);
@@ -24,7 +25,7 @@ public final class CombosAlgorithm {
 				cards.addAll(playerCards);
 				cards.addAll(boardCards);
 				
-				Hand hand = HoldEmAlgorithm.calculateHand(cards);
+				Hand hand = classifier.calculateHand(cards);
 				
 				updateCombos(combos, hand, playerCards, boardCards);
 				

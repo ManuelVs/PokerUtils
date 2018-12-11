@@ -17,10 +17,11 @@ public class BenchTest {
 	public void benchTest() {
 		ArrayList<Card> cards = CardFactory.getAllCards();
 		ArrayList<Hand> hands = new ArrayList<>(2598960);
+		HoldEmAlgorithm algorithm = new HoldEmAlgorithm();
 		
 		CombinationCalculator<Card> combinations = new CombinationCalculator<>(cards, 5);
 		for (ArrayList<Card> cards1 : combinations) {
-			hands.add(HoldEmAlgorithm.calculateHand(cards1));
+			hands.add(algorithm.calculateHand(cards1));
 		}
 		
 		assertEquals(2598960 , hands.size());

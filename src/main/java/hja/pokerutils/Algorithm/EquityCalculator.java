@@ -15,16 +15,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public final class EquityCalculatorOmaha {
+public final class EquityCalculator {
 	private static ExecutorService pool = Executors.newCachedThreadPool();
 	
-	public static double[] calculateEquity(Config config) {
-		ArrayList<Card> allPossibleCards = getPossibleCards(config);
-		double[] equity = new double[config.getPlayers().size()];
+	public static double[] calculateEquity(ArrayList<Player> players, ArrayList<Card> boardCards, HandClassifier classifier) {
+		ArrayList<Card> allPossibleCards = getPossibleCards(players, boardCards);
+		double[] equity = new double[players.size()];
 		
 		int nTotal = 0;
 		try {
-			for (Future<int[]> future : sendTasks(config, allPossibleCards)) {
+			for (Future<int[]> future : sendTasks(players, boardCards, classifier, allPossibleCards)) {
 				int[] partialEquity = future.get();
 				
 				for (int i = 0; i < partialEquity.length; ++i) {
@@ -35,6 +35,7 @@ public final class EquityCalculatorOmaha {
 			
 			for (int i = 0; i < equity.length; ++i) {
 				equity[i] /= nTotal;
+				players.get(i).setEquity(equity[i]);
 			}
 		}
 		catch (Exception e) { e.printStackTrace(); }
@@ -42,14 +43,14 @@ public final class EquityCalculatorOmaha {
 		return equity;
 	}
 	
-	private static ArrayList<Card> getPossibleCards(Config config){
+	private static ArrayList<Card> getPossibleCards(ArrayList<Player> players, ArrayList<Card> boardCards){
 		ArrayList<Card> allPossibleCards = CardFactory.getAllCards();
 		
-		for (Card card : config.getBoardCards()) {
+		for (Card card : boardCards) {
 			allPossibleCards.remove(card);
 		}
 		
-		for (Player player : config.getPlayers()) {
+		for (Player player : players) {
 			for (Card card : player.getCards()) {
 				allPossibleCards.remove(card);
 			}
@@ -58,10 +59,10 @@ public final class EquityCalculatorOmaha {
 		return allPossibleCards;
 	}
 	
-	private static ArrayList<Future<int[]>> sendTasks(Config config, ArrayList<Card> allPossibleCards){
+	private static ArrayList<Future<int[]>> sendTasks(ArrayList<Player> players, ArrayList<Card> boardCards, HandClassifier classifier, ArrayList<Card> allPossibleCards){
 		ArrayList<Future<int[]>> futures = new ArrayList<>();
 		
-		int numLeftCards = 5 - config.getBoardCards().size();
+		int numLeftCards = 5 - boardCards.size();
 		CombinationCalculator<Card> combinations = new CombinationCalculator<>(allPossibleCards, numLeftCards);
 		int numCores = Runtime.getRuntime().availableProcessors();
 		Iterator<CountedCombinationIterator<Card>> iterators = combinations.iterators(numCores);
@@ -69,10 +70,10 @@ public final class EquityCalculatorOmaha {
 			CountedCombinationIterator<Card> iterator = iterators.next();
 			
 			Future<int[]> future = pool.submit(() -> {
-				int[] partialEquity = new int[config.getPlayers().size()];
+				int[] partialEquity = new int[players.size()];
 				while (iterator.hasNext()) {
 					ArrayList<Card> combination = iterator.next();
-					Integer i = calculateBest(combination, config);
+					Integer i = calculateBest(combination, players, boardCards, classifier);
 					partialEquity[i] += 1;
 				}
 				
@@ -85,17 +86,17 @@ public final class EquityCalculatorOmaha {
 		return futures;
 	}
 	
-	private static int calculateBest(ArrayList<Card> combination, Config config) {
-		ArrayList<Card> cards = new ArrayList<>(config.getBoardCards());
+	private static int calculateBest(ArrayList<Card> combination, ArrayList<Player> players, ArrayList<Card> boardCards, HandClassifier classifier) {
+		ArrayList<Card> cards = new ArrayList<>(boardCards);
 		cards.addAll(combination);
 		
 		int bestIndex = 0;
-		Player player = config.getPlayers().get(0);
-		Hand bestHand = OmahaAlgorithm.calculateHand(player.getCards(), cards);
+		Player player = players.get(0);
+		Hand bestHand = classifier.calculateHand(player.getCards(), cards);
 		
-		for (int i = 1; i < config.getPlayers().size(); ++i) {
-			player = config.getPlayers().get(i);
-			Hand hand = OmahaAlgorithm.calculateHand(player.getCards(), cards);
+		for (int i = 1; i < players.size(); ++i) {
+			player = players.get(i);
+			Hand hand = classifier.calculateHand(player.getCards(), cards);
 			
 			if (hand.compareTo(bestHand) > 0) {
 				bestHand = hand;

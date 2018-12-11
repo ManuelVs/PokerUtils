@@ -1,5 +1,6 @@
 package hja.logic.gui.model;
 
+import hja.pokerutils.Algorithm.HandClassifier;
 import hja.pokerutils.Board.Player;
 import hja.pokerutils.Card.Card;
 
@@ -9,6 +10,7 @@ public class Config {
 	private ArrayList<Player> players;
 	private ArrayList<Card> boardCards;
 	private int phase;
+	private HandClassifier classifier;
 	
 	public Config(ArrayList<Card> boardCards, ArrayList<Player> players) {
 		this.players = players;
@@ -37,5 +39,13 @@ public class Config {
 	
 	public void setPhase(int phase) {
 		this.phase = phase;
+	}
+	
+	public HandClassifier getClassifier() {
+		return classifier;
+	}
+	
+	public void setClassifier(HandClassifier classifier) {
+		this.classifier = classifier;
 	}
 }

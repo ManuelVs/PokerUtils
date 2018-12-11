@@ -83,10 +83,11 @@ class HoldEmAlgorithmTest {
 		);
 	}
 	
+	private HoldEmAlgorithm algorithm = new HoldEmAlgorithm();
 	@ParameterizedTest(name = "{index} => {1}")
 	@MethodSource("handProvider")
 	void compareToTest(ArrayList<Card> cards, Class<Hand> handClass) {
-		Hand hand = HoldEmAlgorithm.calculateHand(cards);
+		Hand hand = algorithm.calculateHand(cards);
 		
 		assertEquals(handClass, hand.getClass());
 	}

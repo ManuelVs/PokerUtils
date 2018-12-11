@@ -8,16 +8,17 @@ import hja.pokerutils.Hand.Hand;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public final class OmahaAlgorithm {
+public final class OmahaAlgorithm implements HandClassifier  {
+	private static final HandClassifier holdEmEval = new HoldEmAlgorithm();
 	
-	public static Hand calculateHand(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
+	public final Hand calculateHand(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
 		CombinationCalculator<Card> playerCombinations = new CombinationCalculator<>(playerCards, 2);
 		CombinationCalculator<Card> boardCombinations = new CombinationCalculator<>(boardCards, 3);
 		
 		Hand bestHand = null;
 		for(ArrayList<Card> playerCombination : playerCombinations){
 			for(ArrayList<Card> boardCombination : boardCombinations){
-				Hand hand = HoldEmAlgorithm.calculateHand(playerCombination, boardCombination);
+				Hand hand = holdEmEval.calculateHand(playerCombination, boardCombination);
 				
 				if(bestHand == null || hand.compareTo(bestHand) > 0){
 					bestHand = hand;

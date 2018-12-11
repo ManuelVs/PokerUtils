@@ -38,10 +38,11 @@ class OmahaAlgorithmTest {
 		);
 	}
 	
+	private OmahaAlgorithm algorithm = new OmahaAlgorithm();
 	@ParameterizedTest(name = "{index} => {0}, {1}")
 	@MethodSource("handProvider")
 	void compareToTest(ArrayList<Card> player, ArrayList<Card> board, Class<Hand> handClass) {
-		Hand hand = OmahaAlgorithm.calculateHand(player, board);
+		Hand hand = algorithm.calculateHand(player, board);
 		
 		assertEquals(handClass, hand.getClass());
 	}

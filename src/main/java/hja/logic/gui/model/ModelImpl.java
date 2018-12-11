@@ -1,13 +1,8 @@
 package hja.logic.gui.model;
 
-import hja.pokerutils.Algorithm.Combos;
-import hja.pokerutils.Algorithm.CombosAlgorithm;
-import hja.pokerutils.Algorithm.EquityCalculatorHoldEm;
+import hja.pokerutils.Algorithm.EquityCalculator;
 import hja.pokerutils.Board.Player;
-import hja.pokerutils.Card.Card;
-import hja.pokerutils.Range.Range;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class ModelImpl implements Model {
@@ -72,6 +67,6 @@ public class ModelImpl implements Model {
 	}
 	
 	private void updateEquityOnConfig() {
-		EquityCalculatorHoldEm.calculateEquity(config);
+		EquityCalculator.calculateEquity(config.getPlayers(), config.getBoardCards(), config.getClassifier());
 	}
 }

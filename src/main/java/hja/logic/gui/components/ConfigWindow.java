@@ -32,7 +32,7 @@ public class ConfigWindow extends JFrame implements ConfigListener {
 		/* Crear playerPanel,  saber qué jugador es
 		apliicar el setConfig
 		*/
-		
+		/*
 		ArrayList<Player> players = new ArrayList<>(NUM_PLAYERS);
 		
 		JPanel northPanel = new JPanel();
@@ -138,10 +138,10 @@ public class ConfigWindow extends JFrame implements ConfigListener {
 		this.add(centralPanel, BorderLayout.CENTER);
 		this.add(southPanel, BorderLayout.SOUTH);
 		this.setSize(525, 580);
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);*/
 	}
 	
-	private ArrayList<Card> getAllPossibleCards(ArrayList<Card> boardCards, ArrayList<Player> players) {
+	private ArrayList<Card> getAllPossibleCards(ArrayList<Card> boardCards, ArrayList<Player> players) {/*
 		ArrayList<Card> allPossibleCards = CardFactory.getAllCards();
 		
 		for (Card card : boardCards) {
@@ -154,7 +154,8 @@ public class ConfigWindow extends JFrame implements ConfigListener {
 			}
 		}
 		
-		return allPossibleCards;
+		return allPossibleCards;*/
+		return null;
 	}
 	
 	@Override

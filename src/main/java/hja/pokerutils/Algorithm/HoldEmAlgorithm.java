@@ -8,7 +8,7 @@ import hja.pokerutils.Hand.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public final class HoldEmAlgorithm {
+public final class HoldEmAlgorithm implements HandClassifier {
 	
 	/**
 	 * Calculates the best hand given the player cards and the board cards
@@ -17,7 +17,7 @@ public final class HoldEmAlgorithm {
 	 * @param boardCards  Board cards
 	 * @return The best hand
 	 */
-	public static Hand calculateHand(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
+	public final Hand calculateHand(ArrayList<Card> playerCards, ArrayList<Card> boardCards) {
 		ArrayList<Card> cards = new ArrayList<>(boardCards);
 		cards.addAll(playerCards);
 		
@@ -30,7 +30,7 @@ public final class HoldEmAlgorithm {
 	 * @param cards The array of cards. Can be unordered
 	 * @return The best hand
 	 */
-	public static Hand calculateHand(ArrayList<Card> cards) {
+	public final Hand calculateHand(ArrayList<Card> cards) {
 		cards.sort(Collections.reverseOrder());
 		CombinationCalculator<Card> combinations = new CombinationCalculator<>(cards, 5);
 		
