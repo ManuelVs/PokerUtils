@@ -1,6 +1,7 @@
 package hja.pokerutils.Card;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public final class CardFactory {
 	private static Card[][] cards;
@@ -82,9 +83,7 @@ public final class CardFactory {
 	public static ArrayList<Card> getAllCards() {
 		ArrayList<Card> allCards = new ArrayList<>(Suit.values().length * Rank.values().length);
 		for (int i = 0; i < cards.length; ++i) {
-			for (int j = 0; j < cards[i].length; ++j) {
-				allCards.add(CardFactory.cards[i][j]);
-			}
+			allCards.addAll(Arrays.asList(CardFactory.cards[i]));
 		}
 		
 		return allCards;
