@@ -22,19 +22,6 @@ public class ModelImpl implements Model {
 		onConfigChanged();
 	}
 	
-	@Override
-	public void nextPhase() {
-		int phase = this.config.getPhase();
-		if (phase >= 3) {
-			phase = 0;
-		}
-		else {
-			phase += 1;
-		}
-		
-		this.config.setPhase(phase);
-		onConfigChanged();
-	}
 /*
 	@Override
 	public void deletePlayer(Player p) {

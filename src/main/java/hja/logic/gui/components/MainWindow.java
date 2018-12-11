@@ -9,47 +9,20 @@ import java.io.IOException;
 public class MainWindow extends JFrame {
 	
 	public MainWindow() {
+		super("HJA Equity calculator");
 		initGUI();
 	}
 	
 	private void initGUI() {
 		Model model = new ModelImpl();
-		JMenuBar menuBar = new JMenuBar();
-		JMenu fileMenu = new JMenu("Archivo");
-		JMenuItem openFileItem = new JMenuItem("Abrir");
-		JMenuItem settingsItem = new JMenuItem("Configuración");
 		
-		fileMenu.add(openFileItem);
-		fileMenu.add(settingsItem);
-		menuBar.add(fileMenu);
-		
-		this.setTitle("HJA Equity calculator");
-		
-		PokerBoard board;
-		
+
 		try {
-			board = new PokerBoard();
-			ConfigWindow nextPhaseWindow = new ConfigWindow(model);
-			nextPhaseWindow.setVisible(true);
-			
-			
-			JButton nextPhaseButton = new JButton("Siguiente fase");
-			nextPhaseButton.setAlignmentX(RIGHT_ALIGNMENT);
-			nextPhaseButton.setFocusPainted(false);
-			
-			nextPhaseButton.addActionListener(e -> {
-			
-			});
-			
-			JPanel boardPanel = new JPanel();
-			boardPanel.setLayout(new BoxLayout(boardPanel, BoxLayout.Y_AXIS));
-			boardPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-			
-			boardPanel.add(nextPhaseButton);
-			boardPanel.add(board);
-			
-			this.setJMenuBar(menuBar);
-			this.add(boardPanel);
+			PokerBoard board = new PokerBoard(model);
+			ConfigWindow configWindow = new ConfigWindow(model);
+			configWindow.setVisible(true);
+
+			this.add(board);
 		}
 		catch (IOException e) {
 			e.printStackTrace();

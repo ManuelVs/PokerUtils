@@ -9,12 +9,12 @@ import java.util.ArrayList;
 public class Config {
 	private ArrayList<Player> players;
 	private ArrayList<Card> boardCards;
-	private int phase;
 	private HandClassifier classifier;
 	
-	public Config(ArrayList<Card> boardCards, ArrayList<Player> players) {
+	public Config(ArrayList<Card> boardCards, ArrayList<Player> players, HandClassifier classifier) {
 		this.players = players;
 		this.boardCards = boardCards;
+		this.classifier = classifier;
 	}
 	
 	public ArrayList<Player> getPlayers() {
@@ -31,14 +31,6 @@ public class Config {
 	
 	public void setBoardCards(ArrayList<Card> boardCards) {
 		this.boardCards = boardCards;
-	}
-	
-	public int getPhase() {
-		return phase;
-	}
-	
-	public void setPhase(int phase) {
-		this.phase = phase;
 	}
 	
 	public HandClassifier getClassifier() {

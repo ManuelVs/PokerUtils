@@ -2,6 +2,7 @@ package hja.logic.gui.components;
 
 import hja.logic.gui.model.Config;
 import hja.logic.gui.model.ConfigListener;
+import hja.logic.gui.model.Model;
 import hja.pokerutils.Board.Player;
 
 import javax.imageio.ImageIO;
@@ -9,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 
 public class PokerBoard extends JPanel implements ConfigListener {
 	private static final int NUM_PLAYERS = 10;
@@ -31,11 +33,12 @@ public class PokerBoard extends JPanel implements ConfigListener {
 	protected Config config;
 	protected final MCardSet cardSetDrawer;
 	
-	public PokerBoard() throws IOException {
+	public PokerBoard(Model model) throws IOException {
 		this.wPlayer = new double[NUM_PLAYERS];
 		this.hPlayer = new double[NUM_PLAYERS];
 		this.cardSetDrawer = new MCardSet();
 		
+		model.addConfigListener(this);
 		this.config = null;
 		
 		URL pokerBoardURL = PokerBoard.class.getResource("pokerBoard.png");
@@ -87,13 +90,17 @@ public class PokerBoard extends JPanel implements ConfigListener {
 	}
 	
 	private void paintText(Graphics g) {
-		double[] hString = new double[]{-5, -5, -5, this.ch + 12, this.ch + 12, this.ch + 12, this.ch + 12, -5, -5};
+		double[] hString = new double[]{-5, -5, -5, this.ch + 12, this.ch + 12, this.ch + 12,this.ch + 12, this.ch + 12, -5, -5};
 		
 		for (Player player : config.getPlayers()) {
-			this.cardSetDrawer.setImages(player.getCards());
 			int i = player.getPlayerNumber();
-			String equity = player.getEquity() * 100 + "%";
-			g.drawString(equity, (int) this.wPlayer[i], (int) (this.hPlayer[i] + hString[i]));
+			DecimalFormat df = new DecimalFormat("#.##");
+			
+			
+			String equity = df.format(player.getEquity() * 100) + "%";
+			String name_equity = "J" + (player.getPlayerNumber() + 1) + ": " + equity;
+			
+			g.drawString(name_equity, (int) this.wPlayer[i], (int) (this.hPlayer[i] + hString[i]));
 		}
 	}
 	
@@ -111,7 +118,7 @@ public class PokerBoard extends JPanel implements ConfigListener {
 		double v2 = width * 0.20;
 		double v3 = width * 0.50 - pack_width * 0.5;
 		double v4 = width * 0.80 - pack_width;
-		double v5 = width * 0.97 - pack_width;
+		double v5 = width * 0.95 - pack_width;
 		
 		double h1 = height * 0.03;
 		double h2 = height * 0.25;
@@ -156,5 +163,6 @@ public class PokerBoard extends JPanel implements ConfigListener {
 	@Override
 	public void notify(Config config) {
 		this.config = config;
+		repaint();
 	}
 }

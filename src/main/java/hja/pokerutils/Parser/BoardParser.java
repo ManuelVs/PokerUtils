@@ -44,7 +44,7 @@ public final class BoardParser {
 			
 			Hand bestHand = classifier.calculateHand(allCards);
 			
-			players.add(new Player(Integer.parseInt(playerName.substring(1)), bestHand, playerCards));
+			players.add(new Player(Integer.parseInt(playerName.substring(1)), playerCards));
 		}
 		players.sort(Collections.reverseOrder());
 		return new Board(boardCards, players);
