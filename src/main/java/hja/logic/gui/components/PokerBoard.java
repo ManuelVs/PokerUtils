@@ -3,6 +3,7 @@ package hja.logic.gui.components;
 import hja.logic.gui.model.Config;
 import hja.logic.gui.model.ConfigListener;
 import hja.pokerutils.Board.Board;
+import hja.pokerutils.Board.Player;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class PokerBoard extends JPanel implements ConfigListener {
-	private static final int NUM_PLAYERS = 9;
+	private static final int NUM_PLAYERS = 10;
 	
 	protected double aspect_ratio_card = 1.452;
 	
@@ -53,7 +54,7 @@ public class PokerBoard extends JPanel implements ConfigListener {
 		
 		updateReferences();
 		paintBoard(g);
-		if (this.board != null) {
+		if (this.config != null) {
 			paintCards(g);
 			paintText(g);
 		}
@@ -64,8 +65,9 @@ public class PokerBoard extends JPanel implements ConfigListener {
 	}
 	
 	private void paintCards(Graphics g) {
-		for (int i = 0; i < this.board.players.size(); ++i) {
-			this.cardSetDrawer.setImages(this.board.players.get(i).cards);
+		for(Player player : config.getPlayers()){
+			this.cardSetDrawer.setImages(player.getCards());
+			int i = player.getPlayerNumber();
 			
 			this.cardSetDrawer.setPosX(this.wPlayer[i]);
 			this.cardSetDrawer.setPosY(this.hPlayer[i]);
@@ -76,7 +78,7 @@ public class PokerBoard extends JPanel implements ConfigListener {
 			this.cardSetDrawer.draw(g);
 		}
 		
-		this.cardSetDrawer.setImages(this.board.boardCards);
+		this.cardSetDrawer.setImages(this.config.getBoardCards());
 		this.cardSetDrawer.setPosX(vs);
 		this.cardSetDrawer.setPosY(hs);
 		this.cardSetDrawer.setWidth(this.cw);
@@ -88,9 +90,11 @@ public class PokerBoard extends JPanel implements ConfigListener {
 	private void paintText(Graphics g) {
 		double[] hString = new double[]{-5, -5, -5, this.ch + 12, this.ch + 12, this.ch + 12, this.ch + 12, -5, -5};
 		
-		for (int i = 0; i < this.board.players.size(); ++i) {
-			String hand = this.board.players.get(i).hand.toString();
-			g.drawString(hand, (int) this.wPlayer[i], (int) (this.hPlayer[i] + hString[i]));
+		for(Player player : config.getPlayers()) {
+			this.cardSetDrawer.setImages(player.getCards());
+			int i = player.getPlayerNumber();
+			String equity = player.getEquity() * 100 + "%";
+			g.drawString(equity, (int) this.wPlayer[i], (int) (this.hPlayer[i] + hString[i]));
 		}
 	}
 	
@@ -134,20 +138,20 @@ public class PokerBoard extends JPanel implements ConfigListener {
 		this.wPlayer[4] = v2;
 		this.hPlayer[4] = h1;
 		
-		this.wPlayer[5] = v4;
+		this.wPlayer[5] = v3;
 		this.hPlayer[5] = h1;
 		
-		this.wPlayer[6] = v5;
-		this.hPlayer[6] = h2;
+		this.wPlayer[6] = v4;
+		this.hPlayer[6] = h1;
 		
 		this.wPlayer[7] = v5;
-		this.hPlayer[7] = h3;
+		this.hPlayer[7] = h2;
 		
-		this.wPlayer[8] = v4;
-		this.hPlayer[8] = h4;
+		this.wPlayer[8] = v5;
+		this.hPlayer[8] = h3;
 		
-		this.wPlayer[8] = v4;
-		this.hPlayer[8] = h4;
+		this.wPlayer[9] = v4;
+		this.hPlayer[9] = h4;
 	}
 	
 	private void drawImage(Graphics g, Image image, double x, double y, double width, double height) {
