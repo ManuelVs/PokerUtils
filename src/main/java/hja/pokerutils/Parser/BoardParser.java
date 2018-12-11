@@ -43,7 +43,7 @@ public final class BoardParser {
 			
 			Hand bestHand = HoldEmAlgorithm.calculateHand(allCards);
 			
-			players.add(new Player(playerName, bestHand, playerCards));
+			players.add(new Player(Integer.parseInt(playerName.substring(1)), bestHand, playerCards));
 		}
 		players.sort(Collections.reverseOrder());
 		return new Board(boardCards, players);
