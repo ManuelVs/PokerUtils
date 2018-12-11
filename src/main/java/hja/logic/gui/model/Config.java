@@ -3,14 +3,14 @@ package hja.logic.gui.model;
 import hja.pokerutils.Board.Player;
 import hja.pokerutils.Card.Card;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Config {
 	private ArrayList<Player> players;
 	private ArrayList<Card> boardCards;
+	private int phase;
 	
-	public Config(ArrayList<Player> players, ArrayList<Card> boardCards) {
+	public Config(ArrayList<Card> boardCards, ArrayList<Player> players) {
 		this.players = players;
 		this.boardCards = boardCards;
 	}
@@ -29,5 +29,13 @@ public class Config {
 	
 	public void setBoardCards(ArrayList<Card> boardCards) {
 		this.boardCards = boardCards;
+	}
+	
+	public int getPhase() {
+		return phase;
+	}
+	
+	public void setPhase(int phase) {
+		this.phase = phase;
 	}
 }
