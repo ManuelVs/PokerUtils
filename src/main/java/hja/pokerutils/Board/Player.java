@@ -6,38 +6,20 @@ import hja.pokerutils.Utils;
 
 import java.util.ArrayList;
 
-public class Player implements Comparable<Player> {
-	public final String name;
-	public final Hand hand;
-	public final ArrayList<Card> cards;
-	private boolean playing;
+public final class Player implements Comparable<Player> {
+	private final int playerNumber;
+	private final Hand hand;
+	private final ArrayList<Card> cards;
 	private double equity;
 	
-	public Player(String name, ArrayList<Card> cards) {
-		this(name, null, cards);
+	public Player(int playerNumber, ArrayList<Card> cards) {
+		this(playerNumber, null, cards);
 	}
 	
-	public boolean isPlaying() {
-		return playing;
-	}
-	
-	public void setPlaying(boolean playing) {
-		this.playing = playing;
-	}
-	
-	public double getEquity() {
-		return equity;
-	}
-	
-	public void setEquity(double equity) {
-		this.equity = equity;
-	}
-	
-	public Player(String name, Hand hand, ArrayList<Card> cards) {
-		this.name = name;
+	public Player(int playerNumber, Hand hand, ArrayList<Card> cards) {
+		this.playerNumber = playerNumber;
 		this.hand = hand;
 		this.cards = cards;
-		this.playing = true;
 		this.equity = 0;
 	}
 	
@@ -49,6 +31,27 @@ public class Player implements Comparable<Player> {
 	
 	@Override
 	public String toString() {
-		return this.name + " " + Utils.cardsToString(hand.getCards()) + " (" + hand.toString() + ")";
+		return "J" + this.playerNumber + " " + Utils.cardsToString(hand.getCards()) + " (" + hand.toString() + ")";
+	}
+	
+	
+	public int getPlayerNumber() {
+		return playerNumber;
+	}
+	
+	public Hand getHand() {
+		return hand;
+	}
+	
+	public ArrayList<Card> getCards() {
+		return cards;
+	}
+	
+	public double getEquity() {
+		return equity;
+	}
+	
+	public void setEquity(double equity) {
+		this.equity = equity;
 	}
 }
