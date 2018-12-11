@@ -4,7 +4,7 @@ import hja.logic.gui.model.Model;
 import hja.logic.gui.model.ModelImpl;
 
 import javax.swing.*;
-import java.awt.*;
+import java.io.IOException;
 
 public class MainWindow extends JFrame {
 	
@@ -14,33 +14,44 @@ public class MainWindow extends JFrame {
 	
 	private void initGUI() {
 		Model model = new ModelImpl();
-		CardMatrix rangeMatrix = new CardMatrix(model);
-		PercentageRange percentageRange = new PercentageRange(model);
-		TextRange rangeText = new TextRange(model);
-		BoardCards boardCards = new BoardCards(model);
-		CombosPanel combosPanel = new CombosPanel(model);
+		JMenuBar menuBar = new JMenuBar();
+		JMenu fileMenu = new JMenu("Archivo");
+		JMenuItem openFileItem = new JMenuItem("Abrir");
+		JMenuItem settingsItem = new JMenuItem("Configuración");
 		
+		fileMenu.add(openFileItem);
+		fileMenu.add(settingsItem);
+		menuBar.add(fileMenu);
 		
-		JPanel leftPanel = new JPanel();
-		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-		leftPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		this.setTitle("HJA Equity calculator");
 		
-		leftPanel.add(rangeText);
-		leftPanel.add(rangeMatrix);
-		leftPanel.add(percentageRange);
+		PokerBoard board;
 		
-		
-		JPanel rightPanel = new JPanel();
-		rightPanel.setLayout(new GridLayout(1, 2));
-		
-		boardCards.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		combosPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		rightPanel.add(boardCards);
-		rightPanel.add(combosPanel);
-		
-		this.setLayout(new GridLayout(1, 2));
-		//this.rootPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		this.add(leftPanel);
-		this.add(rightPanel);
+		try {
+			board = new PokerBoard();
+			ConfigWindow nextPhaseWindow = new ConfigWindow(model);
+			nextPhaseWindow.setVisible(true);
+			
+			
+			JButton nextPhaseButton = new JButton("Siguiente fase");
+			nextPhaseButton.setAlignmentX(RIGHT_ALIGNMENT);
+			nextPhaseButton.setFocusPainted(false);
+			
+			nextPhaseButton.addActionListener(e -> {
+
+			});
+			
+			JPanel boardPanel = new JPanel();
+			boardPanel.setLayout(new BoxLayout(boardPanel, BoxLayout.Y_AXIS));
+			boardPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+			
+			boardPanel.add(nextPhaseButton);
+			boardPanel.add(board);
+			
+			this.setJMenuBar(menuBar);
+			this.add(boardPanel);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -1,17 +1,18 @@
 package hja.logic.gui.model;
 
+import hja.pokerutils.Board.Player;
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Range.Range;
 
+import java.util.ArrayList;
+
 public interface Model {
 	
-	void setRange(Range range);
+	void setConfig(Config config);
+
+	void nextPhase();
 	
-	void setCard(Card card);
+	void deletePlayer(Player p);
 	
-	void addBoardCardsListener(BoardCardsListener listener);
-	
-	void addCombosListener(CombosListener listener);
-	
-	void addRangeListener(RangeListener listener);
+	void addConfigListener(ConfigListener listener);
 }

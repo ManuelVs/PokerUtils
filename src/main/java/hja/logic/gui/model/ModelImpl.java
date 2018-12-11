@@ -2,6 +2,7 @@ package hja.logic.gui.model;
 
 import hja.pokerutils.Algorithm.Combos;
 import hja.pokerutils.Algorithm.CombosAlgorithm;
+import hja.pokerutils.Board.Player;
 import hja.pokerutils.Card.Card;
 import hja.pokerutils.Range.Range;
 
@@ -9,83 +10,45 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class ModelImpl implements Model {
-	private final ArrayList<Card> cards;
-	private final ArrayList<BoardCardsListener> boardCardsListeners;
-	private final ArrayList<CombosListener> combosListeners;
-	private final ArrayList<RangeListener> rangeListeners;
-	private Range range;
-	private Combos combos;
+	private Config config;
+	private ArrayList<ConfigListener> configListeners;
 	
 	public ModelImpl() {
-		this.cards = new ArrayList<>(5);
-		this.range = new Range();
-		this.combos = new Combos();
-		
-		this.boardCardsListeners = new ArrayList<>();
-		this.combosListeners = new ArrayList<>();
-		this.rangeListeners = new ArrayList<>();
+		this.config = null;
+		this.configListeners = new ArrayList<>();
 	}
 	
-	public void setRange(Range range) {
-		this.range = range;
-		
-		updateCombos();
-		notifyRangeListeners();
+	
+	@Override
+	public void setConfig(Config config) {
+		this.config = config;
+		notifyAllConfigListeners();
 	}
 	
-	public void setCard(Card card) {
-		if (!this.cards.remove(card) && this.cards.size() < 5) {
-			this.cards.add(card);
-		}
-		
-		updateCombos();
-		notifyBoardCardsListeners();
+	@Override
+	public void nextPhase() {
+		//Ver como hacerlo
 	}
 	
-	public void addBoardCardsListener(BoardCardsListener listener) {
-		this.boardCardsListeners.add(listener);
+	@Override
+	public void deletePlayer(Player p) {
+		ArrayList<Player> players = this.config.getPlayers();
+		players.remove(p);
+		this.config = new Config(players, this.config.getBoardCards());
+		notifyAllConfigListeners();
 	}
 	
-	public void addCombosListener(CombosListener listener) {
-		this.combosListeners.add(listener);
+	@Override
+	public void addConfigListener(ConfigListener listener) {
+		this.configListeners.add(listener);
 	}
 	
-	public void addRangeListener(RangeListener listener) {
-		this.rangeListeners.add(listener);
-	}
-	
-	private void updateCombos() {
-		Thread thread = new Thread(() -> {
-			if (ModelImpl.this.cards.size() >= 3) {
-				ModelImpl.this.combos = CombosAlgorithm.getCombos(range, new ArrayList<>(cards));
-			}
-			else combos = new Combos();
-			notifyCombosListener();
-		});
-		thread.start();
-	}
-	
-	private void notifyBoardCardsListeners() {
+	public void notifyAllConfigListeners(){
 		SwingUtilities.invokeLater(() -> {
-			for (BoardCardsListener listener : boardCardsListeners) {
-				listener.notify(ModelImpl.this.cards);
+			for (ConfigListener listener: this.configListeners) {
+				listener.notify(this.config);
 			}
 		});
 	}
 	
-	private void notifyRangeListeners() {
-		SwingUtilities.invokeLater(() -> {
-			for (RangeListener listener : rangeListeners) {
-				listener.notify(ModelImpl.this.range);
-			}
-		});
-	}
-	
-	private void notifyCombosListener() {
-		SwingUtilities.invokeLater(() -> {
-			for (CombosListener listener : combosListeners) {
-				listener.notify(combos);
-			}
-		});
-	}
 }

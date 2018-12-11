@@ -4,7 +4,6 @@ import hja.pokerutils.Card.Card;
 
 import java.util.ArrayList;
 
-public interface BoardCardsListener {
-	
-	void notify(ArrayList<Card> cards);
+public interface PlayerCardsListener {
+	void notify(int player, ArrayList<Card> cards);
 }
