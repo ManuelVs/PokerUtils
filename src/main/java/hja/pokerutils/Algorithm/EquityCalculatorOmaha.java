@@ -1,5 +1,6 @@
 package hja.pokerutils.Algorithm;
 
+import hja.logic.gui.model.Config;
 import hja.pokerutils.Algorithm.Combinations.CombinationCalculator;
 import hja.pokerutils.Algorithm.Combinations.CountedCombinationIterator;
 import hja.pokerutils.Board.Board;
@@ -17,13 +18,13 @@ import java.util.concurrent.Future;
 public final class EquityCalculatorOmaha {
 	private static ExecutorService pool = Executors.newCachedThreadPool();
 	
-	public static double[] calculateEquity(Board board) {
-		ArrayList<Card> allPossibleCards = getPossibleCards(board);
-		double[] equity = new double[board.players.size()];
+	public static double[] calculateEquity(Config config) {
+		ArrayList<Card> allPossibleCards = getPossibleCards(config);
+		double[] equity = new double[config.getPlayers().size()];
 		
 		int nTotal = 0;
 		try {
-			for (Future<int[]> future : sendTasks(board, allPossibleCards)) {
+			for (Future<int[]> future : sendTasks(config, allPossibleCards)) {
 				int[] partialEquity = future.get();
 				
 				for (int i = 0; i < partialEquity.length; ++i) {
@@ -41,15 +42,15 @@ public final class EquityCalculatorOmaha {
 		return equity;
 	}
 	
-	private static ArrayList<Card> getPossibleCards(Board board){
+	private static ArrayList<Card> getPossibleCards(Config config){
 		ArrayList<Card> allPossibleCards = CardFactory.getAllCards();
 		
-		for (Card card : board.boardCards) {
+		for (Card card : config.getBoardCards()) {
 			allPossibleCards.remove(card);
 		}
 		
-		for (Player player : board.players) {
-			for (Card card : player.cards) {
+		for (Player player : config.getPlayers()) {
+			for (Card card : player.getCards()) {
 				allPossibleCards.remove(card);
 			}
 		}
@@ -57,10 +58,10 @@ public final class EquityCalculatorOmaha {
 		return allPossibleCards;
 	}
 	
-	private static ArrayList<Future<int[]>> sendTasks(Board board, ArrayList<Card> allPossibleCards){
+	private static ArrayList<Future<int[]>> sendTasks(Config config, ArrayList<Card> allPossibleCards){
 		ArrayList<Future<int[]>> futures = new ArrayList<>();
 		
-		int numLeftCards = 5 - board.boardCards.size();
+		int numLeftCards = 5 - config.getBoardCards().size();
 		CombinationCalculator<Card> combinations = new CombinationCalculator<>(allPossibleCards, numLeftCards);
 		int numCores = Runtime.getRuntime().availableProcessors();
 		Iterator<CountedCombinationIterator<Card>> iterators = combinations.iterators(numCores);
@@ -68,10 +69,10 @@ public final class EquityCalculatorOmaha {
 			CountedCombinationIterator<Card> iterator = iterators.next();
 			
 			Future<int[]> future = pool.submit(() -> {
-				int[] partialEquity = new int[board.players.size()];
+				int[] partialEquity = new int[config.getPlayers().size()];
 				while (iterator.hasNext()) {
 					ArrayList<Card> combination = iterator.next();
-					Integer i = calculateBest(combination, board);
+					Integer i = calculateBest(combination, config);
 					partialEquity[i] += 1;
 				}
 				
@@ -84,17 +85,17 @@ public final class EquityCalculatorOmaha {
 		return futures;
 	}
 	
-	private static int calculateBest(ArrayList<Card> combination, Board board) {
-		ArrayList<Card> cards = new ArrayList<>(board.boardCards);
+	private static int calculateBest(ArrayList<Card> combination, Config config) {
+		ArrayList<Card> cards = new ArrayList<>(config.getBoardCards());
 		cards.addAll(combination);
 		
 		int bestIndex = 0;
-		Player player = board.players.get(0);
-		Hand bestHand = OmahaAlgorithm.calculateHand(player.cards, cards);
+		Player player = config.getPlayers().get(0);
+		Hand bestHand = OmahaAlgorithm.calculateHand(player.getCards(), cards);
 		
-		for (int i = 1; i < board.players.size(); ++i) {
-			player = board.players.get(i);
-			Hand hand = OmahaAlgorithm.calculateHand(player.cards, cards);
+		for (int i = 1; i < config.getPlayers().size(); ++i) {
+			player = config.getPlayers().get(i);
+			Hand hand = OmahaAlgorithm.calculateHand(player.getCards(), cards);
 			
 			if (hand.compareTo(bestHand) > 0) {
 				bestHand = hand;
