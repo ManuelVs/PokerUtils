@@ -7,6 +7,7 @@ import hja.pokerutils.Card.Card;
 import hja.pokerutils.Card.CardFactory;
 import hja.pokerutils.Hand.Hand;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
@@ -73,8 +74,11 @@ public final class EquityCalculator {
 				int[] partialEquity = new int[players.size()];
 				while (iterator.hasNext()) {
 					ArrayList<Card> combination = iterator.next();
-					Integer i = calculateBest(combination, players, boardCards, classifier);
-					partialEquity[i] += 1;
+					ArrayList<Integer> indexArray = calculateBest(combination, players, boardCards, classifier);
+					int sameEquity = 10 / indexArray.size();
+					for (Integer i: indexArray) {
+						partialEquity[i] += sameEquity;
+					}
 				}
 				
 				return partialEquity;
@@ -86,11 +90,12 @@ public final class EquityCalculator {
 		return futures;
 	}
 	
-	private static int calculateBest(ArrayList<Card> combination, ArrayList<Player> players, ArrayList<Card> boardCards, HandClassifier classifier) {
+	private static ArrayList<Integer> calculateBest(ArrayList<Card> combination, ArrayList<Player> players, ArrayList<Card> boardCards, HandClassifier classifier) {
 		ArrayList<Card> cards = new ArrayList<>(boardCards);
 		cards.addAll(combination);
 		
-		int bestIndex = 0;
+		ArrayList<Integer> bestIndex = new ArrayList<>();
+		bestIndex.add(0);
 		Player player = players.get(0);
 		Hand bestHand = classifier.calculateHand(player.getCards(), cards);
 		
@@ -100,7 +105,12 @@ public final class EquityCalculator {
 			
 			if (hand.compareTo(bestHand) > 0) {
 				bestHand = hand;
-				bestIndex = i;
+				bestIndex.clear();
+				bestIndex.add(i);
+			}
+			else if (hand.compareTo(bestHand) == 0) {
+				bestHand = hand;
+				bestIndex.add(i);
 			}
 		}
 		
