@@ -247,7 +247,6 @@ public class ConfigWindow extends JFrame {
 		this.allPossibleCards = CardFactory.getAllCards();
 		this.boardCards = new ArrayList<>();
 		this.phase = PREFLOP_PHASE;
-		this.mode = HOLDEM_MODE;
 		
 		this.players = new Player[NUM_PLAYERS];
 
