@@ -91,16 +91,18 @@ public class PokerBoard extends JPanel implements ConfigListener {
 	
 	private void paintText(Graphics g) {
 		double[] hString = new double[]{-5, -5, -5, this.ch + 12, this.ch + 12, this.ch + 12,this.ch + 12, this.ch + 12, -5, -5};
+		double wString = this.cw * fs;
 		
+		g.setFont(new Font("Arial", Font.BOLD, 14));
+		g.setColor(Color.WHITE);
 		for (Player player : config.getPlayers()) {
 			int i = player.getPlayerNumber();
 			DecimalFormat df = new DecimalFormat("#.##");
 			
-			
 			String equity = df.format(player.getEquity() * 100) + "%";
 			String name_equity = "J" + (player.getPlayerNumber() + 1) + ": " + equity;
 			
-			g.drawString(name_equity, (int) this.wPlayer[i], (int) (this.hPlayer[i] + hString[i]));
+			g.drawString(name_equity, (int) (this.wPlayer[i] + wString), (int) (this.hPlayer[i] + hString[i]));
 		}
 	}
 	

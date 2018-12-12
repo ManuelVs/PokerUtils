@@ -22,16 +22,6 @@ public class ModelImpl implements Model {
 		onConfigChanged();
 	}
 	
-/*
-	@Override
-	public void deletePlayer(Player p) {
-		ArrayList<Player> players = this.config.getPlayers();
-		players.remove(p);
-		
-		this.config = new Config(this.config.getBoardCards(), players);
-		onConfigChanged();
-	}*/
-	
 	@Override
 	public void addConfigListener(ConfigListener listener) {
 		this.configListeners.add(listener);

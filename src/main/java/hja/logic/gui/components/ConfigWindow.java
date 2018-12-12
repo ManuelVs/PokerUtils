@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ConfigWindow extends JFrame {
-	private static final int ALL_CARDS = 52;
-	
 	private static final int NUM_PLAYERS = 10;
 	
 	private static final int HOLDEM_MODE = 2;
@@ -48,8 +46,6 @@ public class ConfigWindow extends JFrame {
 	
 	public ConfigWindow(Model model) {
 		super("Settings");
-		this.setSize(525, 580);
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		this.model = model;
 		this.allPossibleCards = CardFactory.getAllCards();
@@ -83,7 +79,6 @@ public class ConfigWindow extends JFrame {
 	
 	private JPanel createBoardPanel(){
 		boardPanel = new BoardPanel(this);
-		
 		return boardPanel;
 	}
 	
@@ -102,19 +97,22 @@ public class ConfigWindow extends JFrame {
 	
 	private JPanel createButtonsPanel(){
 		JButton resetButton = new JButton("Reset");
-		resetButton.addActionListener(e -> {
-			resetAll();
-		});
+		resetButton.addActionListener(e ->
+			resetAll()
+		);
 		
 		startButton = new JButton("Start");
 		startButton.addActionListener(e -> {
-			if(this.allPossibleCards.size() < ALL_CARDS - this.mode - 5 && this.boardCards.size() == 5){
+			if(validateConfig()){
 				updateConfigToModel();
 				startButton.setEnabled(false);
 				nextPhaseButton.setEnabled(true);
 			}
 			else {
-				JOptionPane.showMessageDialog(this, "There are not enough cards to calculate equity.", "ERROR", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this,
+					"The actual configuration is not valid.",
+					"ERROR",
+					JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		
@@ -135,12 +133,11 @@ public class ConfigWindow extends JFrame {
 		
 		JComboBox<String> modes = new JComboBox<>(new String[]{ "HoldEm", "Omaha" });
 		modes.addActionListener(e -> {
+			resetAll();
 			if(modes.getSelectedIndex() == 0){
-				resetAll();
 				mode = HOLDEM_MODE;
 			}
 			else {
-				resetAll();
 				mode = OMAHA_MODE;
 			}
 		});
@@ -174,22 +171,27 @@ public class ConfigWindow extends JFrame {
 				this.allPossibleCards.addAll(oldCards);
 				
 				if(allPossibleCards.containsAll(playerCards)){
-					this.players[player].setCards(playerCards);
-					notifyPlayerPanel(player, cards);
 					this.allPossibleCards.removeAll(playerCards);
+					
+					this.players[player].setCards(playerCards);
+					this.playerPanels[player].setCards(cards);
 				}
 				else {
-					JOptionPane.showMessageDialog(this, "Some cards of the player " + (player + 1) + " are already in this game.", "ERROR", JOptionPane.ERROR_MESSAGE);
-					notifyPlayerPanel(player, "");
+					JOptionPane.showMessageDialog(this,
+						"Some cards of the player " + (player + 1) + " are already in this game.",
+						"ERROR",
+						JOptionPane.ERROR_MESSAGE);
+					
+					playerPanels[player].setCards("");
 				}
 			} catch (ParseException e) {
 				JOptionPane.showMessageDialog(this, "Some cards of the player " + (player + 1) + " are not typed correctly.", "ERROR", JOptionPane.ERROR_MESSAGE);
-				notifyPlayerPanel(player, "");
+				playerPanels[player].setCards("");
 			}
 		}
 		else {
 			JOptionPane.showMessageDialog(this, "The player " + (player + 1) + " it is not playing currently.", "ERROR", JOptionPane.ERROR_MESSAGE);
-			notifyPlayerPanel(player, "");
+			playerPanels[player].setCards("");
 		}
 	}
 	
@@ -197,24 +199,21 @@ public class ConfigWindow extends JFrame {
 		if(this.activePlayers[player]) {
 			ArrayList<Card> oldCards = this.players[player].getCards();
 			this.allPossibleCards.addAll(oldCards);
+			
 			ArrayList<Card> playerCards = getRandomCards(this.mode);
+			this.allPossibleCards.removeAll(playerCards);
 			
 			this.players[player].setCards(playerCards);
-			notifyPlayerPanel(player, Utils.cardsToString(playerCards));
-			this.allPossibleCards.removeAll(playerCards);
+			this.playerPanels[player].setCards(Utils.cardsToString(playerCards));
 		} else {
 			JOptionPane.showMessageDialog(this, "The player " + (player + 1) + " it is not playing currently.", "ERROR", JOptionPane.ERROR_MESSAGE);
-			notifyPlayerPanel(player, "");
+			playerPanels[player].setCards("");
 		}
 	}
 	
 	private void foldPlayer(int player) {
 		activePlayers[player] = false;
 		playerPanels[player].setEnabled(false);
-	}
-	
-	private void notifyPlayerPanel(int player, String cards){
-		playerPanels[player].setCards(cards);
 	}
 	
 	private void setRandomCardsForBoard() {
@@ -244,37 +243,6 @@ public class ConfigWindow extends JFrame {
 		}
 	}
 	
-	private void updateConfigToModel(){
-		ArrayList<Player> players = new ArrayList<>();
-		for(int i = 0; i < activePlayers.length; ++i){
-			if(activePlayers[i]){
-				players.add(this.players[i]);
-			}
-		}
-		
-		int numBoardCards;
-		switch (phase){
-			case PREFLOP_PHASE: numBoardCards = 0; break;
-			case FLOP_PHASE: numBoardCards = 3; break;
-			case TURN_PHASE: numBoardCards = 4; break;
-			default: numBoardCards = 5; break;
-		}
-		
-		HandClassifier classifier;
-		if(mode == HOLDEM_MODE){
-			classifier = new HoldEmAlgorithm();
-		}
-		else {
-			classifier = new OmahaAlgorithm();
-		}
-		
-		
-		ArrayList<Card> board = new ArrayList<>(this.boardCards.subList(0, numBoardCards));
-		
-		Config config = new Config(board, players, classifier);
-		model.setConfig(config);
-	}
-	
 	private void resetAll() {
 		this.allPossibleCards = CardFactory.getAllCards();
 		this.boardCards = new ArrayList<>();
@@ -296,6 +264,44 @@ public class ConfigWindow extends JFrame {
 		
 		startButton.setEnabled(true);
 		nextPhaseButton.setEnabled(false);
+	}
+	
+	private void updateConfigToModel() {
+		ArrayList<Player> players = new ArrayList<>();
+		for(int i = 0; i < activePlayers.length; ++i){
+			if(activePlayers[i]){
+				players.add(this.players[i]);
+			}
+		}
+		
+		int numBoardCards;
+		switch (phase) {
+			case PREFLOP_PHASE: numBoardCards = 0; break;
+			case FLOP_PHASE: numBoardCards = 3; break;
+			case TURN_PHASE: numBoardCards = 4; break;
+			default: numBoardCards = 5; break;
+		}
+		ArrayList<Card> board = new ArrayList<>(this.boardCards.subList(0, numBoardCards));
+		
+		HandClassifier classifier;
+		classifier = mode == OMAHA_MODE ? new OmahaAlgorithm() : new HoldEmAlgorithm();
+		
+		Config config = new Config(board, players, classifier);
+		model.setConfig(config);
+	}
+	
+	private boolean validateConfig() {
+		if(boardCards.size() != 5) return false;
+		
+		for(int i = 0; i < activePlayers.length; ++i){
+			if(activePlayers[i]){
+				if(players[i].getCards().size() != mode){
+					return false;
+				}
+			}
+		}
+		
+		return true;
 	}
 	
 	private static class PlayerPanel extends JPanel {
