@@ -7,7 +7,6 @@ import hja.pokerutils.Card.Card;
 import hja.pokerutils.Card.CardFactory;
 import hja.pokerutils.Hand.Hand;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
@@ -76,7 +75,7 @@ public final class EquityCalculator {
 					ArrayList<Card> combination = iterator.next();
 					ArrayList<Integer> indexArray = calculateBest(combination, players, boardCards, classifier);
 					int sameEquity = 10 / indexArray.size();
-					for (Integer i: indexArray) {
+					for (Integer i : indexArray) {
 						partialEquity[i] += sameEquity;
 					}
 				}

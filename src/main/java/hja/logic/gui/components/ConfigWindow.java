@@ -13,12 +13,13 @@ import hja.pokerutils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class ConfigWindow extends JFrame {
+	private static final long serialVersionUID = 3058169837273332867L;
+	
 	private static final int NUM_PLAYERS = 10;
 	
 	private static final int HOLDEM_MODE = 2;
@@ -55,7 +56,7 @@ public class ConfigWindow extends JFrame {
 		
 		this.players = new Player[NUM_PLAYERS];
 		this.activePlayers = new boolean[NUM_PLAYERS];
-		for(int i = 0; i < NUM_PLAYERS; ++i){
+		for (int i = 0; i < NUM_PLAYERS; ++i) {
 			players[i] = new Player(i, new ArrayList<>());
 			
 			activePlayers[i] = true;
@@ -77,7 +78,7 @@ public class ConfigWindow extends JFrame {
 		this.add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
-	private JPanel createBoardPanel(){
+	private JPanel createBoardPanel() {
 		boardPanel = new BoardPanel(this);
 		return boardPanel;
 	}
@@ -87,7 +88,7 @@ public class ConfigWindow extends JFrame {
 		playersPanel.setLayout(new BoxLayout(playersPanel, BoxLayout.Y_AXIS));
 		
 		this.playerPanels = new PlayerPanel[NUM_PLAYERS];
-		for(int i = 0; i < NUM_PLAYERS; ++i){
+		for (int i = 0; i < NUM_PLAYERS; ++i) {
 			playerPanels[i] = new PlayerPanel(i, this);
 			playersPanel.add(playerPanels[i]);
 		}
@@ -95,7 +96,7 @@ public class ConfigWindow extends JFrame {
 		return playersPanel;
 	}
 	
-	private JPanel createButtonsPanel(){
+	private JPanel createButtonsPanel() {
 		JButton resetButton = new JButton("Reset");
 		resetButton.addActionListener(e ->
 			resetAll()
@@ -103,7 +104,7 @@ public class ConfigWindow extends JFrame {
 		
 		startButton = new JButton("Start");
 		startButton.addActionListener(e -> {
-			if(validateConfig()){
+			if (validateConfig()) {
 				updateConfigToModel();
 				startButton.setEnabled(false);
 				nextPhaseButton.setEnabled(true);
@@ -118,7 +119,7 @@ public class ConfigWindow extends JFrame {
 		
 		nextPhaseButton = new JButton("Next phase");
 		nextPhaseButton.addActionListener(e -> {
-			if(phase < 3){
+			if (phase < 3) {
 				phase++;
 				updateConfigToModel();
 			}
@@ -131,10 +132,10 @@ public class ConfigWindow extends JFrame {
 		
 		JPanel buttonsPanel = new JPanel();
 		
-		JComboBox<String> modes = new JComboBox<>(new String[]{ "HoldEm", "Omaha" });
+		JComboBox<String> modes = new JComboBox<>(new String[]{"HoldEm", "Omaha"});
 		modes.addActionListener(e -> {
 			resetAll();
-			if(modes.getSelectedIndex() == 0){
+			if (modes.getSelectedIndex() == 0) {
 				mode = HOLDEM_MODE;
 			}
 			else {
@@ -150,11 +151,11 @@ public class ConfigWindow extends JFrame {
 		return buttonsPanel;
 	}
 	
-	private ArrayList<Card> getRandomCards(int n){
+	private ArrayList<Card> getRandomCards(int n) {
 		ArrayList<Card> cards = new ArrayList<>(this.allPossibleCards);
 		ArrayList<Card> out = new ArrayList<>(n);
 		
-		for(int i = 0; i < n; i++){
+		for (int i = 0; i < n; i++) {
 			Card card = cards.get(this.random.nextInt(cards.size()));
 			out.add(card);
 			cards.remove(card);
@@ -163,14 +164,14 @@ public class ConfigWindow extends JFrame {
 		return out;
 	}
 	
-	private void setCardsForPlayer(int player, String cards){
-		if(this.activePlayers[player]) {
+	private void setCardsForPlayer(int player, String cards) {
+		if (this.activePlayers[player]) {
 			try {
 				ArrayList<Card> playerCards = CardListParser.parseListCards(cards);
 				ArrayList<Card> oldCards = this.players[player].getCards();
 				this.allPossibleCards.addAll(oldCards);
 				
-				if(allPossibleCards.containsAll(playerCards)){
+				if (allPossibleCards.containsAll(playerCards)) {
 					this.allPossibleCards.removeAll(playerCards);
 					
 					this.players[player].setCards(playerCards);
@@ -184,7 +185,8 @@ public class ConfigWindow extends JFrame {
 					
 					playerPanels[player].setCards("");
 				}
-			} catch (ParseException e) {
+			}
+			catch (ParseException e) {
 				JOptionPane.showMessageDialog(this, "Some cards of the player " + (player + 1) + " are not typed correctly.", "ERROR", JOptionPane.ERROR_MESSAGE);
 				playerPanels[player].setCards("");
 			}
@@ -195,8 +197,8 @@ public class ConfigWindow extends JFrame {
 		}
 	}
 	
-	private void setRandomCardsForPlayer(int player){
-		if(this.activePlayers[player]) {
+	private void setRandomCardsForPlayer(int player) {
+		if (this.activePlayers[player]) {
 			ArrayList<Card> oldCards = this.players[player].getCards();
 			this.allPossibleCards.addAll(oldCards);
 			
@@ -205,7 +207,8 @@ public class ConfigWindow extends JFrame {
 			
 			this.players[player].setCards(playerCards);
 			this.playerPanels[player].setCards(Utils.cardsToString(playerCards));
-		} else {
+		}
+		else {
 			JOptionPane.showMessageDialog(this, "The player " + (player + 1) + " it is not playing currently.", "ERROR", JOptionPane.ERROR_MESSAGE);
 			playerPanels[player].setCards("");
 		}
@@ -228,7 +231,7 @@ public class ConfigWindow extends JFrame {
 		try {
 			ArrayList<Card> cards = CardListParser.parseListCards(text);
 			this.allPossibleCards.addAll(boardCards);
-			if(allPossibleCards.containsAll(cards)) {
+			if (allPossibleCards.containsAll(cards)) {
 				boardCards = cards;
 				boardPanel.setCards(text);
 				this.allPossibleCards.removeAll(boardCards);
@@ -237,7 +240,8 @@ public class ConfigWindow extends JFrame {
 				JOptionPane.showMessageDialog(this, "Some of the cards of the board that you are trying to set are already in this game.", "ERROR", JOptionPane.ERROR_MESSAGE);
 				boardPanel.setCards("");
 			}
-		} catch (ParseException e) {
+		}
+		catch (ParseException e) {
 			JOptionPane.showMessageDialog(this, "Some cards of the board are not typed correctly.", "ERROR", JOptionPane.ERROR_MESSAGE);
 			boardPanel.setCards("");
 		}
@@ -249,9 +253,9 @@ public class ConfigWindow extends JFrame {
 		this.phase = PREFLOP_PHASE;
 		
 		this.players = new Player[NUM_PLAYERS];
-
+		
 		this.activePlayers = new boolean[NUM_PLAYERS];
-		for(int i = 0; i < NUM_PLAYERS; ++i){
+		for (int i = 0; i < NUM_PLAYERS; ++i) {
 			players[i] = new Player(i, new ArrayList<>());
 			
 			activePlayers[i] = true;
@@ -267,18 +271,26 @@ public class ConfigWindow extends JFrame {
 	
 	private void updateConfigToModel() {
 		ArrayList<Player> players = new ArrayList<>();
-		for(int i = 0; i < activePlayers.length; ++i){
-			if(activePlayers[i]){
+		for (int i = 0; i < activePlayers.length; ++i) {
+			if (activePlayers[i]) {
 				players.add(this.players[i]);
 			}
 		}
 		
 		int numBoardCards;
 		switch (phase) {
-			case PREFLOP_PHASE: numBoardCards = 0; break;
-			case FLOP_PHASE: numBoardCards = 3; break;
-			case TURN_PHASE: numBoardCards = 4; break;
-			default: numBoardCards = 5; break;
+			case PREFLOP_PHASE:
+				numBoardCards = 0;
+				break;
+			case FLOP_PHASE:
+				numBoardCards = 3;
+				break;
+			case TURN_PHASE:
+				numBoardCards = 4;
+				break;
+			default:
+				numBoardCards = 5;
+				break;
 		}
 		ArrayList<Card> board = new ArrayList<>(this.boardCards.subList(0, numBoardCards));
 		
@@ -290,11 +302,11 @@ public class ConfigWindow extends JFrame {
 	}
 	
 	private boolean validateConfig() {
-		if(boardCards.size() != 5) return false;
+		if (boardCards.size() != 5) return false;
 		
-		for(int i = 0; i < activePlayers.length; ++i){
-			if(activePlayers[i]){
-				if(players[i].getCards().size() != mode){
+		for (int i = 0; i < activePlayers.length; ++i) {
+			if (activePlayers[i]) {
+				if (players[i].getCards().size() != mode) {
 					return false;
 				}
 			}
@@ -304,6 +316,7 @@ public class ConfigWindow extends JFrame {
 	}
 	
 	private static class PlayerPanel extends JPanel {
+		private static final long serialVersionUID = 4050958016626992539L;
 		private int numPlayer;
 		private ConfigWindow configWindow;
 		
@@ -341,7 +354,7 @@ public class ConfigWindow extends JFrame {
 			setButton.addActionListener(e -> {
 				if (configWindow.startButton.isEnabled()) {
 					String cards = cardsText.getText();
-					if(!cards.isEmpty())
+					if (!cards.isEmpty())
 						configWindow.setCardsForPlayer(this.numPlayer, cards);
 					else
 						JOptionPane.showMessageDialog(this, "There are no cards to set.", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -367,7 +380,7 @@ public class ConfigWindow extends JFrame {
 			this.cardsText.setText(cards);
 		}
 		
-		public void setEnabled(boolean activate){
+		public void setEnabled(boolean activate) {
 			super.setEnabled(activate);
 			
 			randomButton.setEnabled(activate);
@@ -378,6 +391,8 @@ public class ConfigWindow extends JFrame {
 	}
 	
 	private static class BoardPanel extends JPanel {
+		private static final long serialVersionUID = -557600694374659522L;
+		
 		private ConfigWindow configWindow;
 		
 		private JTextField cardsText;
@@ -401,7 +416,8 @@ public class ConfigWindow extends JFrame {
 			randomButton.addActionListener(e -> {
 				if (configWindow.startButton.isEnabled()) {
 					configWindow.setRandomCardsForBoard();
-				} else {
+				}
+				else {
 					JOptionPane.showMessageDialog(this, "It is not allowed to change cards in the middle of the game.", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 			});
@@ -409,12 +425,13 @@ public class ConfigWindow extends JFrame {
 			setButton.addActionListener(e -> {
 				if (configWindow.startButton.isEnabled()) {
 					String cards = cardsText.getText();
-					if(!cards.isEmpty())
+					if (!cards.isEmpty())
 						configWindow.setBoardCards(cards);
 					else
 						JOptionPane.showMessageDialog(this, "There are no cards to set.", "ERROR", JOptionPane.ERROR_MESSAGE);
 					
-				} else {
+				}
+				else {
 					JOptionPane.showMessageDialog(this, "It is not allowed to change cards in the middle of the game.", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				

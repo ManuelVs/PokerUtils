@@ -31,7 +31,7 @@ public class MCardSet {
 			}
 		}
 	}
-
+	
 	protected double posX, posY, width, height, fs;
 	protected ArrayList<Card> images;
 	

@@ -35,7 +35,7 @@ public final class CardListParser {
 	}
 	
 	public static ArrayList<Card> parseListCards(String cards) throws ParseException {
-		try{
+		try {
 			int numCards = cards.length() / 2;
 			StringReader stringReader = new StringReader(cards);
 			

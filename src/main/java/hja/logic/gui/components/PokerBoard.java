@@ -13,25 +13,22 @@ import java.net.URL;
 import java.text.DecimalFormat;
 
 public class PokerBoard extends JPanel implements ConfigListener {
+	private static final long serialVersionUID = -3362394789027040210L;
+	
 	private static final int NUM_PLAYERS = 10;
 	
 	protected final double aspect_ratio_card = 1.452;
-	
+	protected final double[] wPlayer;
+	protected final double[] hPlayer;
+	protected final MCardSet cardSetDrawer;
 	protected double vs;
 	protected double hs;
 	protected double sep;
-	
 	protected double fs;
 	protected double cw;
 	protected double ch;
-	
-	protected final double[] wPlayer;
-	protected final double[] hPlayer;
-	
 	protected Image pokerBoard;
-	
 	protected Config config;
-	protected final MCardSet cardSetDrawer;
 	
 	public PokerBoard(Model model) throws IOException {
 		this.wPlayer = new double[NUM_PLAYERS];
@@ -90,7 +87,7 @@ public class PokerBoard extends JPanel implements ConfigListener {
 	}
 	
 	private void paintText(Graphics g) {
-		double[] hString = new double[]{-5, -5, -5, this.ch + 12, this.ch + 12, this.ch + 12,this.ch + 12, this.ch + 12, -5, -5};
+		double[] hString = new double[]{-5, -5, -5, this.ch + 12, this.ch + 12, this.ch + 12, this.ch + 12, this.ch + 12, -5, -5};
 		double wString = this.cw * fs;
 		
 		g.setFont(new Font("Arial", Font.BOLD, 14));

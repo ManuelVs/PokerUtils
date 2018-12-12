@@ -1,7 +1,6 @@
 package hja.logic.gui.model;
 
 import hja.pokerutils.Algorithm.EquityCalculator;
-import hja.pokerutils.Board.Player;
 
 import java.util.ArrayList;
 
