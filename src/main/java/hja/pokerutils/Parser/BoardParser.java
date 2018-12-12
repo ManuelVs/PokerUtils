@@ -1,10 +1,8 @@
 package hja.pokerutils.Parser;
 
-import hja.pokerutils.Algorithm.HoldEmAlgorithm;
 import hja.pokerutils.Board.Board;
 import hja.pokerutils.Board.Player;
 import hja.pokerutils.Card.Card;
-import hja.pokerutils.Hand.Hand;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -17,7 +15,6 @@ public final class BoardParser {
 	public static Board parseBoard(Reader reader) throws IOException {
 		int cNumPlayers = reader.read();
 		int numPlayers = charToInt((char) cNumPlayers);
-		HoldEmAlgorithm classifier = new HoldEmAlgorithm();
 		
 		reader.read();
 		
@@ -42,7 +39,7 @@ public final class BoardParser {
 			allCards.addAll(playerCards);
 			allCards.addAll(boardCards);
 			
-			Hand bestHand = classifier.calculateHand(allCards);
+			//Hand bestHand = classifier.calculateHand(allCards);
 			
 			players.add(new Player(Integer.parseInt(playerName.substring(1)), playerCards));
 		}
