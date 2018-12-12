@@ -215,8 +215,13 @@ public class ConfigWindow extends JFrame {
 	}
 	
 	private void foldPlayer(int player) {
+		if (activePlayers[player]){
+			allPossibleCards.addAll(players[player].getCards());
+		}
+		
 		activePlayers[player] = false;
 		playerPanels[player].setEnabled(false);
+		playerPanels[player].setCards("");
 	}
 	
 	private void setRandomCardsForBoard() {
@@ -303,16 +308,18 @@ public class ConfigWindow extends JFrame {
 	
 	private boolean validateConfig() {
 		if (boardCards.size() != 5) return false;
+		int numPlayers = 0;
 		
 		for (int i = 0; i < activePlayers.length; ++i) {
 			if (activePlayers[i]) {
 				if (players[i].getCards().size() != mode) {
 					return false;
 				}
+				++numPlayers;
 			}
 		}
 		
-		return true;
+		return numPlayers != 0;
 	}
 	
 	private static class PlayerPanel extends JPanel {
