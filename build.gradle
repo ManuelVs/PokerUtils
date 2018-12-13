@@ -8,10 +8,7 @@
 
 plugins {
     // Apply the java plugin to add support for Java
-    id 'java'
-
-    // Apply the application plugin to add support for building an application
-    id 'application'
+    id 'java-library'
 }
 
 repositories {
@@ -29,6 +26,3 @@ dependencies {
 	testCompile 'org.junit.jupiter:junit-jupiter-params:5.3.1'
     testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 }
-
-// Define the main class for the application
-mainClassName = 'hja.logic.Main'
