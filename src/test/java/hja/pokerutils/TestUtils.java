@@ -1,8 +1,8 @@
 package hja.pokerutils;
 
-import hja.pokerutils.Card.Card;
-import hja.pokerutils.Card.Rank;
-import hja.pokerutils.Card.Suit;
+import hja.pokerutils.card.Card;
+import hja.pokerutils.card.Rank;
+import hja.pokerutils.card.Suit;
 
 public final class TestUtils {
 	public static final Card ACEh = new Card(Rank.ACE, Suit.HEARTS);

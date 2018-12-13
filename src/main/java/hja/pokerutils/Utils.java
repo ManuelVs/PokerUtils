@@ -1,6 +1,6 @@
 package hja.pokerutils;
 
-import hja.pokerutils.Card.Card;
+import hja.pokerutils.card.Card;
 
 import java.util.ArrayList;
 
