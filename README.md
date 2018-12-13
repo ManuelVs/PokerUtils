@@ -1,4 +1,4 @@
-# HJAPracticas
+# PokerUtils
 
 This repository contains the source code for all the exercises in HJA.
 All files must be encoded in UTF-8.
@@ -15,12 +15,12 @@ This is not a performance implementation of poker problems. It aims to show a si
 
 This project dependencies are managed by gradle. For more information, you can see `build.gradle`.
 
-You can generate a `jar` of this library executing `./gradlew jar` and use it on your project (you may want to change the name).
-Remember that this library has a MIT license.
-
 ### Source
 
 Sources are self-contained, there is no need to include additional libraries to compile.
+
+You can generate a `jar` of this library executing `./gradlew jar` and use it on your project.
+Remember that this library has a MIT license.
 
 ### Tests
 
