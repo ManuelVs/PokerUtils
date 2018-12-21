@@ -1,6 +1,6 @@
 # PokerUtils
 
-This repository contains the source code for all the exercises in HJA.
+This repository contains the source code for all the exercises of HJA.
 All files must be encoded in UTF-8.
 
 This project can be loaded in any IDE supporting gradle, like IntelliJ, VSCode... You can even use a simple text editor and use the `./gradlew` command!
